@@ -566,9 +566,9 @@ h4 {
     .logo-mobile {
         display: block;
         margin: 0 auto 30px;
-        max-width: 100%;
+        width: 100%;
         height: auto;
-        max-height: 160px;
+        max-height: none;
     }
 
     .hero {
