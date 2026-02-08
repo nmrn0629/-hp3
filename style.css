@@ -170,8 +170,8 @@ h4 {
     /* Shift view slightly up to cut bottom whitespace */
 
     display: block;
-    margin-left: -50px;
-    /* Shift left to align with text visually */
+    margin-left: -90px;
+    /* Shift further left to visually align with text start */
 }
 
 .nav-list {
