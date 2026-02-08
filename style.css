@@ -115,6 +115,12 @@ h4 {
     backdrop-filter: blur(10px);
 }
 
+.page-header .section-title {
+    left: auto;
+    transform: none;
+    margin-bottom: 20px;
+}
+
 .header.scrolled {
     padding: 10px 0;
     background-color: rgba(255, 255, 255, 0.95);
