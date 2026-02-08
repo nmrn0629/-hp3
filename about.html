@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ハーモグロー会計事務所 | 信頼と安心のパートナー</title>
-    <meta name="description" content="親しみやすさと信頼を大切にするハーモグロー会計事務所。法人税務、確定申告、相続・事業承継など、お客様のビジネスと人生をサポートします。">
+    <title>事務所紹介 | ハーモグロー会計事務所</title>
+    <meta name="description" content="ハーモグロー会計事務所の事務所紹介。私たちはお客様との調和と成長を大切にするパートナーです。">
 
     <!-- Google Fonts: M PLUS Rounded 1c -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 
     <header class="header">
         <div class="container header-container">
-            <h1 class="logo"><a href="#">ハーモグロー会計事務所</a></h1>
+            <h1 class="logo"><a href="index.html">ハーモグロー会計事務所</a></h1>
             <nav class="nav">
                 <ul class="nav-list">
                     <li><a href="index.html">ホーム</a></li>
@@ -41,48 +41,47 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h2 class="hero-title">あなたのビジネスに、<br>安心と成長を。</h2>
-                <p class="hero-subtitle">数字の向こうにある想いに寄り添い、<br>未来を共に創るパートナーです。</p>
-                <div class="hero-buttons">
-                </div>
-            </div>
-            <div class="hero-background"></div>
-        </section>
-
-        <!-- Features / Concept -->
-        <section class="section features">
+        <!-- Page Title Hero -->
+        <section class="page-header"
+            style="padding-top: 120px; padding-bottom: 40px; text-align: center; background-color: var(--color-bg);">
             <div class="container">
-                <h3 class="section-title">選ばれる3つの理由</h3>
-                <div class="grid-3">
-                    <div class="card feature-card">
-                        <div class="icon-wrapper">
-                            <i class="fa-solid fa-hand-holding-heart"></i>
-                        </div>
-                        <h4>親身な対応</h4>
-                        <p>難しい専門用語は使わず、丁寧で分かりやすい説明を心がけています。初めての方でも安心です。</p>
-                    </div>
-                    <div class="card feature-card">
-                        <div class="icon-wrapper">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                        <h4>未来志向の提案</h4>
-                        <p>単なる事務処理だけでなく、経営の成長に繋がる積極的な節税・財務提案を行います。</p>
-                    </div>
-                    <div class="card feature-card">
-                        <div class="icon-wrapper">
-                            <i class="fa-solid fa-laptop-file"></i>
-                        </div>
-                        <h4>IT活用による効率化</h4>
-                        <p>クラウド会計やチャットツールを導入し、スピーディーでストレスのないやり取りを実現します。</p>
+                <h2 class="section-title">事務所紹介</h2>
+                <p>私たちについて</p>
+            </div>
+        </section>
+
+        <!-- About Content -->
+        <section id="about" class="section about-section" style="padding-top: 40px;">
+            <div class="container">
+                <div class="about-wrapper">
+                    <div class="about-content">
+                        <p class="about-text">
+                            「ハーモグロー」という名前には、お客様との調和（Harmony）と、共に成長する（Grow）という願いを込めています。<br><br>
+                            会計事務所は「敷居が高い」と思われがちですが、私たちはカフェのように気軽に相談できる場所を目指しています。<br>
+                            どんな小さな悩みでも構いません。まずは一度お話をお聞かせください。
+                        </p>
+                        <dl class="company-info">
+                            <div class="info-row">
+                                <dt>事務所名</dt>
+                                <dd>ハーモグロー会計事務所</dd>
+                            </div>
+                            <div class="info-row">
+                                <dt>代表税理士</dt>
+                                <dd>宮脇 貴也</dd>
+                            </div>
+                            <div class="info-row">
+                                <dt>所在地</dt>
+                                <dd>〒673-0403 兵庫県三木市末広2丁目5-10 アーサービル1階B号</dd>
+                            </div>
+                            <div class="info-row">
+                                <dt>営業時間</dt>
+                                <dd>平日 9:00 - 18:00（土日祝・夜間も応相談）</dd>
+                            </div>
+                        </dl>
                     </div>
                 </div>
             </div>
         </section>
-
-
     </main>
 
     <footer class="footer">
@@ -101,16 +100,6 @@
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
         // Mobile Menu Toggle
         const menuBtn = document.querySelector('.mobile-menu-btn');
         const navList = document.querySelector('.nav-list');

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | ハーモグロー会計事務所</title>
+    <meta name="description" content="ハーモグロー会計事務所へのお問い合わせ。初回相談は無料です。お気軽にご連絡ください。">
+
+    <!-- Google Fonts: M PLUS Rounded 1c -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <h1 class="logo"><a href="index.html">ハーモグロー会計事務所</a></h1>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="services.html">業務案内</a></li>
+                    <li><a href="about.html">事務所紹介</a></li>
+                    <li><a href="contact.html" class="btn-primary">お問い合わせ</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="メニューを開く">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Title Hero -->
+        <section class="page-header"
+            style="padding-top: 120px; padding-bottom: 40px; text-align: center; background-color: var(--color-bg);">
+            <div class="container">
+                <h2 class="section-title">お問い合わせ</h2>
+                <p>初回相談は無料です。お気軽にご連絡ください</p>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section id="contact" class="section contact-section"
+            style="padding-top: 40px; border-radius: 0; background-color: white; color: var(--color-text);">
+            <!-- Override coloring for standalone page if needed, or keep original style -->
+            <div class="container contact-container">
+
+                <div class="phone-contact-wrapper" style="box-shadow: var(--shadow-card); background-color: #f9f9f9;">
+                    <p class="phone-desc">お電話でのお問い合わせはこちら</p>
+                    <a href="tel:0794886136" class="btn-phone">
+                        <i class="fa-solid fa-phone"></i> 0794-88-6136
+                    </a>
+                    <p class="phone-note">受付時間: 平日 9:00 - 18:00</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <h2>ハーモグロー会計事務所</h2>
+            </div>
+            <ul class="footer-links">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="services.html">業務案内</a></li>
+                <li><a href="about.html">事務所紹介</a></li>
+                <li><a href="#">プライバシーポリシー</a></li>
+            </ul>
+            <p class="copyright">&copy; 2026 Harmogrow Accounting Office. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navList = document.querySelector('.nav-list');
+
+        menuBtn.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        // Sticky header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

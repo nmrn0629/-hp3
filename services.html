@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ハーモグロー会計事務所 | 信頼と安心のパートナー</title>
-    <meta name="description" content="親しみやすさと信頼を大切にするハーモグロー会計事務所。法人税務、確定申告、相続・事業承継など、お客様のビジネスと人生をサポートします。">
+    <title>業務内容 | ハーモグロー会計事務所</title>
+    <meta name="description" content="ハーモグロー会計事務所の業務内容。法人税務顧問、個人確定申告、起業・会社設立、相続・事業承継など、幅広いサービスを提供しています。">
 
     <!-- Google Fonts: M PLUS Rounded 1c -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 
     <header class="header">
         <div class="container header-container">
-            <h1 class="logo"><a href="#">ハーモグロー会計事務所</a></h1>
+            <h1 class="logo"><a href="index.html">ハーモグロー会計事務所</a></h1>
             <nav class="nav">
                 <ul class="nav-list">
                     <li><a href="index.html">ホーム</a></li>
@@ -41,48 +41,54 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h2 class="hero-title">あなたのビジネスに、<br>安心と成長を。</h2>
-                <p class="hero-subtitle">数字の向こうにある想いに寄り添い、<br>未来を共に創るパートナーです。</p>
-                <div class="hero-buttons">
-                </div>
-            </div>
-            <div class="hero-background"></div>
-        </section>
-
-        <!-- Features / Concept -->
-        <section class="section features">
+        <!-- Page Title Hero -->
+        <section class="page-header"
+            style="padding-top: 120px; padding-bottom: 40px; text-align: center; background-color: var(--color-bg);">
             <div class="container">
-                <h3 class="section-title">選ばれる3つの理由</h3>
-                <div class="grid-3">
-                    <div class="card feature-card">
-                        <div class="icon-wrapper">
-                            <i class="fa-solid fa-hand-holding-heart"></i>
+                <h2 class="section-title">業務内容</h2>
+                <p>お客様のニーズに合わせた最適なプランをご提案します</p>
+            </div>
+        </section>
+
+        <!-- Services Content -->
+        <section id="services" class="section services-section" style="padding-top: 40px;">
+            <div class="container">
+                <div class="grid-2">
+                    <div class="service-item">
+                        <div class="service-text">
+                            <h4>法人税務顧問</h4>
+                            <p>月次決算、決算申告、節税対策など、法人の税務会計をトータルサポート。経営判断に役立つ数字を提供します。</p>
                         </div>
-                        <h4>親身な対応</h4>
-                        <p>難しい専門用語は使わず、丁寧で分かりやすい説明を心がけています。初めての方でも安心です。</p>
                     </div>
-                    <div class="card feature-card">
-                        <div class="icon-wrapper">
-                            <i class="fa-solid fa-chart-line"></i>
+                    <div class="service-item">
+                        <div class="service-text">
+                            <h4>個人確定申告</h4>
+                            <p>個人事業主、不動産オーナー、株式譲渡など。正確かつスピーディーな申告で、無駄な税金の支払いを防ぎます。</p>
                         </div>
-                        <h4>未来志向の提案</h4>
-                        <p>単なる事務処理だけでなく、経営の成長に繋がる積極的な節税・財務提案を行います。</p>
                     </div>
-                    <div class="card feature-card">
-                        <div class="icon-wrapper">
-                            <i class="fa-solid fa-laptop-file"></i>
+                    <div class="service-item">
+                        <div class="service-text">
+                            <h4>起業・会社設立</h4>
+                            <p>創業時の資金調達、事業計画書の作成、設立手続きまで。夢の実現をスタートからバックアップします。</p>
                         </div>
-                        <h4>IT活用による効率化</h4>
-                        <p>クラウド会計やチャットツールを導入し、スピーディーでストレスのないやり取りを実現します。</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-text">
+                            <h4>相続・事業承継</h4>
+                            <p>円満な相続とスムーズな事業承継のために。早めの対策と丁寧な対話で、想いを次世代へ繋ぎます。</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-
+        <!-- Call to Action -->
+        <section class="section" style="text-align: center; background-color: white;">
+            <div class="container">
+                <p style="margin-bottom: 20px;">ご相談・お見積もりはお気軽にお問い合わせください。</p>
+                <a href="contact.html" class="btn-primary">お問い合わせはこちら</a>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -101,16 +107,6 @@
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
         // Mobile Menu Toggle
         const menuBtn = document.querySelector('.mobile-menu-btn');
         const navList = document.querySelector('.nav-list');
