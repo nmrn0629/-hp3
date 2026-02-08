@@ -142,34 +142,36 @@ h4 {
 
 /* Hero Logo Section */
 /* Hero Logo Section */
+/* Hero Logo Section */
 .logo-container-hero {
     text-align: left;
     /* Left align */
     padding-top: 100px;
     /* Clear fixed header */
-    padding-bottom: 20px;
-    margin-bottom: -30px;
+    padding-bottom: 0;
+    /* Minimized bottom padding */
+    margin-bottom: -50px;
+    /* Pull hero section significantly closer */
     background-color: var(--color-bg);
     overflow: hidden;
-    /* Removed flex centering */
 }
 
 .hero-logo {
-    max-width: 600px;
+    max-width: 650px;
     /* Restore max-width constraint */
     width: 100%;
 
     /* Aggressive Cropping */
-    height: 150px;
-    /* Fixed height to cut off top/bottom whitespace */
+    height: 200px;
+    /* Increased height for larger display */
     object-fit: cover;
     /* Fill width, crop height */
-    object-position: center;
-    /* Keep center of image file visible */
+    object-position: center 35%;
+    /* Shift view slightly up to cut bottom whitespace */
 
     display: block;
     margin-left: -50px;
-    /* Shift left to align with text visually (counteract whitespace) */
+    /* Shift left to align with text visually */
 }
 
 .nav-list {
