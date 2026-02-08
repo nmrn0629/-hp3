@@ -165,12 +165,11 @@ h4 {
     object-fit: cover;
     /* Fill width, crop height */
     object-position: center;
-    /* Keep center of image file visible (usually where logo is) */
+    /* Keep center of image file visible */
 
     display: block;
-    /* Ensure block alignment works */
-    margin: 0;
-    /* Left align (no auto margins) */
+    margin-left: -50px;
+    /* Shift left to align with text visually (counteract whitespace) */
 }
 
 .nav-list {
