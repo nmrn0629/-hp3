@@ -545,4 +545,8 @@ h4 {
         width: 100%;
         justify-content: center;
     }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
 }
