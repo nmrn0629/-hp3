@@ -357,6 +357,8 @@ h4 {
 
 .contact-section .section-title {
     color: var(--color-white);
+    left: auto;
+    transform: none;
 }
 
 .contact-section .section-title::after {
