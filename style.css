@@ -134,21 +134,27 @@ h4 {
 }
 
 .logo a {
-    display: flex;
-    /* Centers the image */
-    align-items: center;
+    display: block;
+    /* Essential for sizing */
+    width: 420px;
+    /* Force wide container */
+    max-width: 80vw;
+    /* Responsive constraint */
+    height: 100px;
+    /* Fixed height for header */
 }
 
 .header-logo-img {
-    height: 125px;
-    /* Further increased base height */
-    width: auto;
-    max-width: 500px;
-    transform: scale(1.8);
-    /* Stronger zoom/crop */
-    transform-origin: left center;
-    margin-left: 15px;
-    /* Increased margin for larger crop */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Crops top/bottom to fill width */
+    object-position: center;
+    /* Focus on center */
+    transform: none;
+    /* Reset manual scale */
+    margin: 0;
+    /* Reset margin */
     display: block;
 }
 
