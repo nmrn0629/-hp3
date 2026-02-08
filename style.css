@@ -1,11 +1,11 @@
 /* CSS Variables for Theming */
 :root {
-    --color-primary: #0F4C81;
-    /* Classic Blue - Trustworthy */
-    --color-accent: #D4AF37;
-    /* Gold - Premium, Growth */
-    --color-bg: #F9F9F9;
-    /* Off-white Background */
+    --color-primary: #5c946e;
+    /* Sage Green - Trustworthy & Natural */
+    --color-accent: #dce775;
+    /* Lime Green - Fresh Growth */
+    --color-bg: #fafafa;
+    /* Neutral Background */
     --color-text: #333333;
     /* Dark Grey Text */
     --color-text-light: #666666;
@@ -21,7 +21,7 @@
 
     --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
     --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 10px 25px rgba(15, 76, 129, 0.15);
+    --shadow-hover: 0 10px 25px rgba(92, 148, 110, 0.2);
 }
 
 /* Reset & Base Styles */
@@ -156,13 +156,13 @@ h4 {
     border-radius: var(--radius-pill);
     font-weight: 700;
     display: inline-block;
-    box-shadow: 0 4px 15px rgba(15, 76, 129, 0.3);
+    box-shadow: 0 4px 15px rgba(92, 148, 110, 0.3);
 }
 
 .btn-primary:hover {
-    background-color: #0c3e6b;
+    background-color: #3d694b;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(15, 76, 129, 0.4);
+    box-shadow: 0 6px 20px rgba(92, 148, 110, 0.4);
 }
 
 .btn-secondary {
@@ -196,7 +196,7 @@ h4 {
     right: 0;
     width: 50%;
     height: 100%;
-    background: linear-gradient(135deg, #e0f2f1 0%, #e8eaf6 100%);
+    background: linear-gradient(135deg, #f1f8e9 0%, #c8e6c9 100%);
     border-bottom-left-radius: 200px;
     z-index: -1;
 }
@@ -258,7 +258,7 @@ h4 {
 .icon-wrapper {
     width: 60px;
     height: 60px;
-    background: #e8eff5;
+    background: #e8f5e9;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -280,7 +280,7 @@ h4 {
 
 /* Services */
 .services-section {
-    background-color: #f4f8fb;
+    background-color: #f1f8e9;
 }
 
 .grid-2 {
@@ -417,7 +417,7 @@ h4 {
 
 /* Footer */
 .footer {
-    background-color: #0b365d;
+    background-color: #2e4933;
     /* Darker blue */
     color: var(--color-white);
     padding: 40px 0 20px;
@@ -483,7 +483,7 @@ h4 {
         padding: 10px 20px;
         font-weight: 700;
         border-bottom: none;
-        background-color: #f0f4f8;
+        background-color: #f1f8e9;
         border-radius: var(--radius-pill);
         color: var(--color-primary);
     }
