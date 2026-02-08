@@ -141,22 +141,22 @@ h4 {
 }
 
 /* Hero Logo Section */
+/* Hero Logo Section */
 .logo-container-hero {
-    text-align: center;
+    text-align: left;
+    /* Left align */
     padding-top: 100px;
     /* Clear fixed header */
     padding-bottom: 20px;
     margin-bottom: -30px;
     background-color: var(--color-bg);
     overflow: hidden;
-
-    /* Center the cropped container */
-    display: flex;
-    justify-content: center;
+    /* Removed flex centering */
 }
 
 .hero-logo {
     max-width: 600px;
+    /* Restore max-width constraint */
     width: 100%;
 
     /* Aggressive Cropping */
@@ -165,7 +165,12 @@ h4 {
     object-fit: cover;
     /* Fill width, crop height */
     object-position: center;
-    /* Keep center visible */
+    /* Keep center of image file visible (usually where logo is) */
+
+    display: block;
+    /* Ensure block alignment works */
+    margin: 0;
+    /* Left align (no auto margins) */
 }
 
 .nav-list {
