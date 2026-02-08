@@ -157,21 +157,13 @@
                 <h3 class="section-title">お問い合わせ</h3>
                 <p class="contact-desc">初回相談は無料です。お気軽にお問い合わせください。</p>
 
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('デモ用のため送信されません');">
-                    <div class="form-group">
-                        <label for="name">お名前 <span class="required">必須</span></label>
-                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">メールアドレス <span class="required">必須</span></label>
-                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">ご相談内容</label>
-                        <textarea id="message" name="message" rows="5" placeholder="ご自由にご記入ください"></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">送信する</button>
-                </form>
+                <div class="phone-contact-wrapper">
+                    <p class="phone-desc">お電話でのお問い合わせはこちら</p>
+                    <a href="tel:1234" class="btn-phone">
+                        <i class="fa-solid fa-phone"></i> 1234
+                    </a>
+                    <p class="phone-note">受付時間: 平日 9:00 - 18:00</p>
+                </div>
             </div>
         </section>
     </main>

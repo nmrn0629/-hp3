@@ -369,72 +369,48 @@ h4 {
     opacity: 0.9;
 }
 
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
+.phone-contact-wrapper {
     background: var(--color-white);
-    padding: 40px;
+    padding: 60px 20px;
     border-radius: var(--radius-lg);
     color: var(--color-text);
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-}
-
-.required {
-    background: #ff6b6b;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-    vertical-align: middle;
-    margin-left: 5px;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: var(--radius-sm);
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-}
-
-.btn-submit {
-    width: 100%;
+.btn-phone {
     background-color: var(--color-accent);
-    /* Gold button for conversion */
     color: var(--color-white);
-    padding: 15px;
-    border: none;
+    padding: 20px 60px;
     border-radius: var(--radius-pill);
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
     transition: all 0.3s;
-    font-family: inherit;
 }
 
-.btn-submit:hover {
+.btn-phone:hover {
     background-color: #c19b2e;
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+}
+
+.phone-desc {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.phone-note {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
 }
 
 /* Footer */
@@ -558,5 +534,12 @@ h4 {
 
     .contact-section {
         border-radius: 20px 20px 0 0;
+    }
+
+    .btn-phone {
+        font-size: 1.5rem;
+        padding: 15px 30px;
+        width: 100%;
+        justify-content: center;
     }
 }
