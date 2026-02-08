@@ -134,28 +134,31 @@ h4 {
 }
 
 .logo a {
-    display: block;
-    /* Essential for sizing */
-    width: 420px;
-    /* Force wide container */
-    max-width: 80vw;
-    /* Responsive constraint */
-    height: 100px;
-    /* Fixed height for header */
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    text-decoration: none;
 }
 
-.header-logo-img {
+/* Hero Logo Section */
+.logo-container-hero {
+    text-align: center;
+    padding-top: 100px;
+    /* Clear fixed header */
+    padding-bottom: 0;
+    margin-bottom: -30px;
+    background-color: var(--color-bg);
+    overflow: hidden;
+}
+
+.hero-logo {
+    max-width: 600px;
+    /* Much larger since it's outside header */
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Crops top/bottom to fill width */
-    object-position: center;
-    /* Focus on center */
-    transform: none;
-    /* Reset manual scale */
-    margin: 0;
-    /* Reset margin */
-    display: block;
+    height: auto;
+    /* Apply similar cropping technique */
+    transform: scale(1.5);
+    transform-origin: center;
 }
 
 .nav-list {
@@ -216,8 +219,8 @@ h4 {
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding-top: 180px;
-    /* Increased for very large header */
+    padding-top: 0;
+    /* Reset since logo section is above */
 }
 
 .hero-background {
