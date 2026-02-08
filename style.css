@@ -140,10 +140,11 @@ h4 {
 }
 
 .header-logo-img {
-    height: 60px;
-    /* Base height for header */
+    height: 90px;
+    /* Increased base height */
     width: auto;
-    max-width: 250px;
+    max-width: 400px;
+    /* Increased max width */
     transform: scale(1.5);
     /* Crop whitespace */
     transform-origin: left center;
@@ -211,8 +212,8 @@ h4 {
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding-top: 0;
-    /* Removed to close gap with logo */
+    padding-top: 130px;
+    /* Added to account for taller fixed header */
 }
 
 .hero-background {
