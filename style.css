@@ -143,6 +143,10 @@ h4 {
 /* Hero Logo Section */
 /* Hero Logo Section */
 /* Hero Logo Section */
+.logo-mobile {
+    display: none;
+}
+
 .logo-container-hero {
     text-align: left;
     /* Left align */
@@ -556,25 +560,15 @@ h4 {
 
     /* Mobile Logo Adjustments */
     .logo-container-hero {
-        text-align: center;
-        /* Center align container */
-        padding-top: 70px;
-        /* Slightly less padding than desktop */
-        margin-bottom: -20px;
-        /* Less negative margin */
+        display: none;
     }
 
-    .hero-logo {
-        margin-left: 0;
-        /* Reset desktop negative shift */
-        margin: 0 auto;
-        /* Center the block */
-        height: 160px;
-        /* Smaller height for mobile */
+    .logo-mobile {
+        display: block;
+        margin: 0 auto 30px;
         max-width: 100%;
-        /* Ensure it fits screen */
-        object-position: center;
-        /* Center image content */
+        height: auto;
+        max-height: 160px;
     }
 
     .hero {
