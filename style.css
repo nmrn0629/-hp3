@@ -166,8 +166,8 @@ h4 {
     /* Increased height for larger display */
     object-fit: cover;
     /* Fill width, crop height */
-    object-position: center 35%;
-    /* Shift view slightly up to cut bottom whitespace */
+    object-position: center;
+    /* Restore vertical center to show bottom */
 
     display: block;
     margin-left: -130px;
