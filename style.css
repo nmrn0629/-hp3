@@ -230,10 +230,11 @@ h4 {
     height: 90vh;
     min-height: 500px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    /* Align content to top instead of center */
     overflow: hidden;
-    padding-top: 0;
-    /* Reset since logo section is above */
+    padding-top: 40px;
+    /* Space from logo section above */
 }
 
 .hero-background {
