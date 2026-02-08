@@ -140,17 +140,15 @@ h4 {
 }
 
 .header-logo-img {
-    height: 90px;
-    /* Increased base height */
+    height: 125px;
+    /* Further increased base height */
     width: auto;
-    max-width: 400px;
-    /* Increased max width */
-    transform: scale(1.5);
-    /* Crop whitespace */
+    max-width: 500px;
+    transform: scale(1.8);
+    /* Stronger zoom/crop */
     transform-origin: left center;
-    /* Align cropped logo to left */
-    margin-left: 10px;
-    /* Compensate for crop */
+    margin-left: 15px;
+    /* Increased margin for larger crop */
     display: block;
 }
 
@@ -212,8 +210,8 @@ h4 {
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding-top: 130px;
-    /* Added to account for taller fixed header */
+    padding-top: 180px;
+    /* Increased for very large header */
 }
 
 .hero-background {
