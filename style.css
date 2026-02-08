@@ -145,20 +145,27 @@ h4 {
     text-align: center;
     padding-top: 100px;
     /* Clear fixed header */
-    padding-bottom: 0;
+    padding-bottom: 20px;
     margin-bottom: -30px;
     background-color: var(--color-bg);
     overflow: hidden;
+
+    /* Center the cropped container */
+    display: flex;
+    justify-content: center;
 }
 
 .hero-logo {
     max-width: 600px;
-    /* Much larger since it's outside header */
     width: 100%;
-    height: auto;
-    /* Apply similar cropping technique */
-    transform: scale(1.5);
-    transform-origin: center;
+
+    /* Aggressive Cropping */
+    height: 150px;
+    /* Fixed height to cut off top/bottom whitespace */
+    object-fit: cover;
+    /* Fill width, crop height */
+    object-position: center;
+    /* Keep center visible */
 }
 
 .nav-list {
