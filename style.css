@@ -569,9 +569,9 @@ h4 {
         /* Reset desktop negative shift */
         margin: 0 auto;
         /* Center the block */
-        height: 120px;
+        height: 160px;
         /* Smaller height for mobile */
-        max-width: 90%;
+        max-width: 100%;
         /* Ensure it fits screen */
         object-position: center;
         /* Center image content */
