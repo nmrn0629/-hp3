@@ -652,7 +652,7 @@ h4 {
         transform: translate(-50%, -50%) scale(0);
         pointer-events: none;
         animation: growLeaf 0.5s ease-out;
-        opacity: 0.5;
+        opacity: 0.8;
         z-index: 9999;
     }
 
@@ -674,7 +674,7 @@ h4 {
         }
 
         100% {
-            transform: translate(-50%, -50%) scale(15);
+            transform: translate(-50%, -50%) scale(80);
             opacity: 0;
         }
     }

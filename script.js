@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 setTimeout(() => {
                     window.location.href = href;
-                }, 400); // 400ms delay for visual
+                }, 800); // 800ms delay for visual
             }
 
             // Clean up leaf after animation (for internal links or if stays on page)
