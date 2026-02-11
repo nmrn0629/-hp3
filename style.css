@@ -634,9 +634,48 @@ h4 {
         white-space: nowrap;
     }
 
-    .phone-desc {
-        font-size: 0.95rem;
-        white-space: nowrap;
+    /* Leaf Click Effect */
+    .nav-list a {
+        position: relative;
+        overflow: hidden;
+        /* Ensure the ripple stays inside the button */
+    }
+
+    .leaf-effect {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: var(--color-accent);
+        /* Lime Green */
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        pointer-events: none;
+        animation: growLeaf 0.5s ease-out;
+        opacity: 0.8;
+        z-index: 0;
+    }
+
+    /* Ensure text is above the effect */
+    .nav-list a {
+        z-index: 1;
+    }
+
+    .nav-list a span,
+    .nav-list a i {
+        position: relative;
+        z-index: 2;
+    }
+
+    @keyframes growLeaf {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(15);
+            opacity: 0;
+        }
     }
 
     .grid-2 {
