@@ -533,11 +533,11 @@ h4 {
         /* Header height */
         left: 0;
         width: 100%;
-        background-color: var(--color-white);
+        background-color: #f1f8e9;
         padding: 30px 20px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         z-index: 999;
-        text-align: center;
+        align-items: flex-end;
         gap: 20px;
     }
 
