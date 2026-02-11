@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuLinks = document.querySelectorAll('.nav-list a');
     menuLinks.forEach(link => {
         link.addEventListener('click', function (e) {
+            console.log('Menu link clicked', this.href);
             // Only apply effect if it's a navigation link (not just a hash)
             // But user might want it for all.
             // If it's a hash link on the same page, we might want the effect too?
