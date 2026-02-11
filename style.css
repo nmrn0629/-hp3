@@ -401,6 +401,32 @@ h4 {
     flex: 1;
 }
 
+/* Access Section */
+.access-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+.access-title {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.access-map-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.access-map-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    display: inline-block;
+}
+
 /* Contact */
 .contact-section {
     background-color: var(--color-primary);
