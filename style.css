@@ -423,7 +423,8 @@ h4 {
 }
 
 .access-map-image {
-    max-width: 100%;
+    max-width: 50%;
+    /* 50% on desktop */
     height: auto;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
@@ -438,6 +439,10 @@ h4 {
     border-radius: 40px 40px 0 0;
     /* Top rounded corners for section */
 }
+
+
+
+
 
 .contact-section .section-title {
     color: var(--color-white);
@@ -688,5 +693,9 @@ h4 {
 
     .access-title {
         font-size: 1rem;
+    }
+
+    .access-map-image {
+        max-width: 100%;
     }
 }
