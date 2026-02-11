@@ -490,7 +490,9 @@ h4 {
 }
 
 .phone-contact-wrapper {
-    background: var(--color-white);
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('images/ミーティング室.jpg');
+    background-size: cover;
+    background-position: center;
     padding: 60px 20px;
     border-radius: var(--radius-lg);
     color: var(--color-text);
