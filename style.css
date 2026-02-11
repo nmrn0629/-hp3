@@ -403,9 +403,9 @@ h4 {
 
 /* Access Section */
 .access-section {
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid #eee;
+    margin-top: 30px;
+    padding-top: 0;
+    border-top: none;
 }
 
 .access-title {
