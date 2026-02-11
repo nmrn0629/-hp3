@@ -685,4 +685,8 @@ h4 {
     .grid-2 {
         grid-template-columns: 1fr;
     }
+
+    .access-title {
+        font-size: 1rem;
+    }
 }
