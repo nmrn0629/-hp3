@@ -735,4 +735,11 @@ h4 {
     .access-map-image {
         max-width: 100%;
     }
+
+    /* Explicit spacing fix for mobile */
+    .access-section {
+        margin-top: 30px;
+        padding-top: 0;
+        border-top: none;
+    }
 }
