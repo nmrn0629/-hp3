@@ -505,8 +505,18 @@ h4 {
     opacity: 0.6;
 }
 
+/* Global utility for mobile break */
+.mobile-break {
+    display: none;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
+    .mobile-break {
+        display: block;
+        /* Changing to block to force a break */
+    }
+
     .header-container {
         padding: 0 15px;
     }
