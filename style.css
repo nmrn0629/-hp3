@@ -143,7 +143,9 @@ h4 {
 /* Hero Logo Section */
 /* Hero Logo Section */
 /* Hero Logo Section */
-.logo-mobile {
+/* Hero Logo Section */
+.logo-mobile,
+.logo-mobile-container {
     display: none;
 }
 
@@ -577,12 +579,24 @@ h4 {
         display: none;
     }
 
+    .logo-mobile-container {
+        display: block;
+        width: 100%;
+        margin-bottom: 30px;
+        overflow: visible;
+        /* Allow logo to expand */
+        text-align: center;
+    }
+
     .logo-mobile {
         display: block;
-        margin: 0 auto 30px;
+        margin: 0 auto;
         width: 100%;
         height: auto;
         max-height: none;
+        transform: scale(2);
+        /* Double the size */
+        transform-origin: center center;
     }
 
     .hero {
