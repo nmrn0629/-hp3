@@ -639,8 +639,7 @@ h4 {
     /* Leaf Click Effect */
     .nav-list a {
         position: relative;
-        overflow: hidden;
-        /* Ensure the ripple stays inside the button */
+        /* overflow: hidden; Removed to let effect spread out */
     }
 
     .leaf-effect {
@@ -654,7 +653,7 @@ h4 {
         pointer-events: none;
         animation: growLeaf 0.5s ease-out;
         opacity: 0.5;
-        z-index: 100;
+        z-index: 9999;
     }
 
     /* Ensure text is above the effect */
