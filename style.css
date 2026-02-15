@@ -424,10 +424,9 @@ h4 {
 }
 
 .access-map-wrapper {
-    <<<<<<< HEAD flex: 1;
-    =======width: 50%;
+    width: 50%;
     /* Half width on desktop */
-    >>>>>>>access-map text-align: center;
+    text-align: center;
 }
 
 .access-info {
@@ -462,37 +461,7 @@ h4 {
     display: block;
 }
 
-.access-content {
-    display: flex;
-    flex-direction: row-reverse;
-    /* Map Right, Text Left */
-    align-items: flex-start;
-    gap: 40px;
-}
 
-.access-info {
-    flex: 1;
-    text-align: left;
-}
-
-.access-info h4 {
-    font-size: 1.1rem;
-    color: var(--color-primary);
-    margin-bottom: 10px;
-    margin-top: 20px;
-    font-weight: 700;
-}
-
-.access-info h4:first-child {
-    margin-top: 0;
-}
-
-.access-info p {
-    font-size: 0.95rem;
-    margin-bottom: 15px;
-    line-height: 1.8;
-    color: var(--color-text);
-}
 
 /* Contact */
 .contact-section {
