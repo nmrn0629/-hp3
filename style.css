@@ -402,6 +402,24 @@ h4 {
     border-bottom: 1px solid #eee;
 }
 
+.info-row.no-border-bottom {
+    border-bottom: none;
+    padding-bottom: 5px;
+}
+
+.info-row.sub-info-row {
+    padding-top: 5px;
+    padding-bottom: 20px;
+}
+
+.info-row.sub-info-row dt {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #666;
+    padding-left: 20px;
+    /* Indent */
+}
+
 .info-row dt {
     width: 120px;
     font-weight: 700;
