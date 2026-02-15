@@ -379,6 +379,17 @@ h4 {
     flex: 1;
 }
 
+.about-text-box {
+    background-color: #f1f8e9;
+    padding: 30px;
+    border-radius: var(--radius-md);
+    margin-bottom: 30px;
+}
+
+.about-text {
+    margin-bottom: 0;
+}
+
 .company-info {
     margin-top: 40px;
     border-top: 1px solid #eee;
