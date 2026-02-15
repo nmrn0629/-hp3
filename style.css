@@ -603,7 +603,7 @@ h4 {
         /* Header height */
         left: 0;
         width: 100%;
-        background-color: #f1f8e9;
+        background-color: var(--color-primary);
         padding: 30px 20px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         z-index: 999;
@@ -616,9 +616,9 @@ h4 {
         padding: 10px 20px;
         font-weight: 700;
         border-bottom: none;
-        background-color: #f1f8e9;
+        background-color: transparent;
         border-radius: var(--radius-pill);
-        color: var(--color-primary);
+        color: var(--color-white);
     }
 
     .mobile-menu-btn {
