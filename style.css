@@ -489,7 +489,7 @@ h4 {
 }
 
 .phone-contact-wrapper {
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('images/ミーティング室.jpg');
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('images/ミーティング室.jpg');
     background-size: cover;
     background-position: center;
     padding: 60px 20px;
@@ -650,7 +650,7 @@ h4 {
 
     /* Mobile background adjustment */
     .phone-contact-wrapper {
-        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('images/ミーティング室モバイル版２.jpg');
+        background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('images/ミーティング室モバイル版２.jpg');
         background-size: cover;
         background-position: center 30%;
         /* Hide bottom (shoe rack) */
