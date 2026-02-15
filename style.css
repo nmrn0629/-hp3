@@ -494,6 +494,7 @@ h4 {
 
 .phone-contact-wrapper {
     background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('images/ミーティング室.jpg');
+    background-size: cover;
     background-position: center;
     padding: 60px 20px;
     border-radius: var(--radius-lg);
