@@ -378,6 +378,16 @@ h4 {
     transform: translateY(0);
 }
 
+.service-item.visible:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.service-item.visible:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
 .service-item h4 {
     font-size: 1.3rem;
     margin-bottom: 10px;
