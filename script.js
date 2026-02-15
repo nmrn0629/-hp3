@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    const fadeElements = document.querySelectorAll('.feature-card');
+    const fadeElements = document.querySelectorAll('.feature-card, .service-item');
     fadeElements.forEach(el => {
         observer.observe(el);
     });
