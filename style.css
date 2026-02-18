@@ -749,6 +749,23 @@ h4 {
         transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
+    /* Reset btn-primary style in mobile menu */
+    .nav-list .btn-primary {
+        background-color: transparent;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        display: inline;
+        font-weight: normal;
+    }
+
+    .nav-list .btn-primary:hover {
+        background-color: transparent;
+        box-shadow: none;
+        transform: none;
+        color: var(--color-white);
+    }
+
     .nav-list.active a {
         opacity: 1;
         transform: translateX(0);
