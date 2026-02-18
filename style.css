@@ -689,16 +689,16 @@ h4 {
         width: 100%;
         height: 100vh;
         background-color: var(--color-primary);
-        padding-top: 90px;
-        /* Reduced top padding */
-        padding-right: 25px;
+        padding-top: 70px;
+        /* Reduced top padding to move items up */
+        padding-right: 20px;
         /* Reduced right padding */
         align-items: flex-end;
         /* Align items to the right */
         justify-content: flex-start;
         /* Align items to the top */
-        gap: 15px;
-        /* Significantly reduced gap */
+        gap: 12px;
+        /* Reduced gap to fit items */
         z-index: 1000;
 
         /* Initial State: Circle at top-right with 0 size */
@@ -713,14 +713,14 @@ h4 {
     }
 
     .nav-list.active {
-        /* Active State: Circle expands to cover top-right corner (approx 45%) */
-        clip-path: circle(45% at 100% 0%);
+        /* Active State: Circle expands to cover top-right corner (approx 55%) */
+        clip-path: circle(55% at 100% 0%);
         pointer-events: auto;
     }
 
     .nav-list a {
-        font-size: 0.95rem;
-        /* Smaller font to fit */
+        font-size: 0.9rem;
+        /* Slightly smaller font */
         color: var(--color-white);
         opacity: 0;
         transform: translateX(20px);
