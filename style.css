@@ -37,8 +37,8 @@ body {
     color: var(--color-text);
     line-height: 1.8;
     letter-spacing: 0.05em;
+    letter-spacing: 0.05em;
     /* Slightly wider for readability */
-    animation: pageFadeIn 0.8s ease-out forwards;
 }
 
 @keyframes pageFadeIn {
@@ -680,6 +680,10 @@ h4 {
     .mobile-break {
         display: block;
         /* Changing to block to force a break */
+    }
+
+    body {
+        animation: pageFadeIn 0.8s ease-out forwards;
     }
 
     .header-container {

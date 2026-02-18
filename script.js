@@ -63,20 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.appendChild(leaf);
 
-            // If it's a page navigation, wait for effect
+            // If it's a page navigation, wait for effect ONLY on mobile
             if (!isInternal && href && href !== '#') {
-                e.preventDefault();
-
                 // Mobile Transition Effect
-                // Check if mobile menu is active (window width check + active class)
-                if (window.innerWidth <= 768 && navList && navList.classList.contains('active')) {
-                    navList.classList.add('transitioning');
-                    if (menuBtn) menuBtn.classList.add('transitioning');
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    if (navList && navList.classList.contains('active')) {
+                        navList.classList.add('transitioning');
+                        if (menuBtn) menuBtn.classList.add('transitioning');
+                    }
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 900); // Transition before full whiteout
                 }
-
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 900); // Transition before full whiteout (1.2s)
+                // On desktop, do nothing (allow default navigation)
             }
 
             // Clean up leaf after animation (for internal links or if stays on page)
