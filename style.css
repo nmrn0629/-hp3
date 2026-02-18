@@ -39,6 +39,8 @@ body {
     letter-spacing: 0.05em;
     letter-spacing: 0.05em;
     /* Slightly wider for readability */
+    animation: none;
+    /* Disable animation by default (Desktop) */
 }
 
 @keyframes pageFadeIn {
