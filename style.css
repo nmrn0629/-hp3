@@ -303,13 +303,11 @@ h4 {
     transform: translate(-50%, -50%);
     width: 200px;
     height: 200px;
-    background-image: url('images/2k木ロゴ.jpg');
+    background-image: url('images/2k木ロゴ2.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.5;
-    mix-blend-mode: multiply;
-    filter: contrast(1.5) brightness(1.2);
     z-index: -1;
     pointer-events: none;
 }
