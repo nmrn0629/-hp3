@@ -679,30 +679,52 @@ h4 {
         display: none;
     }
 
-    .nav-list.active {
+    /* Mobile Menu Style - Circular Reveal */
+    .nav-list {
         display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 70px;
-        /* Header height */
-        left: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
         width: 100%;
+        height: 100vh;
         background-color: var(--color-primary);
-        padding: 30px 20px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        z-index: 999;
-        align-items: flex-end;
-        gap: 20px;
+        padding-top: 80px;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        z-index: 1000;
+
+        /* Initial State: Circle at top-right with 0 size */
+        clip-path: circle(0% at 100% 0%);
+        transition: clip-path 0.5s ease-in-out;
+
+        /* Reset previous styles if any */
+        transform: none;
+        opacity: 1;
+        pointer-events: none;
+        /* Prevent clicks when closed */
+    }
+
+    .nav-list.active {
+        /* Active State: Circle expands to cover screen */
+        clip-path: circle(150% at 100% 0%);
+        pointer-events: auto;
+    }
+
+    .nav-list a {
+        font-size: 1.2rem;
+        color: var(--color-white);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .nav-list.active a {
-        display: inline-block;
-        padding: 10px 20px;
-        font-weight: 700;
-        border-bottom: none;
-        background-color: transparent;
-        border-radius: var(--radius-pill);
-        color: var(--color-white);
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+        /* Delay to show after background expands */
     }
 
     .mobile-menu-btn {
