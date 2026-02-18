@@ -249,8 +249,8 @@ h4 {
     height: 90vh;
     min-height: 500px;
     display: flex;
-    align-items: flex-start;
-    /* Align content to top instead of center */
+    align-items: center;
+    /* Align content to center (vertical) */
     overflow: hidden;
     padding-top: 40px;
     /* Space from logo section above */
