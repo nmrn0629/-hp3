@@ -695,14 +695,22 @@ h4 {
     }
 
     .hero {
-        background-size: contain;
-        background-position: top center;
+        background-image: none;
         height: auto;
         min-height: 50vh;
-        padding-top: 100px;
-        /* Adjust padding for content */
+        padding-top: 20px;
         align-items: flex-start;
-        /* Align content to top */
+    }
+
+    .hero-text-container {
+        width: 100%;
+        background-image: url('images/top2.png');
+        background-size: contain;
+        background-position: center top;
+        background-repeat: no-repeat;
+        padding-top: 10vw;
+        /* Adjust top padding based on image aspect ratio if needed, or leave to position */
+        padding-bottom: 50px;
     }
 
     .hero-content {
