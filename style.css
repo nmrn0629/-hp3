@@ -703,8 +703,8 @@ h4 {
 
         /* Initial State: Circle at top-right with 0 size */
         clip-path: circle(0% at 100% 0%);
-        transition: clip-path 0.5s ease-in-out, background-color 0.5s ease-in-out;
-        /* Added bg transition */
+        transition: clip-path 0.5s ease-in-out, background-color 1.2s ease-in-out;
+        /* Added bg transition with different timing */
 
         /* Reset previous styles if any */
         transform: none;
