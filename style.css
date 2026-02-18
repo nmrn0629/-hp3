@@ -997,3 +997,10 @@ h4 {
         /* Hide bottom (shoe rack) */
     }
 }
+
+/* Desktop only styles */
+@media (min-width: 769px) {
+    .hero-background {
+        display: none;
+    }
+}
