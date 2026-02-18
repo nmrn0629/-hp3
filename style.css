@@ -176,12 +176,12 @@ h4 {
 }
 
 .hero-logo {
-    max-width: 650px;
+    max-width: 1300px;
     /* Restore max-width constraint */
     width: 100%;
 
     /* Aggressive Cropping */
-    height: 200px;
+    height: 400px;
     /* Increased height for larger display */
     object-fit: cover;
     /* Fill width, crop height */
