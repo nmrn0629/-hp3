@@ -309,6 +309,7 @@ h4 {
     background-position: center;
     opacity: 0.5;
     mix-blend-mode: multiply;
+    filter: contrast(1.5) brightness(1.2);
     z-index: -1;
     pointer-events: none;
 }
