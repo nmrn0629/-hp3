@@ -74,16 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     setTimeout(() => {
                         window.location.href = href;
-                    }, 900); // Transition before full whiteout
+                    }, 700); // Transition earlier (0.7s)
                 }
-<<<<<<< HEAD
                 // On desktop, do nothing (allow default navigation)
-=======
-
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 700); // Transition earlier (0.7s)
->>>>>>> モバイル版ページ移行エフェクト
             }
 
             // Clean up leaf after animation (for internal links or if stays on page)
