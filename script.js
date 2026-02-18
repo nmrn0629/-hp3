@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 setTimeout(() => {
                     window.location.href = href;
-                }, 1300); // Wait for bg transition (1.2s) + buffer
+                }, 900); // Transition before full whiteout (1.2s)
             }
 
             // Clean up leaf after animation (for internal links or if stays on page)
