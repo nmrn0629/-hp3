@@ -163,8 +163,8 @@ h4 {
 }
 
 .logo-container-hero {
-    text-align: left;
-    /* Left align */
+    text-align: center;
+    /* Center align */
     padding-top: 70px;
     /* Clear fixed header */
     padding-bottom: 0;
@@ -189,8 +189,8 @@ h4 {
     /* Restore vertical center to show bottom */
 
     display: block;
-    margin-left: -130px;
-    /* Aggressively shift left to cut left whitespace */
+    margin: 0 auto;
+    /* Center align */
 }
 
 .nav-list {
