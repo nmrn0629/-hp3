@@ -694,6 +694,21 @@ h4 {
         animation: pageFadeIn 0.8s ease-out forwards;
     }
 
+    .hero {
+        background-size: contain;
+        background-position: top center;
+        height: auto;
+        min-height: 50vh;
+        padding-top: 100px;
+        /* Adjust padding for content */
+        align-items: flex-start;
+        /* Align content to top */
+    }
+
+    .hero-content {
+        margin-top: 20px;
+    }
+
     .header-container {
         padding: 0 15px;
     }
