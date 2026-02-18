@@ -66,6 +66,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // If it's a page navigation, wait for effect
             if (!isInternal && href && href !== '#') {
                 e.preventDefault();
+
+                // Mobile Transition Effect
+                // Check if mobile menu is active (window width check + active class)
+                if (window.innerWidth <= 768 && navList && navList.classList.contains('active')) {
+                    navList.classList.add('transitioning');
+                    if (menuBtn) menuBtn.classList.add('transitioning');
+                }
+
                 setTimeout(() => {
                     window.location.href = href;
                 }, 800); // 800ms delay for visual

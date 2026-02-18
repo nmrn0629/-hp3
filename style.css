@@ -703,7 +703,8 @@ h4 {
 
         /* Initial State: Circle at top-right with 0 size */
         clip-path: circle(0% at 100% 0%);
-        transition: clip-path 0.5s ease-in-out;
+        transition: clip-path 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        /* Added bg transition */
 
         /* Reset previous styles if any */
         transform: none;
@@ -716,6 +717,15 @@ h4 {
         /* Active State: Circle expands to cover top-right corner (approx 55%) */
         clip-path: circle(55% at 100% 0%);
         pointer-events: auto;
+    }
+
+    /* Page Transition Effect */
+    .nav-list.transitioning {
+        clip-path: circle(150% at 100% 0%) !important;
+        /* Expand to full screen */
+        background-color: white !important;
+        /* Whiteout */
+        pointer-events: none;
     }
 
     .nav-list a {
@@ -733,6 +743,19 @@ h4 {
         transform: translateX(0);
         transition-delay: 0.2s;
         /* Delay to show after background expands */
+    }
+
+    .nav-list.transitioning a {
+        opacity: 0 !important;
+        /* Hide links during transition */
+        transition: opacity 0.2s ease;
+    }
+
+    /* Hide close button during transition */
+    .mobile-menu-btn.transitioning {
+        opacity: 0 !important;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
     }
 
     .mobile-menu-btn {
