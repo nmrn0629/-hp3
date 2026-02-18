@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuBtn && navList) {
         menuBtn.addEventListener('click', () => {
             navList.classList.toggle('active');
+            menuBtn.classList.toggle('active');
         });
     }
 
