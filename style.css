@@ -595,6 +595,67 @@ h4 {
     opacity: 0.9;
 }
 
+/* Consultation Flow Section */
+.flow-title {
+    text-align: center;
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.flow-steps {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease;
+}
+
+.flow-step:hover {
+    transform: translateY(-2px);
+}
+
+.flow-step-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.flow-step-content h4 {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.flow-step-content p {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    opacity: 0.85;
+    line-height: 1.7;
+    margin: 0;
+}
+
 .phone-contact-wrapper {
     background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('images/ミーティング室ウェブ版.png');
     background-size: cover;
