@@ -916,9 +916,11 @@ h4 {
     /* Mobile background adjustment */
     .phone-contact-wrapper {
         background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('images/ミーティング室モバイル版.png');
-        background-size: 100% auto;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        padding: 20px;
+        overflow: hidden;
     }
 
     /* Mobile Logo Adjustments */
@@ -1031,9 +1033,11 @@ h4 {
     /* Mobile background adjustment */
     .phone-contact-wrapper {
         background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('images/ミーティング室モバイル版.png');
-        background-size: 100% auto;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        padding: 20px;
+        overflow: hidden;
     }
 }
 
