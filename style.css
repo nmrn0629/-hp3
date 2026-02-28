@@ -751,6 +751,18 @@ h4 {
         /* Changing to block to force a break */
     }
 
+    .desktop-space {
+        display: none;
+    }
+
+    .career-list li {
+        margin-bottom: 20px;
+    }
+
+    .career-list li:last-child {
+        margin-bottom: 0;
+    }
+
     body {
         animation: pageFadeIn 0.8s ease-out forwards;
     }
