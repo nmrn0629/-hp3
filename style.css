@@ -712,7 +712,11 @@ h4 {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        padding-top: 20vw;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 20px;
         padding-bottom: 50px;
         position: relative;
         z-index: 1;
