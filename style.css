@@ -709,7 +709,7 @@ h4 {
         padding-left: 20px;
         padding-right: 20px;
         background-image: url('images/トップ背景モバイル版4.png');
-        background-size: cover;
+        background-size: 100% auto;
         background-position: center;
         background-repeat: no-repeat;
         min-height: 50vh;
