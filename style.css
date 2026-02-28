@@ -714,6 +714,8 @@ h4 {
         background-repeat: no-repeat;
         padding-top: 20vw;
         padding-bottom: 50px;
+        position: relative;
+        z-index: 1;
     }
 
     .hero-content {
