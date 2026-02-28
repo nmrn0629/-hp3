@@ -932,7 +932,7 @@ h4 {
     .logo-mobile-container {
         display: block;
         width: 100%;
-        margin-bottom: 5px;
+        margin-bottom: 0;
         overflow: visible;
         /* Allow logo to expand */
         text-align: center;
@@ -951,8 +951,8 @@ h4 {
 
     .hero {
         height: auto;
-        padding: 5px 0 40px;
-        /* Reduced top padding to move logo closer */
+        padding: 0 0 5px;
+        /* Minimal padding to tightly pack sections */
         text-align: center;
         align-items: center;
         /* Re-center items for mobile layout */
