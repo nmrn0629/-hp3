@@ -903,7 +903,7 @@ h4 {
 
     /* Mobile background adjustment */
     .phone-contact-wrapper {
-        background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('images/ミーティング室モバイル版.png');
+        background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('images/ミーティング室ウェブ版.png');
         background-size: 100% auto;
         background-position: center;
         background-repeat: no-repeat;
@@ -1021,7 +1021,7 @@ h4 {
 
     /* Mobile background adjustment */
     .phone-contact-wrapper {
-        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('images/ミーティング室モバイル版.png');
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('images/ミーティング室ウェブ版.png');
         background-size: 100% auto;
         background-position: center;
         background-repeat: no-repeat;
