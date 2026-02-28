@@ -1047,6 +1047,15 @@ h4 {
         font-size: 1.2rem;
     }
 
+    .flow-step-heading {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .flow-step-heading .step-num {
+        white-space: nowrap;
+    }
+
     .about-wrapper {
         flex-direction: column;
     }
