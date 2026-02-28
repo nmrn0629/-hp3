@@ -697,8 +697,8 @@ h4 {
     .hero {
         background-image: none;
         height: auto;
-        min-height: 50vh;
-        padding-top: 20px;
+        min-height: 30vh;
+        padding-top: 10px;
         align-items: flex-start;
     }
 
@@ -712,12 +712,12 @@ h4 {
         background-size: 100% auto;
         background-position: center;
         background-repeat: no-repeat;
-        min-height: 50vh;
+        min-height: 40vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-top: 20px;
-        padding-bottom: 50px;
+        padding-top: 5px;
+        padding-bottom: 20px;
         position: relative;
         z-index: 1;
     }
