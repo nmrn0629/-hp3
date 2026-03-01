@@ -1219,4 +1219,8 @@ h4 {
         max-width: 225px;
         height: auto;
     }
+
+    .page-header {
+        padding-top: 180px !important;
+    }
 }
