@@ -1214,21 +1214,9 @@ h4 {
         display: none;
     }
 
-    .desktop-large-logo-section {
+    .logo-desktop {
         display: block;
-        padding: 110px 0 0 0;
-        text-align: left;
-        background-color: var(--color-bg);
-    }
-
-    .large-logo-desktop {
         max-width: 225px;
-        width: 100%;
         height: auto;
-        transform: translateX(-60px);
-    }
-
-    .page-header {
-        padding-top: 40px !important;
     }
 }
