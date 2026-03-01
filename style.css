@@ -1216,14 +1216,14 @@ h4 {
 
     .desktop-large-logo-section {
         display: block;
-        padding: 40px 0;
-        text-align: center;
+        padding: 0;
+        text-align: left;
         background-color: var(--color-white);
     }
 
     .large-logo-desktop {
-        max-width: 900px;
-        /* Base 45px * 20 = 900px */
+        max-width: 450px;
+        /* Base 45px * 10 = 450px */
         width: 100%;
         height: auto;
     }
