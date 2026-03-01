@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 requestAnimationFrame(scrollStep);
-            }, 500);
+            }, 250);
         }
     }
 });
