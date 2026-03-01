@@ -1144,7 +1144,7 @@ h4 {
         margin: 0 auto;
     }
 
-    .grid-3>*:last-child {
+    .grid-3>*:first-child {
         grid-column: 1 / -1;
         max-width: 50%;
         margin: 0 auto;
