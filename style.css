@@ -505,35 +505,72 @@ h4 {
 
 .info-row {
     display: flex;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px dashed #ddd;
+    /* Soften the border */
 }
 
 .info-row.no-border-bottom {
     border-bottom: none;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
 }
 
 .info-row.sub-info-row {
-    padding-top: 5px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 25px;
 }
 
 .info-row.sub-info-row dt {
     font-size: 0.9rem;
     font-weight: normal;
-    padding-left: 20px;
-    /* Indent */
+    padding-left: 10px;
 }
 
 .info-row dt {
-    width: 120px;
+    width: 130px;
     font-weight: 700;
     color: var(--color-primary);
+    padding-top: 15px;
+    /* Align text vertically with bubble padding */
+    flex-shrink: 0;
 }
 
 .info-row dd {
     flex: 1;
+    position: relative;
+    background: #ffffff;
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-left: 20px;
+    color: #333;
+    line-height: 1.6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* 吹き出しのしっぽ（左向き） */
+.info-row dd::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    /* Position aligned with dt text */
+    left: -14px;
+    border-width: 10px 14px 10px 0;
+    border-style: solid;
+    border-color: transparent var(--color-primary) transparent transparent;
+}
+
+/* 吹き出しのしっぽ内側（白塗り） */
+.info-row dd::after {
+    content: '';
+    position: absolute;
+    top: 21px;
+    /* Offset to create the 2px border effect */
+    left: -10px;
+    border-width: 7px 11px 7px 0;
+    border-style: solid;
+    border-color: transparent #ffffff transparent transparent;
 }
 
 /* Access Section */
@@ -1118,6 +1155,48 @@ h4 {
 
     .about-wrapper {
         flex-direction: column;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 0;
+    }
+
+    .info-row dt {
+        width: auto;
+        padding-top: 0;
+        margin-bottom: 12px;
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .info-row.sub-info-row dt {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .info-row dd {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    /* 吹き出しのしっぽ（上向き）に変更 */
+    .info-row dd::before {
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 10px 14px 10px;
+        border-color: transparent transparent var(--color-primary) transparent;
+    }
+
+    .info-row dd::after {
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 8px 11px 8px;
+        border-color: transparent transparent #ffffff transparent;
     }
 
     .contact-section {
