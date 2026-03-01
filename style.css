@@ -1182,4 +1182,24 @@ h4 {
         font-size: 1.5rem;
         padding: 18px 45px;
     }
+
+    .company-info {
+        font-size: 1.25rem;
+    }
+
+    .info-row dt {
+        width: 150px;
+    }
+
+    .info-row.sub-info-row dt {
+        font-size: 1.125rem;
+    }
+
+    .access-info h4 {
+        font-size: 1.25rem;
+    }
+
+    .access-info p {
+        font-size: 1.125rem;
+    }
 }
