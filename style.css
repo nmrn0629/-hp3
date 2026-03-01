@@ -1165,4 +1165,21 @@ h4 {
     .service-item p {
         font-size: 1.19rem;
     }
+
+    .page-header p {
+        font-size: 1.25rem;
+    }
+
+    .about-text {
+        font-size: 1.19rem;
+    }
+
+    .section>.container>p {
+        font-size: 1.25rem;
+    }
+
+    main .section:not(.services-section):not(.contact-section) .btn-primary {
+        font-size: 1.5rem;
+        padding: 18px 45px;
+    }
 }
