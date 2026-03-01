@@ -1222,7 +1222,7 @@ h4 {
     }
 
     .large-logo-desktop {
-        max-width: 450px;
+        max-width: 225px;
         width: 100%;
         height: auto;
         transform: translateX(-60px);
