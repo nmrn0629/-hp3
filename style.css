@@ -154,7 +154,7 @@ h4 {
 }
 
 .contact-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/コーヒー背景ウェブ版.png?v=1');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/コーヒー背景ウェブ版.png?v=2');
     background-size: cover;
     background-position: center;
 }
@@ -895,7 +895,7 @@ h4 {
     }
 
     .contact-header {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/コーヒー背景.png?v=3');
+        background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/コーヒー背景.png?v=4');
         background-position: top center;
     }
 
