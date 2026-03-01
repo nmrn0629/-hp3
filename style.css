@@ -916,6 +916,11 @@ h4 {
         z-index: 1005;
     }
 
+    .header.scrolled {
+        background-color: #e5e5e5;
+        /* Keep the same gray when scrolled */
+    }
+
     .header-container {
         padding: 0 15px;
     }
