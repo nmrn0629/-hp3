@@ -527,7 +527,7 @@ h4 {
 
 .info-row dt {
     width: 130px;
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-primary);
     padding-top: 15px;
@@ -599,7 +599,7 @@ h4 {
 }
 
 .access-info h4 {
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--color-primary);
     margin-bottom: 15px;
     margin-top: 25px;
@@ -1214,6 +1214,7 @@ h4 {
 
     .access-title {
         font-size: 1rem;
+        text-align: left;
     }
 
     .contact-section {
@@ -1237,9 +1238,7 @@ h4 {
         grid-template-columns: 1fr;
     }
 
-    .access-title {
-        font-size: 1rem;
-    }
+    /* Duplicate .access-title removed to clean up CSS */
 
     .access-content {
         display: block;
