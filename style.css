@@ -1138,6 +1138,15 @@ h4 {
     }
 
     .grid-3 {
-        gap: 100px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .grid-3>*:last-child {
+        grid-column: 1 / -1;
+        max-width: 50%;
+        margin: 0 auto;
     }
 }
