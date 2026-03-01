@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetY = targetEl.getBoundingClientRect().top + window.pageYOffset;
                 const startY = 0;
                 const distance = targetY;
-                const duration = 5000; // 5 seconds
+                const duration = 2500; // 2.5 seconds
                 let startTime = null;
                 let cancelled = false;
 
