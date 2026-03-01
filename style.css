@@ -136,25 +136,25 @@ h4 {
 
 /* Page Header Backgrounds */
 .about-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/観葉植物背景.png?v=2');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/観葉植物背景.png?v=3');
     background-size: cover;
     background-position: center;
 }
 
 .services-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/電卓背景.png?v=2');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/電卓背景.png?v=3');
     background-size: cover;
     background-position: center;
 }
 
 .pricing-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/パソコン背景.png?v=2');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/パソコン背景.png?v=3');
     background-size: cover;
     background-position: center;
 }
 
 .contact-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/コーヒー背景.png?v=2');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/コーヒー背景.png?v=3');
     background-size: cover;
     background-position: center;
 }
