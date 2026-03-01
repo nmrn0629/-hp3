@@ -151,6 +151,12 @@ h4 {
     font-weight: 800;
     color: var(--color-primary);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo-desktop {
+    display: none;
 }
 
 /* Hero Logo Section */
@@ -1201,5 +1207,15 @@ h4 {
 
     .access-info p {
         font-size: 1.125rem;
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    .logo-desktop {
+        display: block;
+        max-height: 45px;
+        width: auto;
     }
 }
