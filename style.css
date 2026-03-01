@@ -136,7 +136,7 @@ h4 {
 
 /* Page Header Backgrounds */
 .about-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/観葉植物背景.png?v=3');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/観葉植物背景ウェブ版.png?v=1');
     background-size: cover;
     background-position: center;
 }
@@ -148,7 +148,7 @@ h4 {
 }
 
 .pricing-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/パソコン背景.png?v=3');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/パソコン背景ウェブ版.png?v=1');
     background-size: cover;
     background-position: center;
 }
@@ -830,8 +830,13 @@ h4 {
     }
 
     /* Adjust page header backgrounds for mobile */
-    .about-header,
+    .about-header {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/観葉植物背景.png?v=3');
+        background-position: top center;
+    }
+
     .pricing-header {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('images/パソコン背景.png?v=3');
         background-position: top center;
     }
 
