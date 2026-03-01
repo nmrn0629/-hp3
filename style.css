@@ -829,6 +829,12 @@ h4 {
         z-index: 1;
     }
 
+    /* Adjust page header backgrounds for mobile */
+    .about-header,
+    .pricing-header {
+        background-position: top center;
+    }
+
     .hero-background {
         display: none;
     }
