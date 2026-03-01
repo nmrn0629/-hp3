@@ -155,7 +155,8 @@ h4 {
     align-items: center;
 }
 
-.logo-desktop {
+/* Desktop Large Logo Section (Default hidden on mobile) */
+.desktop-large-logo-section {
     display: none;
 }
 
@@ -1213,9 +1214,17 @@ h4 {
         display: none;
     }
 
-    .logo-desktop {
+    .desktop-large-logo-section {
         display: block;
-        max-height: 45px;
-        width: auto;
+        padding: 40px 0;
+        text-align: center;
+        background-color: var(--color-white);
+    }
+
+    .large-logo-desktop {
+        max-width: 900px;
+        /* Base 45px * 20 = 900px */
+        width: 100%;
+        height: auto;
     }
 }
