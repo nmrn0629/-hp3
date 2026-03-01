@@ -527,6 +527,7 @@ h4 {
 
 .info-row dt {
     width: 130px;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-primary);
     padding-top: 15px;
@@ -538,7 +539,6 @@ h4 {
     flex: 1;
     position: relative;
     background: #f1f8e9;
-    border: 2px solid var(--color-primary);
     border-radius: 12px;
     padding: 15px 20px;
     margin-left: 20px;
@@ -556,19 +556,12 @@ h4 {
     left: -14px;
     border-width: 10px 14px 10px 0;
     border-style: solid;
-    border-color: transparent var(--color-primary) transparent transparent;
+    border-color: transparent #f1f8e9 transparent transparent;
 }
 
-/* 吹き出しのしっぽ内側（背景色合わせ） */
+/* 吹き出し枠線がなくなったため内側のしっぽ調整は不要 */
 .info-row dd::after {
-    content: '';
-    position: absolute;
-    top: 21px;
-    /* Offset to create the 2px border effect */
-    left: -10px;
-    border-width: 7px 11px 7px 0;
-    border-style: solid;
-    border-color: transparent #f1f8e9 transparent transparent;
+    display: none;
 }
 
 /* Access Section */
@@ -579,11 +572,11 @@ h4 {
 }
 
 .access-title {
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-primary);
     margin-bottom: 30px;
-    text-align: center;
+    text-align: left;
 }
 
 .access-content {
@@ -626,7 +619,6 @@ h4 {
 .access-bubble {
     position: relative;
     background: #f1f8e9;
-    border: 2px solid var(--color-primary);
     border-radius: 12px;
     padding: 15px 20px;
     margin-bottom: 25px;
@@ -641,17 +633,11 @@ h4 {
     left: 30px;
     border-width: 0 10px 14px 10px;
     border-style: solid;
-    border-color: transparent transparent var(--color-primary) transparent;
+    border-color: transparent transparent #f1f8e9 transparent;
 }
 
 .access-bubble::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 32px;
-    border-width: 0 8px 11px 8px;
-    border-style: solid;
-    border-color: transparent transparent #f1f8e9 transparent;
+    display: none;
 }
 
 .access-map-image {
@@ -1219,15 +1205,11 @@ h4 {
         left: 30px;
         transform: none;
         border-width: 0 10px 14px 10px;
-        border-color: transparent transparent var(--color-primary) transparent;
+        border-color: transparent transparent #f1f8e9 transparent;
     }
 
     .info-row dd::after {
-        top: -10px;
-        left: 32px;
-        transform: none;
-        border-width: 0 8px 11px 8px;
-        border-color: transparent transparent #f1f8e9 transparent;
+        display: none;
     }
 
     .access-title {
