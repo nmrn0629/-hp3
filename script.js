@@ -106,4 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeElements.forEach(el => {
         observer.observe(el);
     });
+
+    // Smooth scroll to anchor on page load (for cross-page navigation)
+    if (window.location.hash) {
+        // First scroll to top so the scroll motion is visible
+        window.scrollTo(0, 0);
+        const targetEl = document.querySelector(window.location.hash);
+        if (targetEl) {
+            setTimeout(() => {
+                targetEl.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }, 300);
+        }
+    }
 });
