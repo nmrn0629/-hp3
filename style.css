@@ -909,6 +909,11 @@ h4 {
 
     .header {
         background-color: #e5e5e5;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1005;
     }
 
     .header-container {
