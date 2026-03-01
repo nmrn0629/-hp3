@@ -522,8 +522,6 @@ h4 {
 }
 
 .info-row.sub-info-row dt {
-    font-size: 0.9rem;
-    font-weight: normal;
     padding-left: 10px;
 }
 
@@ -539,7 +537,7 @@ h4 {
 .info-row dd {
     flex: 1;
     position: relative;
-    background: #ffffff;
+    background: #f1f8e9;
     border: 2px solid var(--color-primary);
     border-radius: 12px;
     padding: 15px 20px;
@@ -561,7 +559,7 @@ h4 {
     border-color: transparent var(--color-primary) transparent transparent;
 }
 
-/* 吹き出しのしっぽ内側（白塗り） */
+/* 吹き出しのしっぽ内側（背景色合わせ） */
 .info-row dd::after {
     content: '';
     position: absolute;
@@ -570,7 +568,7 @@ h4 {
     left: -10px;
     border-width: 7px 11px 7px 0;
     border-style: solid;
-    border-color: transparent #ffffff transparent transparent;
+    border-color: transparent #f1f8e9 transparent transparent;
 }
 
 /* Access Section */
@@ -581,10 +579,11 @@ h4 {
 }
 
 .access-title {
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--color-primary);
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 .access-content {
@@ -609,8 +608,8 @@ h4 {
 .access-info h4 {
     font-size: 1rem;
     color: var(--color-primary);
-    margin-bottom: 5px;
-    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-top: 25px;
 }
 
 .access-info h4:first-child {
@@ -619,8 +618,40 @@ h4 {
 
 .access-info p {
     font-size: 0.9rem;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     line-height: 1.6;
+}
+
+/* アクセス項目の吹き出し */
+.access-bubble {
+    position: relative;
+    background: #f1f8e9;
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.access-bubble::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 30px;
+    border-width: 0 10px 14px 10px;
+    border-style: solid;
+    border-color: transparent transparent var(--color-primary) transparent;
+}
+
+.access-bubble::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 32px;
+    border-width: 0 8px 11px 8px;
+    border-style: solid;
+    border-color: transparent transparent #f1f8e9 transparent;
 }
 
 .access-map-image {
@@ -1159,21 +1190,21 @@ h4 {
 
     .info-row {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         padding: 25px 0;
     }
 
     .info-row dt {
-        width: auto;
+        width: 100%;
         padding-top: 0;
         margin-bottom: 12px;
-        text-align: center;
+        text-align: left;
         padding-left: 0;
     }
 
     .info-row.sub-info-row dt {
         padding-left: 0;
-        text-align: center;
+        text-align: left;
     }
 
     .info-row dd {
@@ -1185,18 +1216,22 @@ h4 {
     /* 吹き出しのしっぽ（上向き）に変更 */
     .info-row dd::before {
         top: -14px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 30px;
+        transform: none;
         border-width: 0 10px 14px 10px;
         border-color: transparent transparent var(--color-primary) transparent;
     }
 
     .info-row dd::after {
         top: -10px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 32px;
+        transform: none;
         border-width: 0 8px 11px 8px;
-        border-color: transparent transparent #ffffff transparent;
+        border-color: transparent transparent #f1f8e9 transparent;
+    }
+
+    .access-title {
+        font-size: 1rem;
     }
 
     .contact-section {
