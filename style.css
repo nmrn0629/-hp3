@@ -527,7 +527,7 @@ h4 {
 
 .info-row dt {
     width: 130px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-primary);
     padding-top: 15px;
@@ -572,7 +572,7 @@ h4 {
 }
 
 .access-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-primary);
     margin-bottom: 30px;
@@ -1213,7 +1213,7 @@ h4 {
     }
 
     .access-title {
-        font-size: 1.2rem;
+        font-size: 1.45rem;
         text-align: left;
     }
 
