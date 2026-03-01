@@ -117,13 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const targetEl = document.querySelector(hash);
         if (targetEl) {
+            const isMobile = window.innerWidth <= 768;
+            const scrollDelay = isMobile ? 500 : 250;
             // Wait for page to settle at top, then start smooth scroll
             setTimeout(() => {
                 window.scrollTo(0, 0); // Ensure we're at top
                 const targetY = targetEl.getBoundingClientRect().top + window.pageYOffset;
                 const startY = 0;
                 const distance = targetY;
-                const duration = 2500; // 2.5 seconds
+                const duration = isMobile ? 5000 : 2500;
                 let startTime = null;
                 let cancelled = false;
 
@@ -156,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 requestAnimationFrame(scrollStep);
-            }, 250);
+            }, scrollDelay);
         }
     }
 });
