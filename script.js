@@ -117,14 +117,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetY = targetEl.getBoundingClientRect().top + window.pageYOffset;
                 const startY = window.pageYOffset;
                 const distance = targetY - startY;
-                const duration = 15000; // 15 seconds
+                const duration = 5000; // 5 seconds
                 let startTime = null;
+                let cancelled = false;
 
                 function easeInOutCubic(t) {
                     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
                 }
 
+                // Cancel animation if user interacts
+                function cancelScroll() {
+                    cancelled = true;
+                    window.removeEventListener('wheel', cancelScroll);
+                    window.removeEventListener('touchmove', cancelScroll);
+                }
+                window.addEventListener('wheel', cancelScroll, { once: true });
+                window.addEventListener('touchmove', cancelScroll, { once: true });
+
                 function scrollStep(timestamp) {
+                    if (cancelled) return;
                     if (!startTime) startTime = timestamp;
                     const elapsed = timestamp - startTime;
                     const progress = Math.min(elapsed / duration, 1);
@@ -132,6 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.scrollTo(0, startY + distance * ease);
                     if (progress < 1) {
                         requestAnimationFrame(scrollStep);
+                    } else {
+                        window.removeEventListener('wheel', cancelScroll);
+                        window.removeEventListener('touchmove', cancelScroll);
                     }
                 }
 
