@@ -522,12 +522,13 @@ h4 {
 }
 
 .info-row.sub-info-row dt {
-    padding-left: 10px;
+    padding-left: 0;
 }
 
 .info-row dt {
     width: 130px;
     font-size: 1rem;
+    /* Swapped: used to be larger, now defaults to 1rem like access items used to be */
     font-weight: 700;
     color: var(--color-primary);
     padding-top: 15px;
@@ -599,7 +600,8 @@ h4 {
 }
 
 .access-info h4 {
-    font-size: 1rem;
+    font-size: 1.15rem;
+    /* Swapped: used to be 1rem, now larger like info-row dt used to be */
     color: var(--color-primary);
     margin-bottom: 15px;
     margin-top: 25px;
