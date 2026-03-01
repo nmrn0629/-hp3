@@ -122,7 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Wait for page to settle at top, then start smooth scroll
             setTimeout(() => {
                 window.scrollTo(0, 0); // Ensure we're at top
-                const targetY = targetEl.getBoundingClientRect().top + window.pageYOffset;
+                const elRect = targetEl.getBoundingClientRect();
+                const elTop = elRect.top + window.pageYOffset;
+                // On mobile, center the element on screen
+                const targetY = isMobile
+                    ? elTop - (window.innerHeight / 2) + (elRect.height / 2)
+                    : elTop;
                 const startY = 0;
                 const distance = targetY;
                 const duration = isMobile ? 5000 : 2500;
