@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetY = targetEl.getBoundingClientRect().top + window.pageYOffset;
                 const startY = window.pageYOffset;
                 const distance = targetY - startY;
-                const duration = 1500; // 1.5 seconds
+                const duration = 15000; // 15 seconds
                 let startTime = null;
 
                 function easeInOutCubic(t) {
