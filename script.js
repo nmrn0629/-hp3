@@ -109,14 +109,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth scroll to anchor on page load (for cross-page navigation)
     if (window.location.hash) {
-        // First scroll to top so the scroll motion is visible
+        const hash = window.location.hash;
+        // Remove hash from URL to prevent browser auto-jump
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+        // Force scroll to top
         window.scrollTo(0, 0);
-        const targetEl = document.querySelector(window.location.hash);
+
+        const targetEl = document.querySelector(hash);
         if (targetEl) {
+            // Wait for page to settle at top, then start smooth scroll
             setTimeout(() => {
+                window.scrollTo(0, 0); // Ensure we're at top
                 const targetY = targetEl.getBoundingClientRect().top + window.pageYOffset;
-                const startY = window.pageYOffset;
-                const distance = targetY - startY;
+                const startY = 0;
+                const distance = targetY;
                 const duration = 5000; // 5 seconds
                 let startTime = null;
                 let cancelled = false;
