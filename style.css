@@ -1186,13 +1186,13 @@ h4 {
         margin-bottom: 12px;
         text-align: left;
         padding-left: 0;
-        font-size: 1.625rem;
+        font-size: 1.3rem;
     }
 
     .info-row.sub-info-row dt {
         padding-left: 0;
         text-align: left;
-        font-size: 1.625rem;
+        font-size: 1.3rem;
     }
 
     .info-row dd {
@@ -1215,7 +1215,7 @@ h4 {
     }
 
     .access-title {
-        font-size: 1.625rem;
+        font-size: 1.3rem;
         text-align: left;
     }
 
