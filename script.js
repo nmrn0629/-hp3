@@ -114,10 +114,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetEl = document.querySelector(window.location.hash);
         if (targetEl) {
             setTimeout(() => {
-                targetEl.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }, 300);
+                const targetY = targetEl.getBoundingClientRect().top + window.pageYOffset;
+                const startY = window.pageYOffset;
+                const distance = targetY - startY;
+                const duration = 1500; // 1.5 seconds
+                let startTime = null;
+
+                function easeInOutCubic(t) {
+                    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                function scrollStep(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const elapsed = timestamp - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const ease = easeInOutCubic(progress);
+                    window.scrollTo(0, startY + distance * ease);
+                    if (progress < 1) {
+                        requestAnimationFrame(scrollStep);
+                    }
+                }
+
+                requestAnimationFrame(scrollStep);
+            }, 500);
         }
     }
 });
