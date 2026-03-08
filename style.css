@@ -473,7 +473,7 @@ h4 {
 
 .price-intro-text {
     font-size: 0.95rem;
-    color: var(--color-text-light);
+    color: #000;
     line-height: 1.9;
     text-align: left;
 }
