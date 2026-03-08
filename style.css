@@ -1368,6 +1368,12 @@ h4 {
     }
 }
 
+/* Privacy Policy Hanging Indent */
+.privacy-sub-title {
+    padding-left: 1.8em;
+    text-indent: -1.8em;
+}
+
 /* Desktop only styles */
 @media (min-width: 769px) {
     .mobile-center-logo {
@@ -1468,5 +1474,10 @@ h4 {
 
     .page-header {
         padding-top: 180px !important;
+    }
+
+    .privacy-sub-title {
+        padding-left: 0;
+        text-indent: 0;
     }
 }
