@@ -316,12 +316,20 @@ h4 {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.95),
+        0 0 35px rgba(255, 255, 255, 0.85),
+        0 0 12px rgba(255, 255, 255, 1);
 }
 
 .hero-subtitle {
     font-size: 1.2rem;
     color: var(--color-text-light);
     margin-bottom: 2.5rem;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.95),
+        0 0 35px rgba(255, 255, 255, 0.85),
+        0 0 12px rgba(255, 255, 255, 1);
 }
 
 .hero-buttons {
@@ -958,13 +966,6 @@ h4 {
 
     .hero-content {
         margin-top: 20px;
-    }
-
-    .hero-subtitle {
-        text-shadow:
-            0 0 20px rgba(255, 255, 255, 0.95),
-            0 0 35px rgba(255, 255, 255, 0.85),
-            0 0 12px rgba(255, 255, 255, 1);
     }
 
     .header {
