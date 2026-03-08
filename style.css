@@ -922,7 +922,7 @@ h4 {
         padding-left: 20px;
         padding-right: 20px;
         background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('images/トップ背景モバイル版4.png');
-        background-size: 100% auto;
+        background-size: cover;
         background-position: center 35%;
         background-repeat: no-repeat;
         aspect-ratio: 3 / 2;
