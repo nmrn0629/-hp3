@@ -983,6 +983,7 @@ h4 {
     }
 
     .header-container {
+        position: relative;
         padding: 0 15px;
     }
 
@@ -1026,8 +1027,28 @@ h4 {
 
     .nav-list.active {
         /* Active State: Circle expands to cover top-right corner */
-        clip-path: circle(65% at 100% 0%);
+        clip-path: circle(48% at 100% 0%);
         pointer-events: auto;
+    }
+
+    .nav-home {
+        display: none;
+    }
+
+    /* Mobile Header Center Logo */
+    .mobile-center-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .mobile-center-logo img {
+        height: 35px;
+        width: auto;
     }
 
     /* Page Transition Effect */
@@ -1349,6 +1370,10 @@ h4 {
 
 /* Desktop only styles */
 @media (min-width: 769px) {
+    .mobile-center-logo {
+        display: none;
+    }
+
     .hero-background {
         display: none;
     }
