@@ -1347,7 +1347,12 @@ h4 {
     }
 
     .price-intro {
-        padding: 30px 15px;
+        padding: 30px 1.5em;
+    }
+
+    .price-intro-text {
+        text-align: justify;
+        text-justify: inter-character;
     }
 
     .access-map-image {
