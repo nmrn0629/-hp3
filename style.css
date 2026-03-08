@@ -463,28 +463,6 @@ h4 {
     background-color: #f1f8e9;
 }
 
-.services-cta-section {
-    position: relative;
-    clip-path: inset(0 0 0 0);
-    -webkit-clip-path: inset(0 0 0 0);
-    z-index: 1;
-}
-
-.services-cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('images/大理石2.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    z-index: -2;
-    opacity: 0.8;
-}
-
 /* Pricing intro banner (全体説明) */
 .price-intro {
     max-width: 800px;
