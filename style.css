@@ -921,7 +921,7 @@ h4 {
         margin-top: -30px;
         padding-left: 20px;
         padding-right: 20px;
-        background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('images/トップ背景モバイル版4.png');
+        background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('images/トップ背景モバイル版4.png');
         background-size: cover;
         background-position: center 35%;
         background-repeat: no-repeat;
@@ -958,6 +958,13 @@ h4 {
 
     .hero-content {
         margin-top: 20px;
+    }
+
+    .hero-subtitle {
+        text-shadow:
+            0 0 8px rgba(255, 255, 255, 0.95),
+            0 0 16px rgba(255, 255, 255, 0.8),
+            1px 1px 4px rgba(255, 255, 255, 1);
     }
 
     .header {
