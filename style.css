@@ -1374,6 +1374,16 @@ h4 {
     text-indent: -1.8em;
 }
 
+.privacy-sub-title.title-4 {
+    padding-left: 1.4em;
+    text-indent: -1.4em;
+}
+
+.privacy-sub-title.title-10 {
+    padding-left: 1.9em;
+    text-indent: -1.9em;
+}
+
 /* Desktop only styles */
 @media (min-width: 769px) {
     .mobile-center-logo {
@@ -1477,7 +1487,7 @@ h4 {
     }
 
     .privacy-sub-title {
-        padding-left: 0;
-        text-indent: 0;
+        padding-left: 0 !important;
+        text-indent: 0 !important;
     }
 }
