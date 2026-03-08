@@ -463,20 +463,14 @@ h4 {
     background-color: #f1f8e9;
 }
 
-.services-cta-section,
-.pricing-cta-section,
-.contact-marble-section,
-.privacy-marble-section {
+.services-cta-section {
     position: relative;
     clip-path: inset(0 0 0 0);
     -webkit-clip-path: inset(0 0 0 0);
     z-index: 1;
 }
 
-.services-cta-section::before,
-.pricing-cta-section::before,
-.contact-marble-section::before,
-.privacy-marble-section::before {
+.services-cta-section::before {
     content: '';
     position: absolute;
     top: 0;
