@@ -1043,7 +1043,7 @@ h4 {
         transform: translate(-50%, -50%);
         display: flex;
         align-items: center;
-        z-index: 1000;
+        z-index: 1002;
     }
 
     .mobile-center-logo img {
