@@ -370,7 +370,7 @@ h4 {
     width: 100%;
     height: 100%;
     /* Use fixed attachment for parallax instead of complicated ::before on mobile sometimes */
-    background-image: url('images/大理石背景.png');
+    background-image: url('images/大理石2.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
