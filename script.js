@@ -166,4 +166,142 @@ document.addEventListener('DOMContentLoaded', () => {
             }, scrollDelay);
         }
     }
+
+    // Topics Floating Button & Bubble Logic
+    const fab = document.getElementById('topics-fab');
+    const bubble = document.getElementById('topics-bubble');
+    const closeBtn = document.getElementById('close-topics');
+
+    if (fab && bubble) {
+        let isDragging = false;
+        let startX, startY;
+        let initialX, initialY;
+        let hasMoved = false;
+
+        const onStart = (e) => {
+            isDragging = true;
+            hasMoved = false;
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            
+            startX = clientX;
+            startY = clientY;
+            
+            const rect = fab.getBoundingClientRect();
+            initialX = rect.left;
+            initialY = rect.top;
+
+            fab.style.transition = 'none';
+            bubble.classList.remove('active'); // Close bubble when start moving
+        };
+
+        const onMove = (e) => {
+            if (!isDragging) return;
+            
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+
+            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                hasMoved = true;
+            }
+
+            let newX = initialX + dx;
+            let newY = initialY + dy;
+
+            // Boundary checks
+            const fabWidth = fab.offsetWidth;
+            const fabHeight = fab.offsetHeight;
+            newX = Math.max(10, Math.min(window.innerWidth - fabWidth - 10, newX));
+            newY = Math.max(10, Math.min(window.innerHeight - fabHeight - 10, newY));
+
+            fab.style.left = `${newX}px`;
+            fab.style.top = `${newY}px`;
+            fab.style.bottom = 'auto';
+            fab.style.right = 'auto';
+        };
+
+        const onEnd = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            fab.style.transition = 'transform 0.3s ease';
+        };
+
+        // dragging events
+        fab.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        fab.addEventListener('touchstart', onStart, { passive: true });
+        window.addEventListener('touchmove', onMove, { passive: false });
+        window.addEventListener('touchend', onEnd);
+
+        // Click to toggle bubble
+        fab.addEventListener('click', (e) => {
+            if (hasMoved) {
+                e.preventDefault();
+                return;
+            }
+            bubble.classList.toggle('active');
+            updateBubblePosition();
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                bubble.classList.remove('active');
+            });
+        }
+
+        const updateBubblePosition = () => {
+            const fabRect = fab.getBoundingClientRect();
+            const bubbleWidth = bubble.offsetWidth;
+            
+            // Positions relative to FAB
+            let bLeft = fabRect.left - bubbleWidth + 40;
+            let bTop = fabRect.top - bubble.offsetHeight - 15;
+
+            // Boundary checks for bubble
+            if (bLeft < 10) bLeft = 10;
+            if (bTop < 80) bTop = fabRect.bottom + 15; // Show below if no space above
+
+            bubble.style.left = `${bLeft}px`;
+            bubble.style.top = `${bTop}px`;
+            bubble.style.bottom = 'auto';
+            bubble.style.right = 'auto';
+            
+            // Adjust tail position
+            const tail = bubble.querySelector('.topics-bubble-tail');
+            if (tail) {
+                const relativeX = fabRect.left + (fabRect.width / 2) - bLeft;
+                tail.style.left = `${relativeX - 10}px`;
+                tail.style.right = 'auto';
+                
+                if (bTop > fabRect.bottom) {
+                    tail.style.top = '-10px';
+                    tail.style.bottom = 'auto';
+                    tail.style.borderRight = 'none';
+                    tail.style.borderBottom = 'none';
+                    tail.style.borderTop = '2px solid var(--color-primary)';
+                    tail.style.borderLeft = '2px solid var(--color-primary)';
+                } else {
+                    tail.style.top = 'auto';
+                    tail.style.bottom = '-10px';
+                    tail.style.borderTop = 'none';
+                    tail.style.borderLeft = 'none';
+                    tail.style.borderRight = '2px solid var(--color-primary)';
+                    tail.style.borderBottom = '2px solid var(--color-primary)';
+                }
+            }
+        };
+
+        window.addEventListener('resize', () => {
+            if (bubble.classList.contains('active')) {
+                updateBubblePosition();
+            }
+        });
+    }
 });
+
