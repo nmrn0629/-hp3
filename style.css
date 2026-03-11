@@ -979,7 +979,7 @@ h4 {
     }
 
     .header {
-        background-color: #e5e5e5;
+        background-color: #f2faeb; /* 業務案内項目に近い淡いグリーン */
         position: fixed;
         top: 0;
         left: 0;
@@ -988,8 +988,8 @@ h4 {
     }
 
     .header.scrolled {
-        background-color: #e5e5e5;
-        /* Keep the same gray when scrolled */
+        background-color: #f2faeb;
+        /* Keep the same green when scrolled */
     }
 
     .header-container {
