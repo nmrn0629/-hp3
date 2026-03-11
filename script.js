@@ -240,14 +240,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Click to toggle bubble
         fab.addEventListener('click', (e) => {
+            // ドラッグ直後はクリックイベントを無視
             if (hasMoved) {
                 e.preventDefault();
                 return;
             }
-            if (!bubble.classList.contains('active')) {
+            
+            const isActive = bubble.classList.contains('active');
+            if (!isActive) {
                 renderTopics();
+                bubble.classList.add('active');
+            } else {
+                bubble.classList.remove('active');
             }
-            bubble.classList.toggle('active');
             updateBubblePosition();
         });
 
