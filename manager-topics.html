@@ -100,20 +100,22 @@
                 <input type="text" id="topic-url" placeholder="https://... または ページ名.html">
             </div>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button class="admin-btn" onclick="generateCode()">1. JSコードを生成する</button>
-                <button class="admin-btn" id="copy-btn" style="background:#444; display:none;" onclick="copyToClipboard()">2. コードをコピー</button>
-                <button class="admin-btn" id="download-btn" style="background:#d93025; display:none;" onclick="downloadFile()">3. アップロード（更新ファイルをDL）</button>
+                <button class="admin-btn" style="background:#666;" onclick="clearOutput()">1. 不要TOPICS削除後出力エリアをクリア</button>
+                <button class="admin-btn" onclick="addNewTopic()">2. 更新</button>
+                <button class="admin-btn" id="generate-btn" style="background:#8db600;" onclick="generateFinalCode()">3. JSコードを生成する</button>
+                <button class="admin-btn" id="copy-btn" style="background:#444; display:none;" onclick="copyToClipboard()">4. コードをコピー</button>
+                <a href="index.html" target="_blank" class="admin-btn" style="background:#007bff; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">5. ＨＰ確認</a>
+            </div>
+            <div id="download-area" style="margin-top:20px; display:none;">
+                <button class="admin-btn" id="download-btn" style="background:#d93025;" onclick="downloadFile()">★ 最後にファイルをダウンロード（上書き用）</button>
             </div>
         </div>
 
         <div id="output" class="output-area" style="display:none;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <h3 style="margin:0;">生成されたコード</h3>
-                <button onclick="clearOutput()" style="background:#eee; border:1px solid #ccc; padding:5px 10px; border-radius:5px; cursor:pointer; font-size:12px;">出力エリアをクリア</button>
-            </div>
+            <h3>生成されたコード</h3>
             <p><strong>【全自動で更新する手順】</strong><br>
                 ① フォルダ内の <code>auto-push-topics.ps1</code> を右クリックして「PowerShellで実行」し、黒い画面を開いたままにします。<br>
-                ② 下の「3. アップロード」ボタンを押し、保存先として「js」フォルダを選んで上書きします。<br>
+                ② 下の「★ 最後にファイルをダウンロード」ボタンを押し、保存先として「js」フォルダを選んで上書きします。<br>
                 ③ <strong>これだけで完了です！</strong> 黒い画面が自動でGitHubへ送信してくれます。
             </p>
             <code id="code-result"></code>
@@ -154,11 +156,7 @@
                 </div>
             `).join('');
             
-            // 削除後はコードも再生成の必要があるため、自動で最新化する
-            updateGeneratedCode();
-        }
-
-        function generateCode() {
+        function addNewTopic() {
             const date = document.getElementById('topic-date').value;
             const content = document.getElementById('topic-content').value;
             const url = document.getElementById('topic-url').value;
@@ -177,7 +175,7 @@
             document.getElementById('topic-content').value = '';
             document.getElementById('topic-url').value = '';
             
-            alert('新しいトピックスを追加しました。下の「3. アップロード」ボタンで保存してください。');
+            alert('トピックスをリストに追加しました。「3. JSコードを生成」に進んでください。');
         }
 
         function deleteTopic(index) {
@@ -185,6 +183,11 @@
                 currentData.splice(index, 1);
                 renderAdminList();
             }
+        }
+
+        function generateFinalCode() {
+            updateGeneratedCode();
+            alert('JSコードを生成しました。「4. コードコピー」または「ダウンロード」を行ってください。');
         }
 
         function updateGeneratedCode() {
@@ -198,12 +201,14 @@ if (typeof window !== 'undefined') {
             document.getElementById('code-result').innerText = generatedCode;
             document.getElementById('output').style.display = 'block';
             document.getElementById('copy-btn').style.display = 'inline-block';
+            document.getElementById('download-area').style.display = 'block';
             document.getElementById('download-btn').style.display = 'inline-block';
         }
 
         function clearOutput() {
             if (confirm('出力エリアの内容をクリアしますか？')) {
                 document.getElementById('output').style.display = 'none';
+                document.getElementById('download-area').style.display = 'none';
                 document.getElementById('code-result').innerText = '';
                 document.getElementById('copy-btn').style.display = 'none';
                 document.getElementById('download-btn').style.display = 'none';
