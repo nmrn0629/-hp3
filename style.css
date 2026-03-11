@@ -1401,6 +1401,11 @@ h4 {
     .footer-links {
         margin-bottom: 15px;
     }
+
+    /* 業務案内・料金案内下部のお問い合わせセクションの余白縮小 */
+    .contact-cta-section {
+        padding: 30px 0;
+    }
 }
 
 /* Privacy Policy Hanging Indent */
