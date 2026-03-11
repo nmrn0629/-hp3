@@ -1656,10 +1656,24 @@ h4 {
 }
 
 .topics-bubble-body {
-    max-height: 50vh;
+    max-height: 250px; /* 最新2件が収まる程度の高さに制限 */
     overflow-y: auto;
     padding-right: 5px;
 }
+
+/* スクロールバーのデザインもアップルグリーンに合わせる */
+.topics-bubble-body::-webkit-scrollbar {
+    width: 6px;
+}
+.topics-bubble-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.topics-bubble-body::-webkit-scrollbar-thumb {
+    background: #8db600;
+    border-radius: 10px;
+}
+
 
 .topics-list {
     margin: 0;

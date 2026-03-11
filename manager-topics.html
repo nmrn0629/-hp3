@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>トピックス管理 | ハーモグロー会計事務所</title>
-    <link rel="stylesheet" href="style.css?v=7.10">
+    <link rel="stylesheet" href="style.css?v=7.11">
     <style>
         .admin-container {
             max-width: 800px;
@@ -99,14 +99,21 @@
                 <label>関連URL（任意）</label>
                 <input type="text" id="topic-url" placeholder="https://... または ページ名.html">
             </div>
-            <button class="admin-btn" onclick="generateCode()">JSコードを生成する</button>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="admin-btn" onclick="generateCode()">1. JSコードを生成する</button>
+                <button class="admin-btn" id="copy-btn" style="background:#444; display:none;" onclick="copyToClipboard()">2. コードをコピー</button>
+                <button class="admin-btn" id="download-btn" style="background:#d93025; display:none;" onclick="downloadFile()">3. アップロード（更新ファイルをDL）</button>
+            </div>
         </div>
 
         <div id="output" class="output-area" style="display:none;">
             <h3>生成されたコード</h3>
-            <p>以下の内容で <code>js/topics-data.js</code> 全体を上書き保存してください：</p>
+            <p><strong>【更新手順】</strong><br>
+                ① 下の「3. アップロード」ボタンで <code>topics-data.js</code> をダウンロードします。<br>
+                ② パソコンの <code>js/</code> フォルダにある古いファイルと置き換えてください。<br>
+                ③ 最後にGitHubへプッシュ（送信）すると、サイトが自動更新されます。
+            </p>
             <code id="code-result"></code>
-            <p style="margin-top:10px; font-size: 14px; color: #d93025;">※これは静的サイトのため、ファイルの書き換えが必要です。</p>
         </div>
     </main>
 
@@ -118,6 +125,8 @@
 
     <script src="js/topics-data.js"></script>
     <script>
+        let generatedCode = "";
+
         function generateCode() {
             const date = document.getElementById('topic-date').value;
             const content = document.getElementById('topic-content').value;
@@ -130,17 +139,38 @@
 
             const newTopic = { date, content, url };
             // 現在のデータに追加
-            const updatedData = [newTopic, ...topicsData];
+            const updatedData = [newTopic, ...(window.topicsData || [])];
 
-            const code = `/* Topics Content Data */
+            generatedCode = `/* Topics Content Data */
 const topicsData = ${JSON.stringify(updatedData, null, 4)};
 
 if (typeof window !== 'undefined') {
     window.topicsData = topicsData;
 }
 `;
-            document.getElementById('code-result').innerText = code;
+            document.getElementById('code-result').innerText = generatedCode;
             document.getElementById('output').style.display = 'block';
+            document.getElementById('copy-btn').style.display = 'inline-block';
+            document.getElementById('download-btn').style.display = 'inline-block';
+        }
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(generatedCode).then(() => {
+                alert('コードをコピーしました！');
+            });
+        }
+
+        function downloadFile() {
+            const blob = new Blob([generatedCode], { type: 'text/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'topics-data.js';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            alert('topics-data.js をダウンロードしました。js/ フォルダ内のファイルと置き換えてください。');
         }
 
         // 今日の日付をデフォルトセット
@@ -149,5 +179,6 @@ if (typeof window !== 'undefined') {
             String(today.getMonth() + 1).padStart(2, '0') + '/' + 
             String(today.getDate()).padStart(2, '0');
     </script>
+
 </body>
 </html>
