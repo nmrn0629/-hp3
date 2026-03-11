@@ -1560,7 +1560,7 @@ h4 {
     justify-content: center;
     transition: transform 0.3s ease;
     border: 3px solid #8db600; /* Apple Green */
-    overflow: hidden;
+    overflow: visible; /* ラベルがはみ出せるように変更 */
 }
 
 .topics-fab-img-wrapper img {
@@ -1572,14 +1572,14 @@ h4 {
 
 .topics-label {
     position: absolute;
-    top: 50%;
+    top: -5px;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(141, 182, 0, 0.85); /* Apple Green with transparency */
+    transform: translateX(-50%);
+    background: #8db600; /* Apple Green */
     color: var(--color-white);
-    padding: 4px 12px;
+    padding: 2px 12px;
     border-radius: 20px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
     white-space: nowrap;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
