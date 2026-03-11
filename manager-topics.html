@@ -107,7 +107,10 @@
         </div>
 
         <div id="output" class="output-area" style="display:none;">
-            <h3>生成されたコード</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 style="margin:0;">生成されたコード</h3>
+                <button onclick="clearOutput()" style="background:#eee; border:1px solid #ccc; padding:5px 10px; border-radius:5px; cursor:pointer; font-size:12px;">出力エリアをクリア</button>
+            </div>
             <p><strong>【全自動で更新する手順】</strong><br>
                 ① フォルダ内の <code>auto-push-topics.ps1</code> を右クリックして「PowerShellで実行」し、黒い画面を開いたままにします。<br>
                 ② 下の「3. アップロード」ボタンを押し、保存先として「js」フォルダを選んで上書きします。<br>
@@ -196,6 +199,16 @@ if (typeof window !== 'undefined') {
             document.getElementById('output').style.display = 'block';
             document.getElementById('copy-btn').style.display = 'inline-block';
             document.getElementById('download-btn').style.display = 'inline-block';
+        }
+
+        function clearOutput() {
+            if (confirm('出力エリアの内容をクリアしますか？')) {
+                document.getElementById('output').style.display = 'none';
+                document.getElementById('code-result').innerText = '';
+                document.getElementById('copy-btn').style.display = 'none';
+                document.getElementById('download-btn').style.display = 'none';
+                generatedCode = "";
+            }
         }
 
         function copyToClipboard() {
