@@ -192,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
             initialY = rect.top;
 
             fab.style.transition = 'none';
-            bubble.classList.remove('active'); // Close bubble when start moving
         };
 
         const onMove = (e) => {
@@ -206,6 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
                 hasMoved = true;
+                bubble.classList.remove('active'); // 実際に移動を開始した時だけ閉じる
             }
 
             let newX = initialX + dx;
