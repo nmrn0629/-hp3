@@ -1008,7 +1008,8 @@ h4 {
         right: 0;
         width: 100%;
         height: 100vh;
-        background-color: var(--color-primary);
+        background-color: #8DB600;
+        /* Apple Green */
         padding-top: 70px;
         /* Reduced top padding to move items up */
         padding-right: 20px;
