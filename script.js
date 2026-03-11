@@ -244,9 +244,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 return;
             }
+            if (!bubble.classList.contains('active')) {
+                renderTopics();
+            }
             bubble.classList.toggle('active');
             updateBubblePosition();
         });
+
+        const renderTopics = () => {
+            const list = bubble.querySelector('.topics-list');
+            if (list && window.topicsData) {
+                list.innerHTML = window.topicsData.map(topic => `
+                    <li>
+                        <span class="topics-date">${topic.date}</span>
+                        ${topic.content}
+                        ${topic.url ? `<br><a href="${topic.url}" class="topics-link">詳細はこちら</a>` : ''}
+                    </li>
+                `).join('');
+            }
+        };
 
         if (closeBtn) {
             closeBtn.addEventListener('click', (e) => {

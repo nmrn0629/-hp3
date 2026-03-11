@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トピックス管理 | ハーモグロー会計事務所</title>
+    <link rel="stylesheet" href="style.css?v=7.10">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 140px auto 60px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .admin-title {
+            color: #8db600;
+            border-bottom: 3px solid #8db600;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #555;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #8db600;
+            outline: none;
+        }
+        .admin-btn {
+            background: #8db600;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .admin-btn:hover {
+            background: #769900;
+            transform: translateY(-2px);
+        }
+        .output-area {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 5px solid #8db600;
+        }
+        .output-area code {
+            display: block;
+            white-space: pre-wrap;
+            word-break: break-all;
+            background: #eee;
+            padding: 15px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <h1 class="logo">
+                <span class="logo-text">トピックス管理パネル</span>
+            </h1>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <h2 class="admin-title">トピックス更新ツール</h2>
+        <p>ここで入力した内容をコピーして <code>js/topics-data.js</code> の中身を書き換えてください。</p>
+        
+        <div id="topics-form">
+            <div class="form-group">
+                <label>日付</label>
+                <input type="text" id="topic-date" placeholder="2026/03/11">
+            </div>
+            <div class="form-group">
+                <label>内容</label>
+                <textarea id="topic-content" rows="3" placeholder="トピックスの内容を入力してください"></textarea>
+            </div>
+            <div class="form-group">
+                <label>関連URL（任意）</label>
+                <input type="text" id="topic-url" placeholder="https://... または ページ名.html">
+            </div>
+            <button class="admin-btn" onclick="generateCode()">JSコードを生成する</button>
+        </div>
+
+        <div id="output" class="output-area" style="display:none;">
+            <h3>生成されたコード</h3>
+            <p>以下の内容で <code>js/topics-data.js</code> 全体を上書き保存してください：</p>
+            <code id="code-result"></code>
+            <p style="margin-top:10px; font-size: 14px; color: #d93025;">※これは静的サイトのため、ファイルの書き換えが必要です。</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">&copy; 2026 Admin Panel.</p>
+        </div>
+    </footer>
+
+    <script src="js/topics-data.js"></script>
+    <script>
+        function generateCode() {
+            const date = document.getElementById('topic-date').value;
+            const content = document.getElementById('topic-content').value;
+            const url = document.getElementById('topic-url').value;
+
+            if (!date || !content) {
+                alert('日付と内容は必須です');
+                return;
+            }
+
+            const newTopic = { date, content, url };
+            // 現在のデータに追加
+            const updatedData = [newTopic, ...topicsData];
+
+            const code = `/* Topics Content Data */
+const topicsData = ${JSON.stringify(updatedData, null, 4)};
+
+if (typeof window !== 'undefined') {
+    window.topicsData = topicsData;
+}
+`;
+            document.getElementById('code-result').innerText = code;
+            document.getElementById('output').style.display = 'block';
+        }
+
+        // 今日の日付をデフォルトセット
+        const today = new Date();
+        document.getElementById('topic-date').value = today.getFullYear() + '/' + 
+            String(today.getMonth() + 1).padStart(2, '0') + '/' + 
+            String(today.getDate()).padStart(2, '0');
+    </script>
+</body>
+</html>
