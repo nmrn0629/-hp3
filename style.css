@@ -827,8 +827,8 @@ h4 {
 }
 
 .btn-phone {
-    background-color: var(--color-accent);
-    color: var(--color-white);
+    background-color: var(--color-primary);
+    color: var(--color-text);
     padding: 20px 60px;
     border-radius: var(--radius-pill);
     font-size: 2rem;
@@ -841,7 +841,7 @@ h4 {
 }
 
 .btn-phone:hover {
-    background-color: #c19b2e;
+    background-color: #7a9c00;
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
 }
@@ -850,11 +850,13 @@ h4 {
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--color-primary);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.95), 0 0 35px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 1);
 }
 
 .phone-note {
     font-size: 0.9rem;
     color: var(--color-text-light);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.95), 0 0 35px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 1);
 }
 
 /* Footer */
