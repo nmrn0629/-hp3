@@ -2,7 +2,6 @@
 # This script monitors 'js/topics-data.js' and automatically pushes changes to GitHub.
 
 $targetFile = "js/topics-data.js"
-$targetPath = Join-Path (Get-Location) $targetFile
 
 Write-Host "--- トピックス自動送信スクリプト起動中 ---" -ForegroundColor Cyan
 Write-Host "監視対象: $targetFile"
@@ -16,7 +15,6 @@ $watcher.IncludeSubdirectories = $false
 $watcher.EnableRaisingEvents = $true
 
 $action = {
-    $path = $Event.SourceEventArgs.FullPath
     $changeType = $Event.SourceEventArgs.ChangeType
     Write-Host "$(Get-Date -Format 'HH:mm:ss') - ファイルの更新を検知しました: $changeType" -ForegroundColor Yellow
     
