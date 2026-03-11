@@ -2,6 +2,11 @@
 const topicsData = [
     {
         "date": "2026/03/11",
+        "content": "テスト",
+        "url": "https://nmrn0629.github.io/-hp3/"
+    },
+    {
+        "date": "2026/03/11",
         "content": "ハーモグロー会計事務所です！",
         "url": "https://nmrn0629.github.io/-hp3/"
     },
@@ -9,11 +14,6 @@ const topicsData = [
         "date": "2026/03/11",
         "content": "ホームページを一部更新しました。",
         "url": ""
-    },
-    {
-        "date": "2026/03/01",
-        "content": "春の顧問契約キャンペーンを開始しました。",
-        "url": "pricing.html"
     }
 ];
 
