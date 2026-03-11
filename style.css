@@ -1525,7 +1525,8 @@ h4 {
     }
 
     .page-header {
-        padding-top: 180px !important;
+        padding-top: 240px !important;
+        padding-bottom: 90px !important;
     }
 
     .privacy-sub-title {
