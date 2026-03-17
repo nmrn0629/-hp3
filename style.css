@@ -366,8 +366,8 @@ h4 {
 .grid-4 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    max-width: 900px;
+    gap: 50px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
