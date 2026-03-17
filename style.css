@@ -365,9 +365,9 @@ h4 {
 
 .grid-4 {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-    max-width: 1000px;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -1446,6 +1446,12 @@ h4 {
 
     .hero-subtitle {
         font-size: 1.8rem;
+    }
+
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+        max-width: 1000px;
     }
 
     .grid-3 {
