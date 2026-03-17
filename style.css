@@ -1450,8 +1450,8 @@ h4 {
 
     .grid-4 {
         grid-template-columns: repeat(2, 1fr);
-        gap: 50px;
-        max-width: 1000px;
+        gap: 100px;
+        max-width: 1100px;
     }
 
     .grid-3 {
