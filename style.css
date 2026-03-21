@@ -1231,8 +1231,10 @@ h4 {
 
     .hero {
         height: auto;
-        padding: 40px 0 5px;
-        /* Shifted text and background down */
+        margin-top: -30px;
+        /* Shifted up to close gap with logo background */
+        padding: 70px 0 5px;
+        /* Increased top padding to keep text and background shift down together */
         text-align: center;
         align-items: center;
         /* Re-center items for mobile layout */
