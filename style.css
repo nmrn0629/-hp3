@@ -927,11 +927,16 @@ h4 {
 
     .hero {
         height: auto;
-        margin-top: -85px;
-        /* Aggressive overlap to bridge any gap with logo background */
-        padding-top: 0;
+        min-height: auto;
+        margin-top: -72px;
+        /* Shifted up to close gap with logo background */
+        padding: 100px 0 5px;
+        /* Adjusted padding to move text lower within the background */
+        background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('images/トップ背景3.png');
+        background-size: cover;
+        background-position: center;
         background-attachment: scroll !important;
-        /* Fixed backgrounds are unreliable on mobile */
+        /* Standard background behavior for mobile devices */
         text-align: center;
         align-items: center;
     }
@@ -941,21 +946,14 @@ h4 {
         margin-left: -20px;
         margin-right: -20px;
         margin-top: 0 !important;
-        /* Reset manual shift to lean on parent margin */
         padding-left: 20px;
         padding-right: 20px;
-        background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('images/トップ背景モバイル版4.png');
-        background-size: cover;
-        background-position: center 35%;
-        background-repeat: no-repeat;
-        aspect-ratio: 3 / 2;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 80px;
-        /* Added padding to move text lower within the background */
-        padding-bottom: 20px;
+        background-image: none !important;
+        /* Remove mobile-specific background to use parent's 'トップ背景3' */
+        aspect-ratio: auto;
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
         position: relative;
         z-index: 1;
     }
