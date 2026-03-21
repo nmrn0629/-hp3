@@ -928,8 +928,8 @@ h4 {
     .hero {
         height: auto;
         min-height: auto;
-        margin-top: -72px;
-        /* Shifted up to close gap with logo background */
+        margin-top: -60px;
+        /* Slightly shifted down to reduce overlap while keeping gap closed */
         padding: 100px 0 5px;
         /* Adjusted padding to move text lower within the background */
         background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('images/トップ背景3.png');
