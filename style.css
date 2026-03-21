@@ -1210,7 +1210,9 @@ h4 {
 
     /* Mobile Logo Adjustments */
     .logo-container-hero {
-        display: none;
+        display: block;
+        padding-top: 80px;
+        /* Adjust for mobile header */
     }
 
     .logo a {
@@ -1218,25 +1220,11 @@ h4 {
     }
 
     .logo-mobile-container {
-        display: block;
-        width: 100%;
-        margin-bottom: 0;
-        padding-top: 80px;
-        /* Ensure logo starts below the fixed header on mobile */
-        overflow: visible;
-        /* Allow logo to expand */
-        text-align: center;
-        background-image: url('images/金ロゴ背景白2.png');
-        background-size: cover;
-        background-position: center;
+        display: none;
     }
 
     .logo-mobile {
-        display: block;
-        margin: 0 auto;
-        width: 100%;
-        height: auto;
-        max-height: none;
+        display: none;
     }
 
     .hero {
