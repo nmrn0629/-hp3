@@ -1231,10 +1231,12 @@ h4 {
 
     .hero {
         height: auto;
-        margin-top: -30px;
-        /* Shifted up to close gap with logo background */
-        padding: 70px 0 5px;
-        /* Increased top padding to keep text and background shift down together */
+        margin-top: -61px;
+        /* Aggressively shift up to fully overlap the logo container's 60px bottom padding */
+        padding: 101px 0 5px;
+        /* Adjusted top padding to keep text and background shift down correctly */
+        background-attachment: scroll !important;
+        /* Disable parallax on mobile to prevent display glitches and background gaps */
         text-align: center;
         align-items: center;
         /* Re-center items for mobile layout */
