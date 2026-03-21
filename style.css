@@ -1211,8 +1211,10 @@ h4 {
     /* Mobile Logo Adjustments */
     .logo-container-hero {
         display: block;
-        padding-top: 80px;
-        /* Adjust for mobile header */
+        padding-top: 110px;
+        /* More clearance for mobile header */
+        padding-bottom: 60px;
+        /* Expanded display range for logo background */
     }
 
     .logo a {
@@ -1229,8 +1231,8 @@ h4 {
 
     .hero {
         height: auto;
-        padding: 0 0 5px;
-        /* Minimal padding to tightly pack sections */
+        padding: 40px 0 5px;
+        /* Shifted text and background down */
         text-align: center;
         align-items: center;
         /* Re-center items for mobile layout */
