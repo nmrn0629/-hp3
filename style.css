@@ -926,18 +926,22 @@ h4 {
     }
 
     .hero {
-        background-image: none;
         height: auto;
-        min-height: auto;
+        margin-top: -85px;
+        /* Aggressive overlap to bridge any gap with logo background */
         padding-top: 0;
-        align-items: flex-start;
+        background-attachment: scroll !important;
+        /* Fixed backgrounds are unreliable on mobile */
+        text-align: center;
+        align-items: center;
     }
 
     .hero-text-container {
         width: auto;
         margin-left: -20px;
         margin-right: -20px;
-        margin-top: -30px;
+        margin-top: 0 !important;
+        /* Reset manual shift to lean on parent margin */
         padding-left: 20px;
         padding-right: 20px;
         background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('images/トップ背景モバイル版4.png');
@@ -949,8 +953,9 @@ h4 {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding-top: 80px;
+        /* Added padding to move text lower within the background */
+        padding-bottom: 20px;
         position: relative;
         z-index: 1;
     }
@@ -976,7 +981,7 @@ h4 {
     }
 
     .hero-content {
-        margin-top: 20px;
+        margin-top: 0 !important;
     }
 
     .header {
@@ -1229,18 +1234,7 @@ h4 {
         display: none;
     }
 
-    .hero {
-        height: auto;
-        margin-top: -61px;
-        /* Aggressively shift up to fully overlap the logo container's 60px bottom padding */
-        padding: 101px 0 5px;
-        /* Adjusted top padding to keep text and background shift down correctly */
-        background-attachment: scroll !important;
-        /* Disable parallax on mobile to prevent display glitches and background gaps */
-        text-align: center;
-        align-items: center;
-        /* Re-center items for mobile layout */
-    }
+
 
     .hero-background {
         display: none !important;
