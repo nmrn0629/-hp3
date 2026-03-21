@@ -205,29 +205,22 @@ h4 {
 .logo-container-hero {
     text-align: center;
     /* Center align */
-    padding-top: 70px;
-    /* Clear fixed header */
+    padding-top: 100px;
+    /* Clear fixed header with extra clearance */
     padding-bottom: 0;
-    /* Minimized bottom padding */
-    margin-bottom: -50px;
-    /* Pull hero section significantly closer */
-    background-color: var(--color-bg);
+    /* Removed padding to eliminate gap */
+    margin-bottom: 0;
+    background-image: url('images/金ロゴ背景白2.png');
+    background-size: cover;
+    background-position: center;
     overflow: hidden;
 }
 
 .hero-logo {
-    max-width: 1300px;
-    /* Restore max-width constraint */
-    width: 100%;
-
-    /* Aggressive Cropping */
-    height: 400px;
-    /* Increased height for larger display */
-    object-fit: cover;
-    /* Fill width, crop height */
-    object-position: center;
-    /* Restore vertical center to show bottom */
-
+    width: 90%;
+    /* Slightly reduced to prevent hiding behind the fixed header */
+    max-width: 1200px;
+    height: auto;
     display: block;
     margin: 0 auto;
     /* Center align */
@@ -292,8 +285,8 @@ h4 {
     align-items: center;
     /* Align content to center (vertical) */
     overflow: hidden;
-    padding-top: 40px;
-    /* Space from logo section above */
+    padding-top: 0;
+    /* Removed top padding to sit flush against the logo */
     background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('images/トップ背景3.png');
     background-size: cover;
     background-position: center;
@@ -1228,9 +1221,14 @@ h4 {
         display: block;
         width: 100%;
         margin-bottom: 0;
+        padding-top: 80px;
+        /* Ensure logo starts below the fixed header on mobile */
         overflow: visible;
         /* Allow logo to expand */
         text-align: center;
+        background-image: url('images/金ロゴ背景白2.png');
+        background-size: cover;
+        background-position: center;
     }
 
     .logo-mobile {
@@ -1239,9 +1237,6 @@ h4 {
         width: 100%;
         height: auto;
         max-height: none;
-        transform: scale(2);
-        /* Double the size */
-        transform-origin: center center;
     }
 
     .hero {
