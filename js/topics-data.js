@@ -2,13 +2,13 @@
 const topicsData = [
     {
         "date": "2026/03/28",
-        "content": "法人税基本通達の一部改正について（令和８年１月30日）",
-        "url": "https://www.nta.go.jp/law/joho-zeikaishaku/hojin/260130/index.htm"
+        "content": "電子帳簿保存法関係届出書等の様式の制定について（令和８年２月改正）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/denshichoubo/index.htm"
     },
     {
         "date": "2026/03/28",
-        "content": "電子帳簿保存法関係届出書等の様式の制定について（令和８年２月改正）",
-        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/denshichoubo/index.htm"
+        "content": "法人税基本通達の一部改正について（令和８年１月30日）",
+        "url": "https://www.nta.go.jp/law/joho-zeikaishaku/hojin/260130/index.htm"
     },
     {
         "date": "2026/03/25",
