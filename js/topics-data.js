@@ -1,6 +1,21 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/04/01",
+        "content": "消費税法改正のお知らせ（令和8年4月）",
+        "url": "https://www.nta.go.jp/publication/pamph/shohi/kaisei/pdf/r08kaisei.pdf"
+    },
+    {
+        "date": "2026/04/01",
+        "content": "消費税法施行令の一部改正について",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shohi/kaisei/0026003-067/index.htm"
+    },
+    {
+        "date": "2026/04/01",
+        "content": "通勤手当の非課税限度額の改正について",
+        "url": "https://www.nta.go.jp/users/gensen/2026tsukin/index.htm"
+    },
+    {
         "date": "2026/03/28",
         "content": "電子帳簿保存法関係届出書等の様式の制定について（令和８年２月改正）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/denshichoubo/index.htm"
