@@ -1,7 +1,7 @@
 /* Topics Content Data */
 const topicsData = [
     {
-        "date": "2026/04/01",
+        "date": "2026/04/12",
         "content": "令和8年度 税制改正特集",
         "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice-review/index.htm"
     },
