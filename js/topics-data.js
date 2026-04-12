@@ -2,6 +2,11 @@
 const topicsData = [
     {
         "date": "2026/04/01",
+        "content": "令和8年度 税制改正特集",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice-review/index.htm"
+    },
+    {
+        "date": "2026/04/01",
         "content": "消費税法改正のお知らせ（令和8年4月）",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/kaisei/pdf/r08kaisei.pdf"
     },
