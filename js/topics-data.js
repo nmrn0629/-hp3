@@ -1,6 +1,11 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/04/19",
+        "content": "「取引相場のない株式の評価に関する有識者会議」の開催について",
+        "url": "https://www.nta.go.jp/about/council/kenkyu.htm#nai-hyoka"
+    },
+    {
         "date": "2026/04/12",
         "content": "令和8年度 税制改正特集",
         "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice-review/index.htm"
