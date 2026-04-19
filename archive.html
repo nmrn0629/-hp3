@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>過去のTOPICS | ハーモグロー会計事務所</title>
+    <meta name="description" content="ハーモグロー会計事務所の過去のTOPICS一覧。税制改正情報や事務所からのお知らせなど、これまでに掲載した話題を時系列でご覧いただけます。">
+
+    <!-- Google Fonts: M PLUS Rounded 1c -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=15.1">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <h1 class="logo">
+                <a href="index.html">
+                    <span class="logo-text">ハーモグロー会計事務所</span>
+                </a>
+            </h1>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-home"><a href="index.html">ホーム</a></li>
+                    <li><a href="about.html">事務所紹介</a></li>
+                    <li><a href="services.html">業務案内</a></li>
+                    <li><a href="pricing.html">料金案内</a></li>
+                    <li><a href="contact.html" class="btn-primary">お問い合わせ</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="メニューを開く">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header"
+            style="padding-top: 120px; padding-bottom: 40px; text-align: center; background-color: var(--color-bg);">
+            <div class="container">
+                <h2 class="section-title">過去のTOPICS</h2>
+                <p>これまでに掲載した話題の一覧です</p>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top: 40px;">
+            <div class="container">
+                <ul class="archive-list" id="archive-list">
+                    <!-- 内容は js/topics-data.js から自動読み込みされます -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <h2>ハーモグロー会計事務所</h2>
+            </div>
+            <ul class="footer-links">
+                <li><a href="privacy.html">プライバシーポリシー</a></li>
+            </ul>
+            <p class="copyright">&copy; 2026 Harmogrow Accounting Office. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/topics-data.js?v=1.08"></script>
+    <script src="script.js?v=1.23"></script>
+    <script>
+        (function () {
+            const list = document.getElementById('archive-list');
+            if (!list || !window.topicsData) return;
+            if (window.topicsData.length === 0) {
+                list.innerHTML = '<li>掲載中のTOPICSはありません。</li>';
+                return;
+            }
+            list.innerHTML = window.topicsData.map(function (topic) {
+                const linkHtml = topic.url
+                    ? '<br><a href="' + topic.url + '" class="topics-link" target="_blank" rel="noopener">詳細はこちら</a>'
+                    : '';
+                return '<li><span class="topics-date">' + topic.date + '</span>' + topic.content + linkHtml + '</li>';
+            }).join('');
+        })();
+    </script>
+
+    <!-- Topics Floating Button -->
+    <div id="topics-fab" class="topics-fab">
+        <div class="topics-fab-img-wrapper">
+            <img src="images/トピックス用金ロゴ.png" alt="事務所ロゴ">
+            <span class="topics-label">TOPICS</span>
+        </div>
+    </div>
+
+    <!-- Topics Speech Bubble -->
+    <div id="topics-bubble" class="topics-bubble">
+        <div class="topics-bubble-inner">
+            <div class="topics-bubble-header">
+                <h3>TOPICS</h3>
+                <button id="close-topics" class="close-topics-btn">&times;</button>
+            </div>
+            <div class="topics-bubble-body">
+                <ul class="topics-list">
+                    <!-- 内容は js/topics-data.js から自動読み込みされます -->
+                </ul>
+            </div>
+        </div>
+        <div class="topics-bubble-tail"></div>
+    </div>
+</body>
+
+</html>

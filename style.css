@@ -1708,6 +1708,48 @@ h4 {
     font-weight: 600;
 }
 
+.topics-archive-link-item {
+    text-align: right;
+    padding-top: 10px;
+    border-bottom: none !important;
+}
+
+.topics-archive-link {
+    color: #8db600;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.topics-archive-link:hover {
+    text-decoration: underline;
+}
+
+/* Archive page */
+.archive-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+.archive-list li {
+    padding: 20px 0;
+    border-bottom: 1px dashed #ddd;
+    line-height: 1.7;
+}
+
+.archive-list li:last-child {
+    border-bottom: none;
+}
+
+.archive-list .topics-date {
+    display: inline-block;
+    color: #8db600;
+    font-weight: 700;
+    margin-right: 12px;
+}
+
 /* 吹き出しのしっぽを削除（シンプルな四角枠にするため） */
 .topics-bubble-tail {
     display: none;
