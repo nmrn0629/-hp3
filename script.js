@@ -259,13 +259,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const renderTopics = () => {
             const list = bubble.querySelector('.topics-list');
             if (list && window.topicsData) {
-                list.innerHTML = window.topicsData.map(topic => `
+                const LIMIT = 10;
+                const visible = window.topicsData.slice(0, LIMIT);
+                const hasArchive = window.topicsData.length > LIMIT;
+                const itemsHtml = visible.map(topic => `
                     <li>
                         <span class="topics-date">${topic.date}</span>
                         ${topic.content}
                         ${topic.url ? `<br><a href="${topic.url}" class="topics-link">詳細はこちら</a>` : ''}
                     </li>
                 `).join('');
+                const archiveHtml = hasArchive
+                    ? `<li class="topics-archive-link-item"><a href="archive.html" class="topics-archive-link">過去のTOPICS →</a></li>`
+                    : '';
+                list.innerHTML = itemsHtml + archiveHtml;
             }
         };
 
