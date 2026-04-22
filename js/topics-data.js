@@ -1,6 +1,16 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/04/22",
+        "content": "令和8年分の路線価図等の公開予定日について",
+        "url": "https://www.nta.go.jp/information/release/pdf/0026004-020.pdf"
+    },
+    {
+        "date": "2026/04/22",
+        "content": "令和８年度税制改正による所得税の基礎控除の引上げ等について",
+        "url": "https://www.nta.go.jp/users/gensen/2026kiso/index.htm"
+    },
+    {
         "date": "2026/04/19",
         "content": "「取引相場のない株式の評価に関する有識者会議」の開催について",
         "url": "https://www.nta.go.jp/about/council/kenkyu.htm#nai-hyoka"
