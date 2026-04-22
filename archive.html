@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=15.1">
+    <link rel="stylesheet" href="style.css?v=15.2">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -56,9 +56,9 @@
 
         <section class="section" style="padding-top: 40px;">
             <div class="container">
-                <ul class="archive-list" id="archive-list">
+                <div class="archive-monthly" id="archive-list">
                     <!-- 内容は js/topics-data.js から自動読み込みされます -->
-                </ul>
+                </div>
             </div>
         </section>
     </main>
@@ -79,17 +79,49 @@
     <script src="script.js?v=1.23"></script>
     <script>
         (function () {
-            const list = document.getElementById('archive-list');
-            if (!list || !window.topicsData) return;
+            const container = document.getElementById('archive-list');
+            if (!container || !window.topicsData) return;
             if (window.topicsData.length === 0) {
-                list.innerHTML = '<li>掲載中のTOPICSはありません。</li>';
+                container.innerHTML = '<p class="archive-empty">掲載中のTOPICSはありません。</p>';
                 return;
             }
-            list.innerHTML = window.topicsData.map(function (topic) {
-                const linkHtml = topic.url
-                    ? '<br><a href="' + topic.url + '" class="topics-link" target="_blank" rel="noopener">詳細はこちら</a>'
-                    : '';
-                return '<li><span class="topics-date">' + topic.date + '</span>' + topic.content + linkHtml + '</li>';
+
+            const escapeHtml = function (str) {
+                return String(str).replace(/[&<>"']/g, function (c) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+                });
+            };
+
+            const groups = {};
+            const order = [];
+            window.topicsData.forEach(function (topic) {
+                const parts = topic.date.split('/');
+                const key = parts[0] + '/' + parts[1];
+                if (!groups[key]) {
+                    groups[key] = { label: parts[0] + '年' + parseInt(parts[1], 10) + '月', items: [] };
+                    order.push(key);
+                }
+                groups[key].items.push({ day: parts[2], content: topic.content, url: topic.url });
+            });
+
+            container.innerHTML = order.map(function (key, idx) {
+                const group = groups[key];
+                const itemsHtml = group.items.map(function (item) {
+                    const linkHtml = item.url
+                        ? '<a href="' + escapeHtml(item.url) + '" class="topics-link" target="_blank" rel="noopener">詳細</a>'
+                        : '';
+                    return '<li><span class="archive-day">' + escapeHtml(item.day) + '日</span>'
+                        + '<span class="archive-content">' + escapeHtml(item.content) + '</span>'
+                        + linkHtml + '</li>';
+                }).join('');
+                const openAttr = idx === 0 ? ' open' : '';
+                return '<details class="archive-month"' + openAttr + '>'
+                    + '<summary class="archive-month-summary">'
+                    + '<span class="archive-month-label">' + escapeHtml(group.label) + '</span>'
+                    + '<span class="archive-month-count">' + group.items.length + '件</span>'
+                    + '</summary>'
+                    + '<ul class="archive-list">' + itemsHtml + '</ul>'
+                    + '</details>';
             }).join('');
         })();
     </script>
