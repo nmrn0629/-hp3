@@ -1,6 +1,11 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/04/26",
+        "content": "国税システムの更改について",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/sodan/system.htm"
+    },
+    {
         "date": "2026/04/22",
         "content": "令和8年分の路線価図等の公開予定日について",
         "url": "https://www.nta.go.jp/information/release/pdf/0026004-020.pdf"
