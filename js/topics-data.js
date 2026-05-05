@@ -1,6 +1,11 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/05/05",
+        "content": "e-Tax仕様書等（ドラフト版）の掲載について【令和8年5月25日受付開始予定】",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260501_shiyo.htm"
+    },
+    {
         "date": "2026/04/26",
         "content": "国税システムの更改について",
         "url": "https://www.nta.go.jp/taxes/shiraberu/sodan/system.htm"
