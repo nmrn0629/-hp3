@@ -1,6 +1,16 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/05/13",
+        "content": "第２回「取引相場のない株式の評価に関する有識者会議」配布資料について",
+        "url": "https://www.nta.go.jp/about/council/kenkyu.htm#nai-hyoka"
+    },
+    {
+        "date": "2026/05/13",
+        "content": "法人税申告書別表一等の記載項目の追加等について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/hojin/260428/01.htm"
+    },
+    {
         "date": "2026/05/05",
         "content": "e-Tax仕様書等（ドラフト版）の掲載について【令和8年5月25日受付開始予定】",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260501_shiyo.htm"
