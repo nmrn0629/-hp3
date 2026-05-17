@@ -1,6 +1,11 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/05/15",
+        "content": "リファンド方式特設サイトの更新",
+        "url": "https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm"
+    },
+    {
         "date": "2026/05/13",
         "content": "第２回「取引相場のない株式の評価に関する有識者会議」配布資料について",
         "url": "https://www.nta.go.jp/about/council/kenkyu.htm#nai-hyoka"
