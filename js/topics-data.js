@@ -1,6 +1,21 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/05/29",
+        "content": "令和7年分所得税等、消費税及び贈与税の確定申告状況等について",
+        "url": "https://www.nta.go.jp/information/release/pdf/0026005-037.pdf"
+    },
+    {
+        "date": "2026/05/28",
+        "content": "「国税徴収法基本通達」の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/chosyu/kaisei/260520/01.htm"
+    },
+    {
+        "date": "2026/05/27",
+        "content": "令和8年度法人税関係法令の改正の概要",
+        "url": "https://www.nta.go.jp/publication/pamph/hojin/kaisei_gaiyo2026/01.htm"
+    },
+    {
         "date": "2026/05/27",
         "content": "マイページの「贈与税関係情報」が更に便利になります。",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260527.htm"
@@ -84,21 +99,6 @@ const topicsData = [
         "date": "2026/04/01",
         "content": "消費税法改正のお知らせ（令和8年4月）",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/kaisei/pdf/r08kaisei.pdf"
-    },
-    {
-        "date": "2026/04/01",
-        "content": "消費税法施行令の一部改正について",
-        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shohi/kaisei/0026003-067/index.htm"
-    },
-    {
-        "date": "2026/04/01",
-        "content": "通勤手当の非課税限度額の改正について",
-        "url": "https://www.nta.go.jp/users/gensen/2026tsukin/index.htm"
-    },
-    {
-        "date": "2026/03/28",
-        "content": "電子帳簿保存法関係届出書等の様式の制定について（令和８年２月改正）",
-        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/denshichoubo/index.htm"
     }
 ];
 
