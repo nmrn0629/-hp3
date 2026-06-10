@@ -1,6 +1,21 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/06/05",
+        "content": "適用額明細書の記載に係る区分番号一覧表等の更新",
+        "url": "https://www.nta.go.jp/publication/pamph/hojin/tekiyougaku/01.htm#a02"
+    },
+    {
+        "date": "2026/06/02",
+        "content": "令和8年分の基準年利率について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/hyoka/260500/01.htm"
+    },
+    {
+        "date": "2026/06/02",
+        "content": "財産評価基本通達の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/sisan/hyoka/kaisei/260500/01.htm"
+    },
+    {
         "date": "2026/05/29",
         "content": "令和7年分所得税等、消費税及び贈与税の確定申告状況等について",
         "url": "https://www.nta.go.jp/information/release/pdf/0026005-037.pdf"
@@ -84,7 +99,10 @@ const topicsData = [
         "date": "2026/04/22",
         "content": "令和8年分の路線価図等の公開予定日について",
         "url": "https://www.nta.go.jp/information/release/pdf/0026004-020.pdf"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/04/22",
         "content": "令和８年度税制改正による所得税の基礎控除の引上げ等について",
@@ -99,10 +117,7 @@ const topicsData = [
         "date": "2026/04/01",
         "content": "消費税法改正のお知らせ（令和8年4月）",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/kaisei/pdf/r08kaisei.pdf"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/04/19",
         "content": "「取引相場のない株式の評価に関する有識者会議」の開催について",
