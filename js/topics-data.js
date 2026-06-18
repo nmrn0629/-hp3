@@ -1,6 +1,31 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/06/16",
+        "content": "消費税申告（個人）のオンライン利用率の訂正について",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260616.htm"
+    },
+    {
+        "date": "2026/06/15",
+        "content": "令和8年度税制改正等に係る対応等について",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260615.htm"
+    },
+    {
+        "date": "2026/06/15",
+        "content": "国税システムの更改に伴うe-Tax仕様書等の情報提供について",
+        "url": "https://www.e-tax.nta.go.jp/topics/2024/topics_20241031_ksk2_shiyo.htm"
+    },
+    {
+        "date": "2026/06/15",
+        "content": "令和8年9月のe-Taxソフト更新対象帳票一覧（予定）について",
+        "url": "https://www.e-tax.nta.go.jp/shiyo/chohyo/topics_20260615_chohyo.htm"
+    },
+    {
+        "date": "2026/06/12",
+        "content": "消費税還付申告に関する国税当局の対応について",
+        "url": "https://www.nta.go.jp/publication/pamph/pdf/0022001-098.pdf"
+    },
+    {
         "date": "2026/06/05",
         "content": "適用額明細書の記載に係る区分番号一覧表等の更新",
         "url": "https://www.nta.go.jp/publication/pamph/hojin/tekiyougaku/01.htm#a02"
@@ -74,7 +99,10 @@ const topicsData = [
         "date": "2026/05/15",
         "content": "リファンド方式特設サイトの更新",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/05/13",
         "content": "第２回「取引相場のない株式の評価に関する有識者会議」配布資料について",
@@ -99,10 +127,7 @@ const topicsData = [
         "date": "2026/04/22",
         "content": "令和8年分の路線価図等の公開予定日について",
         "url": "https://www.nta.go.jp/information/release/pdf/0026004-020.pdf"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/04/22",
         "content": "令和８年度税制改正による所得税の基礎控除の引上げ等について",
