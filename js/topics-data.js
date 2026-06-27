@@ -1,6 +1,21 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/06/26",
+        "content": "税理士等でない者に対する税務相談停止等命令",
+        "url": "https://www.nta.go.jp/taxes/zeirishi/chokai/shobun/2606.htm"
+    },
+    {
+        "date": "2026/06/25",
+        "content": "パンフレット「国税査察制度～脱税は、犯罪。～」（令和８年６月）",
+        "url": "https://www.nta.go.jp/publication/pamph/koho/01.pdf"
+    },
+    {
+        "date": "2026/06/19",
+        "content": "「納税の猶予等の取扱要領の制定について」の一部改正について（事務運営指針）",
+        "url": "https://www.nta.go.jp/law/jimu-unei/tyousyu/kaisei/260617/index.htm"
+    },
+    {
         "date": "2026/06/16",
         "content": "消費税申告（個人）のオンライン利用率の訂正について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260616.htm"
@@ -84,7 +99,10 @@ const topicsData = [
         "date": "2026/05/22",
         "content": "印紙税額一覧表（令和8年5月）を掲載しました",
         "url": "https://www.nta.go.jp/publication/pamph/inshi/pdf/zeigaku_ichiran_r0204.pdf"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/05/22",
         "content": "印紙税法基本通達の一部改正について（法令解釈通達）",
@@ -99,10 +117,7 @@ const topicsData = [
         "date": "2026/05/15",
         "content": "リファンド方式特設サイトの更新",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/05/13",
         "content": "第２回「取引相場のない株式の評価に関する有識者会議」配布資料について",
