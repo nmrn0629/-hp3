@@ -1,0 +1,10 @@
+# ハーモグロー会計事務所サイト robots.txt
+# 管理用ページ（トピックス管理ツール）は検索エンジンにインデックスさせない。
+# ※ GitHub Pages のプロジェクトサイト（/-hp3/ 配下）では本ファイルがクローラに
+#    読まれない場合があるため、確実な除外は manager-topics.html 内の
+#    <meta name="robots" content="noindex, nofollow"> で担保している。
+User-agent: *
+Disallow: /manager-topics.html
+Disallow: /-hp3/manager-topics.html
+
+Sitemap: https://nmrn0629.github.io/-hp3/sitemap.xml
