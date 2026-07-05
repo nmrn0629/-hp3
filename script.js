@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            // href が "#" のみだと querySelector('#') が例外を投げるため除外
+            if (href === '#') return;
+            const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth'
@@ -39,13 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuLinks = document.querySelectorAll('.nav-list a');
     menuLinks.forEach(link => {
         link.addEventListener('click', function (e) {
-            console.log('Menu link clicked', this.href);
-            // Only apply effect if it's a navigation link (not just a hash)
-            // But user might want it for all.
-            // If it's a hash link on the same page, we might want the effect too?
-            // "Menu select" usually implies navigation.
-            // Let's apply to all, but handle navigation delay.
-
             const href = this.getAttribute('href');
             const isInternal = href.startsWith('#');
 
@@ -259,14 +255,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const renderTopics = () => {
             const list = bubble.querySelector('.topics-list');
             if (list && window.topicsData) {
+                // archive.html と同じ実装。innerHTML 挿入前に値をエスケープして XSS を防ぐ
+                const escapeHtml = function (str) {
+                    return String(str).replace(/[&<>"']/g, function (c) {
+                        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+                    });
+                };
                 const LIMIT = 10;
                 const visible = window.topicsData.slice(0, LIMIT);
                 const hasArchive = window.topicsData.length > LIMIT;
                 const itemsHtml = visible.map(topic => `
                     <li>
-                        <span class="topics-date">${topic.date}</span>
-                        ${topic.content}
-                        ${topic.url ? `<br><a href="${topic.url}" class="topics-link">詳細はこちら</a>` : ''}
+                        <span class="topics-date">${escapeHtml(topic.date)}</span>
+                        ${escapeHtml(topic.content)}
+                        ${topic.url ? `<br><a href="${escapeHtml(topic.url)}" class="topics-link">詳細はこちら</a>` : ''}
                     </li>
                 `).join('');
                 const archiveHtml = hasArchive
