@@ -37,7 +37,6 @@ body {
     color: var(--color-text);
     line-height: 1.8;
     letter-spacing: 0.05em;
-    letter-spacing: 0.05em;
     /* Slightly wider for readability */
     animation: none;
     /* Disable animation by default (Desktop) */
@@ -194,9 +193,6 @@ h4 {
 }
 
 /* Hero Logo Section */
-/* Hero Logo Section */
-/* Hero Logo Section */
-/* Hero Logo Section */
 .logo-mobile,
 .logo-mobile-container {
     display: none;
@@ -291,17 +287,6 @@ h4 {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(135deg, #f1f8e9 0%, #c8e6c9 100%);
-    border-bottom-left-radius: 200px;
-    z-index: -1;
 }
 
 .hero-content {
@@ -520,11 +505,6 @@ h4 {
 .service-item.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-.service-item.visible:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-hover);
 }
 
 .service-item.visible:hover {
@@ -974,10 +954,6 @@ h4 {
         background-position: top center;
     }
 
-    .hero-background {
-        display: none;
-    }
-
     .hero-content {
         margin-top: 0 !important;
     }
@@ -999,10 +975,6 @@ h4 {
     .header-container {
         position: relative;
         padding: 0 15px;
-    }
-
-    .nav-list {
-        display: none;
     }
 
     /* Mobile Menu Style - Circular Reveal */
@@ -1083,23 +1055,6 @@ h4 {
         transform: translateX(20px);
         /* Slide in from right */
         transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    /* Reset btn-primary style in mobile menu */
-    .nav-list .btn-primary {
-        background-color: transparent;
-        padding: 0;
-        border-radius: 0;
-        box-shadow: none;
-        display: inline;
-        font-weight: normal;
-    }
-
-    .nav-list .btn-primary:hover {
-        background-color: transparent;
-        box-shadow: none;
-        transform: none;
-        color: var(--color-white);
     }
 
     .nav-list.active a {
@@ -1201,16 +1156,6 @@ h4 {
         width: 100%;
     }
 
-    /* Mobile background adjustment */
-    .phone-contact-wrapper {
-        background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('images/ミーティング室モバイル版.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: 20px;
-        overflow: hidden;
-    }
-
     /* Mobile Logo Adjustments */
     .logo-container-hero {
         display: block;
@@ -1233,10 +1178,6 @@ h4 {
     }
 
 
-
-    .hero-background {
-        display: none !important;
-    }
 
     .hero-buttons {
         justify-content: center;
@@ -1418,10 +1359,6 @@ h4 {
 /* Desktop only styles */
 @media (min-width: 769px) {
     .mobile-center-logo {
-        display: none;
-    }
-
-    .hero-background {
         display: none;
     }
 
