@@ -1,6 +1,16 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/07/01",
+        "content": "税務調査手続に関するFAQ（一般納税者向け）の改訂について",
+        "url": "https://www.nta.go.jp/information/other/data/h24/nozeikankyo/ippan.htm"
+    },
+    {
+        "date": "2026/07/01",
+        "content": "令和8年分の路線価等について",
+        "url": "https://www.nta.go.jp/information/release/kokuzeicho/2026/rosenka/index.htm"
+    },
+    {
         "date": "2026/06/26",
         "content": "税理士等でない者に対する税務相談停止等命令",
         "url": "https://www.nta.go.jp/taxes/zeirishi/chokai/shobun/2606.htm"
@@ -89,7 +99,10 @@ const topicsData = [
         "date": "2026/05/25",
         "content": "コード署名証明書の更新について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525_code.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/05/22",
         "content": "個人の方が株式等や土地・建物等を譲渡した場合の令和8年度税制改正のあらまし",
@@ -99,10 +112,7 @@ const topicsData = [
         "date": "2026/05/22",
         "content": "印紙税額一覧表（令和8年5月）を掲載しました",
         "url": "https://www.nta.go.jp/publication/pamph/inshi/pdf/zeigaku_ichiran_r0204.pdf"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/05/22",
         "content": "印紙税法基本通達の一部改正について（法令解釈通達）",
@@ -161,7 +171,7 @@ const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/04/19",
         "content": "「取引相場のない株式の評価に関する有識者会議」の開催について",
-        "url": "https://www.nta.go.jp/about/council/kenkyu.htm#nai-hyoka"
+        "url": "https://www.nta.go.jp/about/council/kenkyu.htm"
     },
     {
         "date": "2026/04/01",
