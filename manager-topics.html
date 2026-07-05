@@ -137,6 +137,10 @@
     <script>
         let generatedCode = "";
         let currentData = [...(window.topicsData || [])];
+        // topicsArchiveData は topicsData.concat(過去分) の構造なので、末尾が過去分。
+        // 掲載終了(削除)した項目もここへ退避し、archive.html の過去TOPICSが消えないようにする。
+        let archiveExtra = (window.topicsArchiveData || [])
+            .slice((window.topicsData || []).length);
 
         function renderAdminList() {
             const listContainer = document.getElementById('current-topics-list');
@@ -180,8 +184,12 @@
         }
 
         function deleteTopic(index) {
-            if (confirm('このトピックスを削除してもよろしいですか？')) {
-                currentData.splice(index, 1);
+            if (confirm('このトピックスの掲載を終了しますか？（トップページの一覧から外れ、過去のTOPICS一覧へ移動します）')) {
+                const removed = currentData.splice(index, 1)[0];
+                // 掲載終了した項目は捨てずにアーカイブ(過去分)の先頭へ移動する
+                if (removed) {
+                    archiveExtra.unshift(removed);
+                }
                 renderAdminList();
             }
         }
@@ -195,8 +203,11 @@
             generatedCode = `/* Topics Content Data */
 const topicsData = ${JSON.stringify(currentData, null, 4)};
 
+const topicsArchiveData = topicsData.concat(${JSON.stringify(archiveExtra, null, 4)});
+
 if (typeof window !== 'undefined') {
     window.topicsData = topicsData;
+    window.topicsArchiveData = topicsArchiveData;
 }
 `;
             document.getElementById('code-result').innerText = generatedCode;
