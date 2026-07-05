@@ -1,0 +1,7 @@
+# バックアップ・作業用ファイル（誤コミット防止）
+*.zip
+diff.txt
+
+# OS が生成するファイル
+.DS_Store
+Thumbs.db
