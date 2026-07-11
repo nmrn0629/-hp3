@@ -1,6 +1,11 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/07/09",
+        "content": "パンフレット「暮らしの税情報」（令和8年度版）の公開",
+        "url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/index.htm"
+    },
+    {
         "date": "2026/07/01",
         "content": "税務調査手続に関するFAQ（一般納税者向け）の改訂について",
         "url": "https://www.nta.go.jp/information/other/data/h24/nozeikankyo/ippan.htm"
@@ -94,15 +99,15 @@ const topicsData = [
         "date": "2026/05/25",
         "content": "商業登記電子証明書をご利用の方へ",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525_certification.htm"
-    },
-    {
-        "date": "2026/05/25",
-        "content": "コード署名証明書の更新について",
-        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525_code.htm"
     }
 ];
 
 const topicsArchiveData = topicsData.concat([
+    {
+        "date": "2026/05/25",
+        "content": "コード署名証明書の更新について",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525_code.htm"
+    },
     {
         "date": "2026/05/22",
         "content": "個人の方が株式等や土地・建物等を譲渡した場合の令和8年度税制改正のあらまし",
