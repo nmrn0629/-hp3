@@ -6,6 +6,11 @@ const topicsData = [
         "url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/index.htm"
     },
     {
+        "date": "2026/07/07",
+        "content": "電子納税等の利用制限について",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260707_nozeitetsuzuki.htm"
+    },
+    {
         "date": "2026/07/01",
         "content": "税務調査手続に関するFAQ（一般納税者向け）の改訂について",
         "url": "https://www.nta.go.jp/information/other/data/h24/nozeikankyo/ippan.htm"
@@ -14,6 +19,31 @@ const topicsData = [
         "date": "2026/07/01",
         "content": "令和8年分の路線価等について",
         "url": "https://www.nta.go.jp/information/release/kokuzeicho/2026/rosenka/index.htm"
+    },
+    {
+        "date": "2026/07/01",
+        "content": "相続税の申告のしかた（令和8年分用）",
+        "url": "https://www.nta.go.jp/publication/pamph/sozoku/shikata-sozoku2026/index.htm"
+    },
+    {
+        "date": "2026/07/01",
+        "content": "相続税の申告書等の様式一覧（令和8年分用）",
+        "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/sozoku-zoyo/annai/r08.htm"
+    },
+    {
+        "date": "2026/07/01",
+        "content": "多言語通訳サービスに関するご案内",
+        "url": "https://www.nta.go.jp/information/other/data/r08/multilingual/index.htm"
+    },
+    {
+        "date": "2026/06/30",
+        "content": "印紙税の手引（令和8年6月）",
+        "url": "https://www.nta.go.jp/publication/pamph/inshi/tebiki/01.htm"
+    },
+    {
+        "date": "2026/06/30",
+        "content": "契約書や領収書と印紙税〈印紙税額一覧表〉",
+        "url": "https://www.nta.go.jp/publication/pamph/inshi/pdf/1504.pdf"
     },
     {
         "date": "2026/06/26",
@@ -69,7 +99,10 @@ const topicsData = [
         "date": "2026/06/02",
         "content": "財産評価基本通達の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/sisan/hyoka/kaisei/260500/01.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/05/29",
         "content": "令和7年分所得税等、消費税及び贈与税の確定申告状況等について",
@@ -99,10 +132,7 @@ const topicsData = [
         "date": "2026/05/25",
         "content": "商業登記電子証明書をご利用の方へ",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525_certification.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/05/25",
         "content": "コード署名証明書の更新について",
