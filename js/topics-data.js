@@ -16,11 +16,6 @@ const topicsData = [
         "url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/index.htm"
     },
     {
-        "date": "2026/07/09",
-        "content": "「資産課税関係の申請、届出等の様式の制定について」の一部改正について（法令解釈通達）",
-        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/sozoku/sochiho/kaisei/2606xx/index.htm"
-    },
-    {
         "date": "2026/07/07",
         "content": "電子納税等の利用制限について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260707_nozeitetsuzuki.htm"
@@ -59,6 +54,11 @@ const topicsData = [
         "date": "2026/06/30",
         "content": "契約書や領収書と印紙税〈印紙税額一覧表〉",
         "url": "https://www.nta.go.jp/publication/pamph/inshi/pdf/1504.pdf"
+    },
+    {
+        "date": "2026/06/30",
+        "content": "「資産課税関係の申請、届出等の様式の制定について」の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/sozoku/sochiho/kaisei/2606xx/index.htm"
     },
     {
         "date": "2026/06/26",
