@@ -2,6 +2,9 @@
 *.zip
 diff.txt
 
+# TOPICS調査の却下リスト（git管理対象外）
+rejected-topics.json
+
 # OS が生成するファイル
 .DS_Store
 Thumbs.db
