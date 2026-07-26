@@ -1,9 +1,24 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/07/15",
+        "content": "国境を越えた電子商取引に係る消費税の課税関係について",
+        "url": "https://www.nta.go.jp/publication/pamph/shohi/denshisho/index.htm"
+    },
+    {
+        "date": "2026/07/13",
+        "content": "税務行政におけるオンラインツールの利用について",
+        "url": "https://www.nta.go.jp/about/introduction/torikumi/onlinetool/index.htm"
+    },
+    {
         "date": "2026/07/09",
         "content": "パンフレット「暮らしの税情報」（令和8年度版）の公開",
         "url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/index.htm"
+    },
+    {
+        "date": "2026/07/09",
+        "content": "「資産課税関係の申請、届出等の様式の制定について」の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/sozoku/sochiho/kaisei/2606xx/index.htm"
     },
     {
         "date": "2026/07/07",
@@ -84,7 +99,10 @@ const topicsData = [
         "date": "2026/06/12",
         "content": "消費税還付申告に関する国税当局の対応について",
         "url": "https://www.nta.go.jp/publication/pamph/pdf/0022001-098.pdf"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/06/05",
         "content": "適用額明細書の記載に係る区分番号一覧表等の更新",
@@ -99,10 +117,7 @@ const topicsData = [
         "date": "2026/06/02",
         "content": "財産評価基本通達の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/sisan/hyoka/kaisei/260500/01.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/05/29",
         "content": "令和7年分所得税等、消費税及び贈与税の確定申告状況等について",
