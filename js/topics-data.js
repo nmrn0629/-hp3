@@ -1,6 +1,11 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/07/29",
+        "content": "令和8年熊本地震により被害を受けられた皆様へ（災害関連情報）",
+        "url": "https://www.nta.go.jp/files/000039093.pdf"
+    },
+    {
         "date": "2026/07/15",
         "content": "国境を越えた電子商取引に係る消費税の課税関係について",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/denshisho/index.htm"
@@ -9,6 +14,11 @@ const topicsData = [
         "date": "2026/07/13",
         "content": "税務行政におけるオンラインツールの利用について",
         "url": "https://www.nta.go.jp/about/introduction/torikumi/onlinetool/index.htm"
+    },
+    {
+        "date": "2026/07/10",
+        "content": "電子帳簿保存法一問一答（Q&A）（令和8年7月改訂）",
+        "url": "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/4-3.htm"
     },
     {
         "date": "2026/07/09",
@@ -61,6 +71,21 @@ const topicsData = [
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/sozoku/sochiho/kaisei/2606xx/index.htm"
     },
     {
+        "date": "2026/06/30",
+        "content": "法人税基本通達等の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/hojin/kaisei/2606xx/index.htm"
+    },
+    {
+        "date": "2026/06/30",
+        "content": "「消費税関係申告書等の様式の制定について」の一部改正等について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shohi/kaisei/260630/index.htm"
+    },
+    {
+        "date": "2026/06/30",
+        "content": "令和8年分年末調整のための各種様式",
+        "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/gensen/mokuji.htm"
+    },
+    {
         "date": "2026/06/26",
         "content": "税理士等でない者に対する税務相談停止等命令",
         "url": "https://www.nta.go.jp/taxes/zeirishi/chokai/shobun/2606.htm"
@@ -70,6 +95,14 @@ const topicsData = [
         "content": "パンフレット「国税査察制度～脱税は、犯罪。～」（令和８年６月）",
         "url": "https://www.nta.go.jp/publication/pamph/koho/01.pdf"
     },
+    {
+        "date": "2026/06/25",
+        "content": "相続税法基本通達等の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/sisan/sozoku/kaisei/260600/index.htm"
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/06/19",
         "content": "「納税の猶予等の取扱要領の制定について」の一部改正について（事務運営指針）",
@@ -99,10 +132,7 @@ const topicsData = [
         "date": "2026/06/12",
         "content": "消費税還付申告に関する国税当局の対応について",
         "url": "https://www.nta.go.jp/publication/pamph/pdf/0022001-098.pdf"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/06/05",
         "content": "適用額明細書の記載に係る区分番号一覧表等の更新",
