@@ -1,6 +1,16 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/08/04",
+        "content": "令和８年熊本地震に係る国税の申告・納付等の期限の延長について",
+        "url": "https://www.nta.go.jp/files/000039363.pdf"
+    },
+    {
+        "date": "2026/08/03",
+        "content": "令和８年10月１日からの税務署総合窓口の受付時間について",
+        "url": "https://www.nta.go.jp/about/introduction/torikumi/madoguchi_jikan/index.htm"
+    },
+    {
         "date": "2026/07/29",
         "content": "令和8年熊本地震により被害を受けられた皆様へ（災害関連情報）",
         "url": "https://www.nta.go.jp/files/000039093.pdf"
@@ -89,7 +99,10 @@ const topicsData = [
         "date": "2026/06/26",
         "content": "税理士等でない者に対する税務相談停止等命令",
         "url": "https://www.nta.go.jp/taxes/zeirishi/chokai/shobun/2606.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/06/25",
         "content": "パンフレット「国税査察制度～脱税は、犯罪。～」（令和８年６月）",
@@ -99,10 +112,7 @@ const topicsData = [
         "date": "2026/06/25",
         "content": "相続税法基本通達等の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/sisan/sozoku/kaisei/260600/index.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/06/19",
         "content": "「納税の猶予等の取扱要領の制定について」の一部改正について（事務運営指針）",
