@@ -1,9 +1,19 @@
 /* Topics Content Data */
 const topicsData = [
     {
-        "date": "2026/08/04",
-        "content": "令和８年熊本地震に係る国税の申告・納付等の期限の延長について",
-        "url": "https://www.nta.go.jp/files/000039363.pdf"
+        "date": "2026/08/12",
+        "content": "「申告に関するお知らせ」の格納について（令和8年熊本地震により被害を受けられた皆様へ）",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260812_messagebox.htm"
+    },
+    {
+        "date": "2026/08/12",
+        "content": "熊本県の一部の地域における国税に関する申告期限等を延長する件（国税庁告示第21号）",
+        "url": "https://www.nta.go.jp/files/000039593.pdf"
+    },
+    {
+        "date": "2026/08/12",
+        "content": "令和８年熊本地震による災害に関し、租税特別措置法第八十六条の五第一項の規定に基づき国税庁長官が定める日を定める件（国税庁告示第22号）",
+        "url": "https://www.nta.go.jp/law/kokuji/pdf/0026008-100.pdf"
     },
     {
         "date": "2026/08/03",
@@ -89,7 +99,10 @@ const topicsData = [
         "date": "2026/06/30",
         "content": "「消費税関係申告書等の様式の制定について」の一部改正等について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shohi/kaisei/260630/index.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/06/30",
         "content": "令和8年分年末調整のための各種様式",
@@ -99,10 +112,7 @@ const topicsData = [
         "date": "2026/06/26",
         "content": "税理士等でない者に対する税務相談停止等命令",
         "url": "https://www.nta.go.jp/taxes/zeirishi/chokai/shobun/2606.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/06/25",
         "content": "パンフレット「国税査察制度～脱税は、犯罪。～」（令和８年６月）",
