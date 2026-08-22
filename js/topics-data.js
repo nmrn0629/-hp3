@@ -1,6 +1,31 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/08/19",
+        "content": "令和９年１月から源泉徴収票の提出方法が変わります",
+        "url": "https://www.nta.go.jp/publication/pamph/hotei/minashi.pdf"
+    },
+    {
+        "date": "2026/08/19",
+        "content": "令和8年分　給与所得の源泉徴収票等の法定調書の作成と提出の手引",
+        "url": "https://www.nta.go.jp/publication/pamph/hotei/tebiki2026/index.htm"
+    },
+    {
+        "date": "2026/08/19",
+        "content": "e-Tax等による法定調書の提出が義務化されています（チラシ）",
+        "url": "https://www.nta.go.jp/publication/pamph/hotei/hikari_gimu.pdf"
+    },
+    {
+        "date": "2026/08/19",
+        "content": "法定調書の提出はe-Tax!!（チラシ）",
+        "url": "https://www.nta.go.jp/publication/pamph/hotei/teishutsu_tirashi.pdf"
+    },
+    {
+        "date": "2026/08/19",
+        "content": "源泉徴収票のみなし提出の特例　特設ページ",
+        "url": "https://www.nta.go.jp/users/gensen/hotei/index/minashi.htm"
+    },
+    {
         "date": "2026/08/12",
         "content": "「申告に関するお知らせ」の格納について（令和8年熊本地震により被害を受けられた皆様へ）",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260812_messagebox.htm"
@@ -14,6 +39,11 @@ const topicsData = [
         "date": "2026/08/12",
         "content": "令和８年熊本地震による災害に関し、租税特別措置法第八十六条の五第一項の規定に基づき国税庁長官が定める日を定める件（国税庁告示第22号）",
         "url": "https://www.nta.go.jp/law/kokuji/pdf/0026008-100.pdf"
+    },
+    {
+        "date": "2026/08/12",
+        "content": "消費税の届出等に関する特例について（令和８年熊本地震）",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/saigai/r8/0026008-100/index.htm"
     },
     {
         "date": "2026/08/03",
@@ -69,7 +99,10 @@ const topicsData = [
         "date": "2026/07/01",
         "content": "相続税の申告書等の様式一覧（令和8年分用）",
         "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/sozoku-zoyo/annai/r08.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/07/01",
         "content": "多言語通訳サービスに関するご案内",
@@ -99,10 +132,7 @@ const topicsData = [
         "date": "2026/06/30",
         "content": "「消費税関係申告書等の様式の制定について」の一部改正等について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shohi/kaisei/260630/index.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/06/30",
         "content": "令和8年分年末調整のための各種様式",
