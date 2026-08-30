@@ -1,14 +1,19 @@
 /* Topics Content Data */
 const topicsData = [
     {
-        "date": "2026/08/26",
-        "content": "電子的控除証明書等作成ソフト等で作成した認定NPO法人等に対する寄附金に係る「寄附金受領証明書」に表示される文言の読み替えについて",
-        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260826.htm"
+        "date": "2026/04/26",
+        "content": "国税システムの更改について",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/sodan/system.htm"
     },
     {
         "date": "2026/04/22",
         "content": "国税システムの更改に伴うメンテナンス時間について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260422.htm"
+    },
+    {
+        "date": "2026/08/26",
+        "content": "電子的控除証明書等作成ソフト等で作成した認定NPO法人等に対する寄附金に係る「寄附金受領証明書」に表示される文言の読み替えについて",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260826.htm"
     },
     {
         "date": "2026/08/19",
@@ -94,15 +99,15 @@ const topicsData = [
         "date": "2026/07/01",
         "content": "税務調査手続に関するFAQ（一般納税者向け）の改訂について",
         "url": "https://www.nta.go.jp/information/other/data/h24/nozeikankyo/ippan.htm"
-    },
-    {
-        "date": "2026/07/01",
-        "content": "令和8年分の路線価等について",
-        "url": "https://www.nta.go.jp/information/release/kokuzeicho/2026/rosenka/index.htm"
     }
 ];
 
 const topicsArchiveData = topicsData.concat([
+    {
+        "date": "2026/07/01",
+        "content": "令和8年分の路線価等について",
+        "url": "https://www.nta.go.jp/information/release/kokuzeicho/2026/rosenka/index.htm"
+    },
     {
         "date": "2026/07/01",
         "content": "相続税の申告のしかた（令和8年分用）",
@@ -282,11 +287,6 @@ const topicsArchiveData = topicsData.concat([
         "date": "2026/05/05",
         "content": "e-Tax仕様書等（ドラフト版）の掲載について【令和8年5月25日受付開始予定】",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260501_shiyo.htm"
-    },
-    {
-        "date": "2026/04/26",
-        "content": "国税システムの更改について",
-        "url": "https://www.nta.go.jp/taxes/shiraberu/sodan/system.htm"
     },
     {
         "date": "2026/04/22",
