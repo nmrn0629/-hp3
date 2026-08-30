@@ -1,6 +1,16 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/08/26",
+        "content": "電子的控除証明書等作成ソフト等で作成した認定NPO法人等に対する寄附金に係る「寄附金受領証明書」に表示される文言の読み替えについて",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260826.htm"
+    },
+    {
+        "date": "2026/04/22",
+        "content": "国税システムの更改に伴うメンテナンス時間について",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260422.htm"
+    },
+    {
         "date": "2026/08/19",
         "content": "令和９年１月から源泉徴収票の提出方法が変わります",
         "url": "https://www.nta.go.jp/publication/pamph/hotei/minashi.pdf"
@@ -89,7 +99,10 @@ const topicsData = [
         "date": "2026/07/01",
         "content": "令和8年分の路線価等について",
         "url": "https://www.nta.go.jp/information/release/kokuzeicho/2026/rosenka/index.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/07/01",
         "content": "相続税の申告のしかた（令和8年分用）",
@@ -99,10 +112,7 @@ const topicsData = [
         "date": "2026/07/01",
         "content": "相続税の申告書等の様式一覧（令和8年分用）",
         "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/sozoku-zoyo/annai/r08.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/07/01",
         "content": "多言語通訳サービスに関するご案内",
