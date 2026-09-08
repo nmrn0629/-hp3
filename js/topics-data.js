@@ -1,6 +1,21 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/09/04",
+        "content": "令和８年分の確定申告はスマホとマイナポータル連携でもっと便利に！",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/shinkoku/r8_smart_shinkoku/index.htm"
+    },
+    {
+        "date": "2026/09/04",
+        "content": "「租税特別措置法に係る所得税の取扱いについて」の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/shotoku/sochiho/kaisei/2609/index.htm"
+    },
+    {
+        "date": "2026/09/04",
+        "content": "租税特別措置法関係通達（法人税編）の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/hojin/kaisei/260904/index.htm"
+    },
+    {
         "date": "2026/04/26",
         "content": "国税システムの更改について",
         "url": "https://www.nta.go.jp/taxes/shiraberu/sodan/system.htm"
