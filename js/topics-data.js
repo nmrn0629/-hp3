@@ -1,6 +1,26 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/09/15",
+        "content": "消費税率引下げ特設サイト",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/zeiritsuhikisage.htm"
+    },
+    {
+        "date": "2026/08/31",
+        "content": "令和8年分　年末調整のしかた",
+        "url": "https://www.nta.go.jp/publication/pamph/gensen/nencho2026/01.htm"
+    },
+    {
+        "date": "2026/08/31",
+        "content": "令和9年分　源泉徴収税額表",
+        "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2027/01.htm"
+    },
+    {
+        "date": "2026/08/31",
+        "content": "マイナポータル連携対応予定のお知らせ",
+        "url": "https://www.nta.go.jp/taxes/tetsuzuki/mynumberinfo/mynapo_renkeiyotei.htm"
+    },
+    {
         "date": "2026/09/04",
         "content": "令和８年分の確定申告はスマホとマイナポータル連携でもっと便利に！",
         "url": "https://www.nta.go.jp/taxes/shiraberu/shinkoku/r8_smart_shinkoku/index.htm"
@@ -79,7 +99,10 @@ const topicsData = [
         "date": "2026/08/03",
         "content": "令和８年10月１日からの税務署総合窓口の受付時間について",
         "url": "https://www.nta.go.jp/about/introduction/torikumi/madoguchi_jikan/index.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/07/29",
         "content": "令和8年熊本地震により被害を受けられた皆様へ（災害関連情報）",
@@ -114,10 +137,7 @@ const topicsData = [
         "date": "2026/07/01",
         "content": "税務調査手続に関するFAQ（一般納税者向け）の改訂について",
         "url": "https://www.nta.go.jp/information/other/data/h24/nozeikankyo/ippan.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/07/01",
         "content": "令和8年分の路線価等について",
