@@ -1,6 +1,26 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/09/24",
+        "content": "所得税徴収高計算書（納付書）の記載のしかた",
+        "url": "https://www.nta.go.jp/publication/pamph/gensen/keisansho/01.htm"
+    },
+    {
+        "date": "2026/08/31",
+        "content": "各種申告書・記載例（扶養控除等申告書など）",
+        "url": "https://www.nta.go.jp/users/gensen/nencho/shinkokusyo/index.htm"
+    },
+    {
+        "date": "2026/08/27",
+        "content": "相続税法基本通達等の一部改正について（法令解釈通達）のあらまし（情報）",
+        "url": "https://www.nta.go.jp/law/joho-zeikaishaku/sozoku/r08/index.htm"
+    },
+    {
+        "date": "2026/08/24",
+        "content": "令和８年８月千葉豪雨により被害を受けられた皆様へ",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/saigai/r8/chiba/index.htm"
+    },
+    {
         "date": "2026/09/15",
         "content": "消費税率引下げ特設サイト",
         "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/zeiritsuhikisage.htm"
@@ -79,7 +99,10 @@ const topicsData = [
         "date": "2026/08/12",
         "content": "「申告に関するお知らせ」の格納について（令和8年熊本地震により被害を受けられた皆様へ）",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260812_messagebox.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/08/12",
         "content": "熊本県の一部の地域における国税に関する申告期限等を延長する件（国税庁告示第21号）",
@@ -99,10 +122,7 @@ const topicsData = [
         "date": "2026/08/03",
         "content": "令和８年10月１日からの税務署総合窓口の受付時間について",
         "url": "https://www.nta.go.jp/about/introduction/torikumi/madoguchi_jikan/index.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/07/29",
         "content": "令和8年熊本地震により被害を受けられた皆様へ（災害関連情報）",
