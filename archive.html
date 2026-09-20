@@ -75,7 +75,7 @@
         </div>
     </footer>
 
-    <script src="js/topics-data.js?v=1.20"></script>
+    <script src="js/topics-data.js?v=1.34"></script>
     <script src="script.js?v=1.23"></script>
     <script>
         (function () {
@@ -116,7 +116,7 @@
                     groups[key] = { label: parts[0] + '年' + parseInt(parts[1], 10) + '月', items: [] };
                     order.push(key);
                 }
-                groups[key].items.push({ day: parts[2], content: topic.content, url: topic.url });
+                groups[key].items.push({ day: parts[2], content: topic.content, url: topic.url, dateType: topic.dateType });
             });
 
             container.innerHTML = order.map(function (key, idx) {
@@ -125,7 +125,10 @@
                     const linkHtml = item.url
                         ? '<a href="' + escapeHtml(item.url) + '" class="topics-link" target="_blank" rel="noopener">詳細</a>'
                         : '';
-                    return '<li><span class="archive-day">' + escapeHtml(item.day) + '日</span>'
+                    const typeHtml = item.dateType
+                        ? '<span class="archive-datetype">（' + escapeHtml(item.dateType) + '）</span>'
+                        : '';
+                    return '<li><span class="archive-day">' + escapeHtml(item.day) + '日' + typeHtml + '</span>'
                         + '<span class="archive-content">' + escapeHtml(item.content) + '</span>'
                         + linkHtml + '</li>';
                 }).join('');
@@ -138,6 +141,11 @@
                     + '<ul class="archive-list">' + itemsHtml + '</ul>'
                     + '</details>';
             }).join('');
+
+            if (archiveData.some(function (t) { return t.dateType; })) {
+                container.insertAdjacentHTML('beforeend',
+                    '<p class="archive-legend">※発出日＝国税庁が通達を出した日／掲載日＝国税庁ホームページに掲載された日／実施日＝変更が始まる日</p>');
+            }
         })();
     </script>
 

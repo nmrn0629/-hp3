@@ -266,15 +266,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const hasArchive = window.topicsData.length > LIMIT;
                 const itemsHtml = visible.map(topic => `
                     <li>
-                        <span class="topics-date">${escapeHtml(topic.date)}</span>
+                        <span class="topics-date">${escapeHtml(topic.date)}${topic.dateType ? `<span class="topics-datetype">（${escapeHtml(topic.dateType)}）</span>` : ''}</span>
                         ${escapeHtml(topic.content)}
                         ${topic.url ? `<br><a href="${escapeHtml(topic.url)}" class="topics-link">詳細はこちら</a>` : ''}
                     </li>
                 `).join('');
+                const hasType = visible.some(t => t.dateType);
+                const legendHtml = hasType
+                    ? `<li class="topics-legend">※発出日＝国税庁が通達を出した日／掲載日＝国税庁ホームページに掲載された日／実施日＝変更が始まる日</li>`
+                    : '';
                 const archiveHtml = hasArchive
                     ? `<li class="topics-archive-link-item"><a href="archive.html" class="topics-archive-link">過去のTOPICS →</a></li>`
                     : '';
-                list.innerHTML = itemsHtml + archiveHtml;
+                list.innerHTML = itemsHtml + legendHtml + archiveHtml;
             }
         };
 

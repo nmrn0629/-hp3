@@ -2,101 +2,121 @@
 const topicsData = [
     {
         "date": "2026/09/24",
+        "dateType": "実施日",
         "content": "所得税徴収高計算書（納付書）の記載のしかた",
         "url": "https://www.nta.go.jp/publication/pamph/gensen/keisansho/01.htm"
     },
     {
         "date": "2026/08/31",
+        "dateType": "掲載日",
         "content": "各種申告書・記載例（扶養控除等申告書など）",
         "url": "https://www.nta.go.jp/users/gensen/nencho/shinkokusyo/index.htm"
     },
     {
         "date": "2026/08/27",
+        "dateType": "発出日",
         "content": "相続税法基本通達等の一部改正について（法令解釈通達）のあらまし（情報）",
         "url": "https://www.nta.go.jp/law/joho-zeikaishaku/sozoku/r08/index.htm"
     },
     {
         "date": "2026/08/24",
+        "dateType": "掲載日",
         "content": "令和８年８月千葉豪雨により被害を受けられた皆様へ",
         "url": "https://www.nta.go.jp/taxes/shiraberu/saigai/r8/chiba/index.htm"
     },
     {
         "date": "2026/09/15",
+        "dateType": "掲載日",
         "content": "消費税率引下げ特設サイト",
         "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/zeiritsuhikisage.htm"
     },
     {
         "date": "2026/08/31",
+        "dateType": "掲載日",
         "content": "令和8年分　年末調整のしかた",
         "url": "https://www.nta.go.jp/publication/pamph/gensen/nencho2026/01.htm"
     },
     {
         "date": "2026/08/31",
+        "dateType": "掲載日",
         "content": "令和9年分　源泉徴収税額表",
         "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2027/01.htm"
     },
     {
         "date": "2026/08/31",
+        "dateType": "掲載日",
         "content": "マイナポータル連携対応予定のお知らせ",
         "url": "https://www.nta.go.jp/taxes/tetsuzuki/mynumberinfo/mynapo_renkeiyotei.htm"
     },
     {
         "date": "2026/09/04",
+        "dateType": "掲載日",
         "content": "令和８年分の確定申告はスマホとマイナポータル連携でもっと便利に！",
         "url": "https://www.nta.go.jp/taxes/shiraberu/shinkoku/r8_smart_shinkoku/index.htm"
     },
     {
         "date": "2026/09/04",
+        "dateType": "発出日",
         "content": "「租税特別措置法に係る所得税の取扱いについて」の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/shotoku/sochiho/kaisei/2609/index.htm"
     },
     {
         "date": "2026/09/04",
+        "dateType": "発出日",
         "content": "租税特別措置法関係通達（法人税編）の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/hojin/kaisei/260904/index.htm"
     },
     {
         "date": "2026/04/26",
+        "dateType": "掲載日",
         "content": "国税システムの更改について",
         "url": "https://www.nta.go.jp/taxes/shiraberu/sodan/system.htm"
     },
     {
         "date": "2026/04/22",
+        "dateType": "掲載日",
         "content": "国税システムの更改に伴うメンテナンス時間について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260422.htm"
     },
     {
         "date": "2026/08/26",
+        "dateType": "掲載日",
         "content": "電子的控除証明書等作成ソフト等で作成した認定NPO法人等に対する寄附金に係る「寄附金受領証明書」に表示される文言の読み替えについて",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260826.htm"
     },
     {
         "date": "2026/08/19",
+        "dateType": "掲載日",
         "content": "令和９年１月から源泉徴収票の提出方法が変わります",
         "url": "https://www.nta.go.jp/publication/pamph/hotei/minashi.pdf"
     },
     {
         "date": "2026/08/19",
+        "dateType": "掲載日",
         "content": "令和8年分　給与所得の源泉徴収票等の法定調書の作成と提出の手引",
         "url": "https://www.nta.go.jp/publication/pamph/hotei/tebiki2026/index.htm"
     },
     {
         "date": "2026/08/19",
+        "dateType": "掲載日",
         "content": "e-Tax等による法定調書の提出が義務化されています（チラシ）",
         "url": "https://www.nta.go.jp/publication/pamph/hotei/hikari_gimu.pdf"
     },
     {
         "date": "2026/08/19",
+        "dateType": "掲載日",
         "content": "法定調書の提出はe-Tax!!（チラシ）",
         "url": "https://www.nta.go.jp/publication/pamph/hotei/teishutsu_tirashi.pdf"
     },
     {
         "date": "2026/08/19",
+        "dateType": "掲載日",
         "content": "源泉徴収票のみなし提出の特例　特設ページ",
         "url": "https://www.nta.go.jp/users/gensen/hotei/index/minashi.htm"
     },
     {
         "date": "2026/08/12",
+        "dateType": "掲載日",
         "content": "「申告に関するお知らせ」の格納について（令和8年熊本地震により被害を受けられた皆様へ）",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260812_messagebox.htm"
     }
@@ -105,306 +125,367 @@ const topicsData = [
 const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/08/12",
+        "dateType": "掲載日",
         "content": "熊本県の一部の地域における国税に関する申告期限等を延長する件（国税庁告示第21号）",
         "url": "https://www.nta.go.jp/files/000039593.pdf"
     },
     {
         "date": "2026/08/12",
+        "dateType": "発出日",
         "content": "令和８年熊本地震による災害に関し、租税特別措置法第八十六条の五第一項の規定に基づき国税庁長官が定める日を定める件（国税庁告示第22号）",
         "url": "https://www.nta.go.jp/law/kokuji/pdf/0026008-100.pdf"
     },
     {
         "date": "2026/08/12",
+        "dateType": "掲載日",
         "content": "消費税の届出等に関する特例について（令和８年熊本地震）",
         "url": "https://www.nta.go.jp/taxes/shiraberu/saigai/r8/0026008-100/index.htm"
     },
     {
         "date": "2026/08/03",
+        "dateType": "掲載日",
         "content": "令和８年10月１日からの税務署総合窓口の受付時間について",
         "url": "https://www.nta.go.jp/about/introduction/torikumi/madoguchi_jikan/index.htm"
     },
     {
         "date": "2026/07/29",
+        "dateType": "掲載日",
         "content": "令和8年熊本地震により被害を受けられた皆様へ（災害関連情報）",
         "url": "https://www.nta.go.jp/files/000039093.pdf"
     },
     {
         "date": "2026/07/15",
+        "dateType": "掲載日",
         "content": "国境を越えた電子商取引に係る消費税の課税関係について",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/denshisho/index.htm"
     },
     {
         "date": "2026/07/13",
+        "dateType": "掲載日",
         "content": "税務行政におけるオンラインツールの利用について",
         "url": "https://www.nta.go.jp/about/introduction/torikumi/onlinetool/index.htm"
     },
     {
         "date": "2026/07/10",
+        "dateType": "掲載日",
         "content": "電子帳簿保存法一問一答（Q&A）（令和8年7月改訂）",
         "url": "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/4-3.htm"
     },
     {
         "date": "2026/07/09",
+        "dateType": "掲載日",
         "content": "パンフレット「暮らしの税情報」（令和8年度版）の公開",
         "url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/index.htm"
     },
     {
         "date": "2026/07/07",
+        "dateType": "掲載日",
         "content": "電子納税等の利用制限について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260707_nozeitetsuzuki.htm"
     },
     {
         "date": "2026/07/01",
+        "dateType": "掲載日",
         "content": "税務調査手続に関するFAQ（一般納税者向け）の改訂について",
         "url": "https://www.nta.go.jp/information/other/data/h24/nozeikankyo/ippan.htm"
     },
     {
         "date": "2026/07/01",
+        "dateType": "掲載日",
         "content": "令和8年分の路線価等について",
         "url": "https://www.nta.go.jp/information/release/kokuzeicho/2026/rosenka/index.htm"
     },
     {
         "date": "2026/07/01",
+        "dateType": "掲載日",
         "content": "相続税の申告のしかた（令和8年分用）",
         "url": "https://www.nta.go.jp/publication/pamph/sozoku/shikata-sozoku2026/index.htm"
     },
     {
         "date": "2026/07/01",
+        "dateType": "掲載日",
         "content": "相続税の申告書等の様式一覧（令和8年分用）",
         "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/sozoku-zoyo/annai/r08.htm"
     },
     {
         "date": "2026/07/01",
+        "dateType": "掲載日",
         "content": "多言語通訳サービスに関するご案内",
         "url": "https://www.nta.go.jp/information/other/data/r08/multilingual/index.htm"
     },
     {
         "date": "2026/06/30",
+        "dateType": "掲載日",
         "content": "印紙税の手引（令和8年6月）",
         "url": "https://www.nta.go.jp/publication/pamph/inshi/tebiki/01.htm"
     },
     {
         "date": "2026/06/30",
+        "dateType": "掲載日",
         "content": "契約書や領収書と印紙税〈印紙税額一覧表〉",
         "url": "https://www.nta.go.jp/publication/pamph/inshi/pdf/1504.pdf"
     },
     {
         "date": "2026/06/30",
+        "dateType": "発出日",
         "content": "「資産課税関係の申請、届出等の様式の制定について」の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/sozoku/sochiho/kaisei/2606xx/index.htm"
     },
     {
         "date": "2026/06/30",
+        "dateType": "発出日",
         "content": "法人税基本通達等の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/hojin/kaisei/2606xx/index.htm"
     },
     {
         "date": "2026/06/30",
+        "dateType": "発出日",
         "content": "「消費税関係申告書等の様式の制定について」の一部改正等について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shohi/kaisei/260630/index.htm"
     },
     {
         "date": "2026/06/30",
+        "dateType": "掲載日",
         "content": "令和8年分年末調整のための各種様式",
         "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/gensen/mokuji.htm"
     },
     {
         "date": "2026/06/26",
+        "dateType": "掲載日",
         "content": "税理士等でない者に対する税務相談停止等命令",
         "url": "https://www.nta.go.jp/taxes/zeirishi/chokai/shobun/2606.htm"
     },
     {
         "date": "2026/06/25",
+        "dateType": "掲載日",
         "content": "パンフレット「国税査察制度～脱税は、犯罪。～」（令和８年６月）",
         "url": "https://www.nta.go.jp/publication/pamph/koho/01.pdf"
     },
     {
         "date": "2026/06/25",
+        "dateType": "発出日",
         "content": "相続税法基本通達等の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/sisan/sozoku/kaisei/260600/index.htm"
     },
     {
         "date": "2026/06/19",
+        "dateType": "掲載日",
         "content": "「納税の猶予等の取扱要領の制定について」の一部改正について（事務運営指針）",
         "url": "https://www.nta.go.jp/law/jimu-unei/tyousyu/kaisei/260617/index.htm"
     },
     {
         "date": "2026/06/16",
+        "dateType": "掲載日",
         "content": "消費税申告（個人）のオンライン利用率の訂正について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260616.htm"
     },
     {
         "date": "2026/06/15",
+        "dateType": "掲載日",
         "content": "令和8年度税制改正等に係る対応等について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260615.htm"
     },
     {
         "date": "2026/06/15",
+        "dateType": "掲載日",
         "content": "国税システムの更改に伴うe-Tax仕様書等の情報提供について",
         "url": "https://www.e-tax.nta.go.jp/topics/2024/topics_20241031_ksk2_shiyo.htm"
     },
     {
         "date": "2026/06/15",
+        "dateType": "掲載日",
         "content": "令和8年9月のe-Taxソフト更新対象帳票一覧（予定）について",
         "url": "https://www.e-tax.nta.go.jp/shiyo/chohyo/topics_20260615_chohyo.htm"
     },
     {
         "date": "2026/06/12",
+        "dateType": "掲載日",
         "content": "消費税還付申告に関する国税当局の対応について",
         "url": "https://www.nta.go.jp/publication/pamph/pdf/0022001-098.pdf"
     },
     {
         "date": "2026/06/05",
+        "dateType": "掲載日",
         "content": "適用額明細書の記載に係る区分番号一覧表等の更新",
         "url": "https://www.nta.go.jp/publication/pamph/hojin/tekiyougaku/01.htm#a02"
     },
     {
         "date": "2026/06/02",
+        "dateType": "掲載日",
         "content": "令和8年分の基準年利率について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/hyoka/260500/01.htm"
     },
     {
         "date": "2026/06/02",
+        "dateType": "掲載日",
         "content": "財産評価基本通達の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/sisan/hyoka/kaisei/260500/01.htm"
     },
     {
         "date": "2026/05/29",
+        "dateType": "掲載日",
         "content": "令和7年分所得税等、消費税及び贈与税の確定申告状況等について",
         "url": "https://www.nta.go.jp/information/release/pdf/0026005-037.pdf"
     },
     {
         "date": "2026/05/28",
+        "dateType": "掲載日",
         "content": "「国税徴収法基本通達」の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/chosyu/kaisei/260520/01.htm"
     },
     {
         "date": "2026/05/27",
+        "dateType": "掲載日",
         "content": "令和8年度法人税関係法令の改正の概要",
         "url": "https://www.nta.go.jp/publication/pamph/hojin/kaisei_gaiyo2026/01.htm"
     },
     {
         "date": "2026/05/27",
+        "dateType": "掲載日",
         "content": "マイページの「贈与税関係情報」が更に便利になります。",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260527.htm"
     },
     {
         "date": "2026/05/25",
+        "dateType": "掲載日",
         "content": "令和8年度税制改正等に係るe-Tax対応について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525.htm"
     },
     {
         "date": "2026/05/25",
+        "dateType": "掲載日",
         "content": "商業登記電子証明書をご利用の方へ",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525_certification.htm"
     },
     {
         "date": "2026/05/25",
+        "dateType": "掲載日",
         "content": "コード署名証明書の更新について",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260525_code.htm"
     },
     {
         "date": "2026/05/22",
+        "dateType": "掲載日",
         "content": "個人の方が株式等や土地・建物等を譲渡した場合の令和8年度税制改正のあらまし",
         "url": "https://www.nta.go.jp/publication/pamph/joto-sanrin/r08aramashi.pdf"
     },
     {
         "date": "2026/05/22",
+        "dateType": "掲載日",
         "content": "印紙税額一覧表（令和8年5月）を掲載しました",
         "url": "https://www.nta.go.jp/publication/pamph/inshi/pdf/zeigaku_ichiran_r0204.pdf"
     },
     {
         "date": "2026/05/22",
+        "dateType": "掲載日",
         "content": "印紙税法基本通達の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/inshi/kaisei/20260522/01.htm"
     },
     {
         "date": "2026/05/18",
+        "dateType": "掲載日",
         "content": "e-Tax仕様書等の掲載について【令和8年5月25日受付開始予定】",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260518_shiyo.htm"
     },
     {
         "date": "2026/05/15",
+        "dateType": "掲載日",
         "content": "リファンド方式特設サイトの更新",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm"
     },
     {
         "date": "2026/05/13",
+        "dateType": "掲載日",
         "content": "第２回「取引相場のない株式の評価に関する有識者会議」配布資料について",
         "url": "https://www.nta.go.jp/about/council/kenkyu.htm#nai-hyoka"
     },
     {
         "date": "2026/05/13",
+        "dateType": "掲載日",
         "content": "法人税申告書別表一等の記載項目の追加等について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/hojin/260428/01.htm"
     },
     {
         "date": "2026/05/05",
+        "dateType": "掲載日",
         "content": "e-Tax仕様書等（ドラフト版）の掲載について【令和8年5月25日受付開始予定】",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260501_shiyo.htm"
     },
     {
         "date": "2026/04/22",
+        "dateType": "掲載日",
         "content": "令和8年分の路線価図等の公開予定日について",
         "url": "https://www.nta.go.jp/information/release/pdf/0026004-020.pdf"
     },
     {
         "date": "2026/04/22",
+        "dateType": "掲載日",
         "content": "令和８年度税制改正による所得税の基礎控除の引上げ等について",
         "url": "https://www.nta.go.jp/users/gensen/2026kiso/index.htm"
     },
     {
         "date": "2026/04/12",
+        "dateType": "掲載日",
         "content": "令和8年度 税制改正特集",
         "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice-review/index.htm"
     },
     {
         "date": "2026/04/01",
+        "dateType": "掲載日",
         "content": "消費税法改正のお知らせ（令和8年4月）",
         "url": "https://www.nta.go.jp/publication/pamph/shohi/kaisei/pdf/r08kaisei.pdf"
     },
     {
         "date": "2026/04/19",
+        "dateType": "掲載日",
         "content": "「取引相場のない株式の評価に関する有識者会議」の開催について",
         "url": "https://www.nta.go.jp/about/council/kenkyu.htm"
     },
     {
         "date": "2026/04/01",
+        "dateType": "掲載日",
         "content": "消費税法施行令の一部改正について",
         "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shohi/kaisei/0026003-067/index.htm"
     },
     {
         "date": "2026/04/01",
+        "dateType": "掲載日",
         "content": "通勤手当の非課税限度額の改正について",
         "url": "https://www.nta.go.jp/users/gensen/2026tsukin/index.htm"
     },
     {
         "date": "2026/03/28",
+        "dateType": "掲載日",
         "content": "法人税基本通達の一部改正について（令和８年１月30日）",
         "url": "https://www.nta.go.jp/law/joho-zeikaishaku/hojin/260130/index.htm"
     },
     {
         "date": "2026/03/28",
+        "dateType": "掲載日",
         "content": "電子帳簿保存法関係届出書等の様式の制定について（令和８年２月改正）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/denshichoubo/index.htm"
     },
     {
         "date": "2026/03/25",
+        "dateType": "掲載日",
         "content": "基礎控除の見直しについて（令和7年・8年分から大幅引き上げ）",
         "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm"
     },
     {
         "date": "2026/03/25",
+        "dateType": "掲載日",
         "content": "給与所得控除の見直しについて（令和7年分から最低控除額が65万円に引き上げ）",
         "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm"
     },
     {
         "date": "2026/03/25",
+        "dateType": "掲載日",
         "content": "消費税インボイス制度特設サイト",
         "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm"
     },
     {
         "date": "2026/03/15",
+        "dateType": "掲載日",
         "content": "ホームページを開設しました！",
         "url": ""
     }

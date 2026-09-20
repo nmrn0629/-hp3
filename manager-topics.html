@@ -93,6 +93,14 @@
                 <input type="text" id="topic-date" placeholder="2026/03/11">
             </div>
             <div class="form-group">
+                <label>日付の種別</label>
+                <select id="topic-datetype">
+                    <option value="掲載日">掲載日（パンフレット・手引・お知らせ・案内ページなど）</option>
+                    <option value="発出日">発出日（法令解釈通達・事務運営指針・国税庁告示）</option>
+                    <option value="実施日">実施日（様式変更など、これから変更が始まる日）</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label>内容</label>
                 <textarea id="topic-content" rows="3" placeholder="トピックスの内容を入力してください"></textarea>
             </div>
@@ -134,7 +142,7 @@
         </div>
     </footer>
 
-    <script src="js/topics-data.js?v=1.20"></script>
+    <script src="js/topics-data.js?v=1.34"></script>
     <script>
         let generatedCode = "";
         let currentData = [...(window.topicsData || [])];
@@ -153,7 +161,7 @@
             listContainer.innerHTML = currentData.map((topic, index) => `
                 <div style="padding:15px; border:1px solid #ddd; border-radius:8px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
                     <div>
-                        <strong style="color:#8db600;">${topic.date}</strong><br>
+                        <strong style="color:#8db600;">${topic.date}</strong><small style="color:#888;">${topic.dateType ? `（${topic.dateType}）` : ''}</small><br>
                         ${topic.content}
                         ${topic.url ? `<br><small style="color:#666;">URL: ${topic.url}</small>` : ''}
                     </div>
@@ -164,6 +172,7 @@
 
         function addNewTopic() {
             const date = document.getElementById('topic-date').value;
+            const dateType = document.getElementById('topic-datetype').value;
             const content = document.getElementById('topic-content').value;
             const url = document.getElementById('topic-url').value;
 
@@ -172,7 +181,7 @@
                 return;
             }
 
-            const newTopic = { date, content, url };
+            const newTopic = { date, dateType, content, url };
             currentData = [newTopic, ...currentData];
             
             renderAdminList();
