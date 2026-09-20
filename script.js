@@ -261,9 +261,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
                     });
                 };
-                const LIMIT = 10;
-                const visible = window.topicsData.slice(0, LIMIT);
-                const hasArchive = window.topicsData.length > LIMIT;
+                // 表示は日付の降順。ただし「先頭 BASE_LIMIT 件」は必ず残す。
+                // 単純に日付順の上位だけを出すと、追加したばかりの古い日付のトピックが
+                // その場で表示枠から落ちてしまうため。
+                // そのうえで、隠れる側に「表示中の最古の日付より新しいもの」が残らないよう、
+                // 該当分は表示件数を増やして引き上げる。
+                const BASE_LIMIT = 10;
+                const all = window.topicsData;
+                const base = all.slice(0, BASE_LIMIT);
+                const cutoff = base.length
+                    ? base.reduce((min, t) => ((t.date || '') < min ? (t.date || '') : min), base[0].date || '')
+                    : '';
+                const visible = base.length
+                    ? base
+                        .concat(all.slice(BASE_LIMIT).filter(t => (t.date || '') >= cutoff))
+                        .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+                    : [];
+                const total = (window.topicsArchiveData || all).length;
+                const hasArchive = total > visible.length;
                 const itemsHtml = visible.map(topic => `
                     <li>
                         <span class="topics-date">${escapeHtml(topic.date)}${topic.dateType ? `<span class="topics-datetype">（${escapeHtml(topic.dateType)}）</span>` : ''}</span>
