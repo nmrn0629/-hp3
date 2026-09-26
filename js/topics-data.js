@@ -2,6 +2,12 @@
 const topicsData = [
     {
         "date": "2026/09/24",
+        "dateType": "掲載日",
+        "content": "年末調整がよくわかるページ（令和８年分）",
+        "url": "https://www.nta.go.jp/users/gensen/nencho/index.htm"
+    },
+    {
+        "date": "2026/09/24",
         "dateType": "実施日",
         "content": "所得税徴収高計算書（納付書）の記載のしかた",
         "url": "https://www.nta.go.jp/publication/pamph/gensen/keisansho/01.htm"
@@ -113,16 +119,16 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "源泉徴収票のみなし提出の特例　特設ページ",
         "url": "https://www.nta.go.jp/users/gensen/hotei/index/minashi.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/08/12",
         "dateType": "掲載日",
         "content": "「申告に関するお知らせ」の格納について（令和8年熊本地震により被害を受けられた皆様へ）",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260812_messagebox.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/08/12",
         "dateType": "掲載日",
