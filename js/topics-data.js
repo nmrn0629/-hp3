@@ -1,6 +1,18 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/10/02",
+        "dateType": "掲載日",
+        "content": "外部委託による記帳指導について、「会計ソフト方式（コンパクト型）」の概要等を掲載しました",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/shinkoku/kojin_jigyo/index.htm"
+    },
+    {
+        "date": "2026/10/01",
+        "dateType": "掲載日",
+        "content": "令和８年分 年調ソフト等の公開",
+        "url": "https://www.nta.go.jp/users/gensen/nenmatsu/nencho.htm"
+    },
+    {
         "date": "2026/09/24",
         "dateType": "掲載日",
         "content": "年末調整がよくわかるページ（令和８年分）",
@@ -107,7 +119,10 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "e-Tax等による法定調書の提出が義務化されています（チラシ）",
         "url": "https://www.nta.go.jp/publication/pamph/hotei/hikari_gimu.pdf"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/08/19",
         "dateType": "掲載日",
@@ -119,10 +134,7 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "源泉徴収票のみなし提出の特例　特設ページ",
         "url": "https://www.nta.go.jp/users/gensen/hotei/index/minashi.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/08/12",
         "dateType": "掲載日",
