@@ -897,7 +897,8 @@ button, input, select { font-family: inherit; }
 
     .nencho-date .nencho-select.year { min-width: 0; flex: 1 1 100%; }
     .nencho-date .nencho-select.month,
-    .nencho-date .nencho-select.day { flex: 1; }
+    .nencho-date .nencho-select.day { flex: 1; min-width: 0; }
+    .nencho-age-badge { flex: 1 1 100%; flex-direction: row; align-items: baseline; gap: 10px; }
 
     .nencho-nav {
         flex-direction: column-reverse;
