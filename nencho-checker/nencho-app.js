@@ -10,6 +10,8 @@
     if (!R || !app) return;
 
     var STEPS = ['ご本人', '配偶者', '扶養親族', '保険料・掛金', '結果'];
+    var man = R.man;
+    function rules() { return R.RULES[state.year] || R.RULES[R.years[0]]; }
     var CURRENT_YEAR = new Date().getFullYear();
 
     // ------------------------------------------------------------------
@@ -231,27 +233,29 @@
                 checkField('self.commonLawSpouse', '事実婚（住民票に「未届の夫／妻」等の記載がある）の相手がいる',
                     'ひとり親控除・寡婦控除は、事実婚の相手がいる場合は受けられません。')) +
             checkField('self.workingStudent', '勤労学生（学校教育法の学校・専修学校等の学生・生徒）である',
-                '合計所得金額85万円以下（給与のみなら年収150万円以下）で給与以外の所得が10万円以下の場合に勤労学生控除の対象です。') +
+                '合計所得金額' + man(rules().workingStudent.incomeLimit) + '以下（給与のみなら年収' + man(rules().salaryHints.workingStudent) + '以下）で給与以外の所得が10万円以下の場合に勤労学生控除の対象です。') +
             navButtons(null, isMarried() ? '次へ：配偶者について' : '次へ：扶養親族について');
     }
 
     function judgeBox(person) {
         if (!person) return '';
-        var rules = R.RULES[state.year];
+        var rl = rules();
         var html = '<div class="nencho-judge' + ((person.amount || person.specificRelativeAmount || person.isDouitsuSeikei) ? '' : ' is-muted') + '">';
         if (person.age != null) {
-            html += rules.judgeDateLabel + '時点 <strong>' + person.age + '歳</strong>　';
+            html += rl.judgeDateLabel + '時点 <strong>' + person.age + '歳</strong>　';
         } else {
             html += '生年月日を入力すると年齢区分を判定します　';
         }
         html += '合計所得金額（見込み）<strong>' + fmt(person.income) + '円</strong>';
         if (person.role === 'spouse') {
+            var lim = rl.dependentIncomeLimit;
+            var spMax = rl.spouseSpecial[rl.spouseSpecial.length - 1][0];
             if (person.isDouitsuSeikei) {
-                html += '<br>→ 配偶者控除の対象（所得58万円以下）' + (person.isElderly ? '／老人控除対象配偶者' : '');
-            } else if (person.income <= 1330000) {
-                html += '<br>→ 配偶者特別控除の対象（所得58万円超133万円以下）';
+                html += '<br>→ 配偶者控除の対象（所得' + man(lim) + '以下）' + (person.isElderly ? '／老人控除対象配偶者' : '');
+            } else if (person.income <= spMax) {
+                html += '<br>→ 配偶者特別控除の対象（所得' + man(lim) + '超' + man(spMax) + '以下）';
             } else {
-                html += '<br>→ 所得133万円超のため配偶者控除・配偶者特別控除は対象外';
+                html += '<br>→ 所得' + man(spMax) + '超のため配偶者控除・配偶者特別控除は対象外';
             }
         } else {
             html += '<br>→ ' + esc(person.categoryLabel || '判定中');
@@ -267,7 +271,7 @@
         return '<h3>配偶者について</h3>' +
             '<p class="nencho-lead">配偶者控除・配偶者特別控除は、配偶者の所得とご本人の所得の組み合わせで控除額が決まります。</p>' +
             dateField('spouse.birth', '配偶者の生年月日', '70歳以上（' + R.RULES[state.year].judgeDateLabel + '時点）だと「老人控除対象配偶者」として控除額が増えます。') +
-            moneyField('spouse.salary', '配偶者の給与収入（年収・額面）の見込み', 'パート・アルバイト収入など。給与収入123万円以下なら所得58万円以下となり配偶者控除の対象です。', '例：1,030,000') +
+            moneyField('spouse.salary', '配偶者の給与収入（年収・額面）の見込み', 'パート・アルバイト収入など。給与収入' + man(rules().salaryHints.dependent) + '以下なら所得' + man(rules().dependentIncomeLimit) + '以下となり配偶者控除の対象です。', '例：1,030,000') +
             moneyField('spouse.otherIncome', '配偶者の給与以外の所得金額（あれば）', '年金のみの場合の目安：65歳以上は年金収入－110万円、65歳未満は年金収入－60万円（マイナスなら0）。') +
             choiceField('spouse.disability', '配偶者の障害者区分', DISABILITY_OPTIONS) +
             (state.spouse.disability === 'special' ? checkField('spouse.cohabiting', 'ご本人または生計を一にする親族と同居している', '同居している特別障害者は「同居特別障害者」として控除額が75万円になります。') : '') +
@@ -277,7 +281,9 @@
 
     function renderDependents(result) {
         var html = '<h3>扶養親族について</h3>' +
-            '<p class="nencho-lead">生計を一にするお子さん・ご両親などを追加してください（配偶者は除く）。16歳未満のお子さんも、障害者控除や所得金額調整控除の判定に使うため入力をおすすめします。</p>';
+            '<p class="nencho-lead">生計を一にするお子さん・ご両親などを追加してください（配偶者は除く）。16歳未満のお子さんも、障害者控除や所得金額調整控除の判定に使うため入力をおすすめします。' +
+            '扶養親族の所得要件は合計所得金額' + man(rules().dependentIncomeLimit) + '以下（給与のみなら年収' + man(rules().salaryHints.dependent) + '以下）、' +
+            '19〜22歳で所得' + man(rules().dependentIncomeLimit) + '超123万円以下（年収' + man(rules().salaryHints.specificRelativeMax) + '以下）なら特定親族特別控除の対象です。</p>';
         if (!state.dependents.length) {
             html += '<p class="nencho-empty">扶養親族がいない場合は、そのまま「次へ」に進んでください。</p>';
         }

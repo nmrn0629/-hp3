@@ -8,9 +8,19 @@
  *   RULES に新しい年分のエントリを追加（既存年をコピーして改正点だけ書き換える）し、
  *   nencho-app.js 側の年分セレクトに追加するだけでよい。
  *
- * 根拠：所得税法、令和7年度税制改正（基礎控除・給与所得控除の見直し、
- *       特定親族特別控除の創設、扶養親族等の所得要件 58万円への引上げ、
- *       令和8年分限定の生命保険料控除（一般・新契約）の限度額 6万円への引上げ）
+ * 根拠（国税庁HPで照合済み・2026-10-08）：
+ *   - 令和7年度税制改正：基礎控除・給与所得控除（最低保障65万円）の見直し、特定親族特別控除の創設、
+ *     扶養親族等の所得要件 58万円への引上げ（令和7年分に適用）
+ *   - 令和8年度税制改正（令和8年12月1日施行・令和8年分以後に適用）：
+ *       基礎控除の引上げ（合計所得489万円以下 104万円、489万超655万以下 67万円、655万超2,350万以下 62万円）、
+ *       給与所得控除の最低保障額 74万円（収入220万円以下）と収入69.1万〜220万円未満の給与所得の特例、
+ *       扶養親族・同一生計配偶者・ひとり親の子の所得要件 62万円、特定親族 62万超123万以下、
+ *       配偶者特別控除の対象 62万超133万以下、勤労学生 89万円以下
+ *   - 年齢23歳未満の扶養親族を有する場合の生命保険料控除の特例（令和8・9年分）：
+ *       新生命保険料に係る一般生命保険料控除の限度額 6万円（新旧合算も6万円、合計限度12万円は不変）
+ *   - ひとり親控除 38万円への引上げは令和9年分以後（令和8年分は35万円のまま）
+ *   出典：国税庁「令和8年分 年末調整のしかた」Ⅰ昨年と比べて変わった点、
+ *         「令和8年度税制改正（所得税の基礎控除の引上げ等関係）Q&A」、タックスアンサー No.1199/1410/1180/1191/1195/1177/1160/1170/1171/1175/1140/1145/1411/2260
  */
 (function (root, factory) {
     if (typeof module === 'object' && module.exports) {
@@ -25,19 +35,24 @@
     // 年分ごとのルール表
     // ------------------------------------------------------------------
     var COMMON = {
-        // 給与所得控除（令和2年分以降の構造に令和7年改正の最低保障 65万円を反映）
+        // 給与所得控除（令和7年分：最低保障 65万円・収入190万円まで）
+        // variant 'R7' … 190万円未満は別表第五に準じた刻み（1,619,000円以上は1,000〜4,000円刻み）
+        // variant 'R8' … 令和8・9年分の特例：69万1,000円以上74万1,000円未満は所得なし、
+        //                 74万1,000円以上219万1,000円未満は「収入−74万円」、219万1,000円〜220万円未満は3段階の定額
         salaryDeduction: {
+            variant: 'R7',
             min: 650000,
             flatUpTo: 1900000,
-            // [上限収入, 率, 加算額]
-            bands: [
-                [3600000, 0.30, 80000],
-                [6600000, 0.20, 440000],
-                [8500000, 0.10, 1100000]
-            ],
             max: 1950000
         },
-        // 基礎控除（合計所得金額の上限, 控除額）令和7・8年分
+        // 扶養親族等の所得要件を給与収入に換算した目安（表示用）
+        salaryHints: {
+            dependent: 1230000,      // 所得58万円 ⇔ 給与収入123万円
+            specificRelativeMax: 1880000, // 所得123万円 ⇔ 給与収入188万円
+            spouseSpecialMax: 2015999,    // 所得133万円 ⇔ 給与収入201万5,999円
+            workingStudent: 1500000  // 所得85万円 ⇔ 給与収入150万円
+        },
+        // 基礎控除（合計所得金額の上限, 控除額）令和7年分
         basic: [
             [1320000, 950000],
             [3360000, 880000],
@@ -76,7 +91,7 @@
             elderly: 480000,      // 70歳以上
             elderlyParent: 580000 // 70歳以上の同居直系尊属
         },
-        // 特定親族特別控除（19歳以上23歳未満、所得58万円超123万円以下）
+        // 特定親族特別控除（19歳以上23歳未満、所得が扶養親族の所得要件超123万円以下）
         specificRelative: [
             [850000, 630000],
             [900000, 610000],
@@ -97,7 +112,7 @@
         // 生命保険料控除
         lifeInsurance: {
             newCap: 40000, oldCap: 50000, total: 120000,
-            // 令和8年分限定：23歳未満の扶養親族がいる場合の一般（新契約）上限
+            // 令和8・9年分：23歳未満の扶養親族がいる場合の一般（新契約）上限（null なら特例なし）
             generalNewCapWithYoungDependent: null
         },
         earthquake: { cap: 50000, longTermCap: 15000 },
@@ -138,6 +153,29 @@
             year: 2026,
             label: '令和8年分',
             judgeDateLabel: '令和8年12月31日',
+            // 令和8年度税制改正（令和8年12月1日施行）
+            salaryDeduction: { variant: 'R8', min: 740000, flatUpTo: 2200000 },
+            salaryHints: {
+                dependent: 1360000,
+                specificRelativeMax: 1970000,
+                spouseSpecialMax: 2070000,
+                workingStudent: 1630000
+            },
+            basic: [
+                [1320000, 1040000],
+                [3360000, 1040000],
+                [4890000, 1040000],
+                [6550000, 670000],
+                [23500000, 620000],
+                [24000000, 480000],
+                [24500000, 320000],
+                [25000000, 160000],
+                [Infinity, 0]
+            ],
+            dependentIncomeLimit: 620000,
+            singleParent: { childIncomeLimit: 620000 },
+            workingStudent: { incomeLimit: 890000 },
+            // 年齢23歳未満の扶養親族を有する場合の特例（令和8・9年分）
             lifeInsurance: { generalNewCapWithYoungDependent: 60000 }
         })
     };
@@ -171,18 +209,28 @@
         return age;
     }
 
-    /** 給与所得（所得金額調整控除 適用前）。速算表（別表第五）に準拠。 */
+    /** 給与所得（所得金額調整控除 適用前）。年末調整等のための給与所得控除後の給与等の金額の表（別表第五）に準拠。 */
     function salaryIncome(revenue, rules) {
         var r = toInt(revenue);
         var sd = rules.salaryDeduction;
         if (r <= 0) return 0;
-        if (r < 1619000) return Math.max(0, r - sd.min);
-        if (r < 1620000) return 969000;
-        if (r < 1622000) return 970000;
-        if (r < 1624000) return 972000;
-        if (r < 1628000) return 974000;
         var A = Math.floor(r / 4000) * 4000;
-        if (r < sd.flatUpTo) return A - sd.min;
+        if (sd.variant === 'R8') {
+            // 令和8・9年分：収入69万1,000円以上220万円未満の特例（租税特別措置法）
+            if (r < 741000) return 0;
+            if (r < 2191000) return r - 740000;
+            if (r < 2193000) return 1451000;
+            if (r < 2196000) return 1453000;
+            if (r < 2200000) return 1456000;
+        } else {
+            // 令和7年分
+            if (r < 1619000) return Math.max(0, r - sd.min);
+            if (r < 1620000) return 969000;
+            if (r < 1622000) return 970000;
+            if (r < 1624000) return 972000;
+            if (r < 1628000) return 974000;
+            if (r < sd.flatUpTo) return A - sd.min;
+        }
         if (r < 3600000) return Math.floor(A * 0.7) - 80000;
         if (r < 6600000) return Math.floor(A * 0.8) - 440000;
         if (r < 8500000) return Math.floor(r * 0.9) - 1100000;
@@ -239,6 +287,13 @@
         return (n == null ? 0 : n).toLocaleString('ja-JP') + '円';
     }
 
+    /** 万円表記（例：620000 → "62万円"、2015999 → "201万5,999円"） */
+    function man(n) {
+        n = toInt(n);
+        var m = Math.floor(n / 10000), rest = n % 10000;
+        return m + '万' + (rest ? rest.toLocaleString('ja-JP') : '') + '円';
+    }
+
     // ------------------------------------------------------------------
     // メイン計算
     // ------------------------------------------------------------------
@@ -250,6 +305,8 @@
         var deps = Array.isArray(input.dependents) ? input.dependents : [];
         var ins = input.insurance || {};
         var limit = rules.dependentIncomeLimit;
+        var specRelMax = rules.specificRelative[rules.specificRelative.length - 1][0];
+        var spouseSpecialMax = rules.spouseSpecial[rules.spouseSpecial.length - 1][0];
 
         var items = [];
         var notes = [];
@@ -293,7 +350,7 @@
                 salary: toInt(d.salary),
                 cohabiting: d.cohabiting !== false,
                 disability: d.disability || 'none',
-                isFuyou: income <= limit,            // 扶養親族（所得58万以下）
+                isFuyou: income <= limit,            // 扶養親族（所得が所得要件以下）
                 category: null,
                 categoryLabel: '',
                 amount: 0,
@@ -336,8 +393,8 @@
                 res.disabilityAmount = disabilityAmount(res.disability, res.cohabiting, rules);
                 res.disabilityLabel = disabilityLabel(res.disability, res.cohabiting);
             } else {
-                // 所得58万円超 → 扶養親族ではない。特定親族特別控除の可能性
-                if (age != null && age >= 19 && age < 23 && income <= rules.specificRelative[rules.specificRelative.length - 1][0]) {
+                // 所得要件超 → 扶養親族ではない。特定親族特別控除の可能性
+                if (age != null && age >= 19 && age < 23 && income <= specRelMax) {
                     res.category = 'specificRelative';
                     res.categoryLabel = '特定親族（特定親族特別控除）';
                     res.specificRelativeAmount = lookup(rules.specificRelative, income);
@@ -345,7 +402,7 @@
                     res.category = 'none';
                     res.categoryLabel = '控除対象外';
                     res.reasons.push('合計所得金額が' + yen(limit) + 'を超えるため扶養親族に該当しません' +
-                        (age != null && age >= 19 && age < 23 ? '（所得123万円超のため特定親族特別控除も対象外）' : ''));
+                        (age != null && age >= 19 && age < 23 ? '（所得' + man(specRelMax) + '超のため特定親族特別控除も対象外）' : ''));
                 }
                 if (res.disability !== 'none') {
                     res.reasons.push('扶養親族に該当しないため障害者控除の対象になりません');
@@ -397,7 +454,7 @@
                 spItem.name = sp.isElderly ? '配偶者控除（老人控除対象配偶者）' : '配偶者控除';
                 spItem.note = '配偶者の合計所得金額 ' + yen(sp.income) + '（' + yen(limit) + '以下）' +
                     (sp.isElderly ? '、70歳以上' : '') + '、ご本人の合計所得金額 ' + yen(totalIncome);
-            } else if (sp.income <= rules.spouseSpecial[rules.spouseSpecial.length - 1][0]) {
+            } else if (sp.income <= spouseSpecialMax) {
                 var col2 = totalIncome <= 9000000 ? 1 : totalIncome <= 9500000 ? 2 : 3;
                 spItem.name = '配偶者特別控除';
                 spItem.amount = lookup(rules.spouseSpecial, sp.income, col2);
@@ -405,7 +462,7 @@
                 spItem.note = '配偶者の合計所得金額 ' + yen(sp.income) + '、ご本人の合計所得金額 ' + yen(totalIncome);
             } else {
                 spItem.name = '配偶者控除／配偶者特別控除';
-                spItem.note = '配偶者の合計所得金額 ' + yen(sp.income) + ' が133万円を超えるため適用なし';
+                spItem.note = '配偶者の合計所得金額 ' + yen(sp.income) + ' が' + man(spouseSpecialMax) + 'を超えるため適用なし';
             }
             items.push(spItem);
 
@@ -438,7 +495,7 @@
                 items.push({
                     key: 'specrel_' + d.index, name: '特定親族特別控除（' + d.label + '）',
                     amount: d.specificRelativeAmount, applied: true,
-                    note: rules.judgeDateLabel + '時点 ' + d.age + '歳、合計所得金額 ' + yen(d.income) + '（58万円超123万円以下）'
+                    note: rules.judgeDateLabel + '時点 ' + d.age + '歳、合計所得金額 ' + yen(d.income) + '（' + man(limit) + '超' + man(specRelMax) + '以下）'
                 });
             } else {
                 items.push({
@@ -479,7 +536,7 @@
                     note: 'ご本人の合計所得金額が500万円を超えるため適用なし' });
             } else if (hasQualifyingChild) {
                 items.push({ key: 'single', name: 'ひとり親控除', amount: rules.singleParent.amount, applied: true,
-                    note: '生計を一にする子（総所得金額等58万円以下）あり、合計所得金額500万円以下' });
+                    note: '生計を一にする子（総所得金額等' + man(rules.singleParent.childIncomeLimit) + '以下）あり、合計所得金額500万円以下' });
             } else if (marital === 'widowed') {
                 items.push({ key: 'single', name: '寡婦控除', amount: rules.widow.amount, applied: true,
                     note: '夫と死別（または生死不明）後、婚姻していない方（扶養親族の有無を問わない）' });
@@ -489,11 +546,11 @@
                         note: '夫と離婚後、婚姻しておらず扶養親族あり' });
                 } else {
                     items.push({ key: 'single', name: '寡婦控除', amount: 0, applied: false,
-                        note: '離婚の場合、扶養親族（所得58万円以下）がいることが要件のため適用なし' });
+                        note: '離婚の場合、扶養親族（所得' + man(limit) + '以下）がいることが要件のため適用なし' });
                 }
             } else {
                 items.push({ key: 'single', name: 'ひとり親控除', amount: 0, applied: false,
-                    note: '生計を一にする子（総所得金額等58万円以下）がいないため適用なし' });
+                    note: '生計を一にする子（総所得金額等' + man(rules.singleParent.childIncomeLimit) + '以下）がいないため適用なし' });
             }
         }
 
@@ -504,8 +561,8 @@
             var wsOk = totalIncome <= ws.incomeLimit && nonWork <= ws.nonWorkIncomeLimit;
             items.push({
                 key: 'student', name: '勤労学生控除', amount: wsOk ? ws.amount : 0, applied: wsOk,
-                note: wsOk ? '合計所得金額85万円以下（給与収入150万円以下）かつ給与以外の所得10万円以下'
-                    : (totalIncome > ws.incomeLimit ? '合計所得金額が85万円（給与収入150万円）を超えるため適用なし'
+                note: wsOk ? '合計所得金額' + man(ws.incomeLimit) + '以下（給与収入' + man(rules.salaryHints.workingStudent) + '以下）かつ給与以外の所得10万円以下'
+                    : (totalIncome > ws.incomeLimit ? '合計所得金額が' + man(ws.incomeLimit) + '（給与収入' + man(rules.salaryHints.workingStudent) + '）を超えるため適用なし'
                         : '給与以外の所得が10万円を超えるため適用なし')
             });
         }
@@ -619,6 +676,7 @@
         lifeOldFormula: lifeOldFormula,
         longTermFormula: longTermFormula,
         calculate: calculate,
-        yen: yen
+        yen: yen,
+        man: man
     };
 });
