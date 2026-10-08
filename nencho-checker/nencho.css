@@ -784,6 +784,30 @@ button, input, select { font-family: inherit; }
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
+.nencho-clearbar {
+    display: flex;
+    justify-content: flex-end;
+    margin: -12px 0 16px;
+    min-height: 34px;
+}
+
+.nencho-clear-btn {
+    border: 1px solid #d5dbd2;
+    background: #fff;
+    color: var(--color-text-light);
+    border-radius: var(--radius-pill);
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nencho-clear-btn:hover {
+    color: #c0392b;
+    border-color: #c0392b;
+}
+
 /* ---- 一人ひとりの判定 ---- */
 .nencho-person-layout {
     display: grid;

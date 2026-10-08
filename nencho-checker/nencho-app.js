@@ -72,16 +72,68 @@
 
     function fmt(n) { return R.toInt(n).toLocaleString('ja-JP'); }
 
-    function fmtInput(v) {
-        var s = R.normalizeDigits(v).replace(/[^\d]/g, '');
-        return s ? Number(s).toLocaleString('ja-JP') : '';
+    // ---- 金額欄は「万円」単位で入力する（内部の状態は円で保持） ----
+    /** 入力文字列（万円・小数可・全角可）→ 半角の数字と小数点だけに整える */
+    function cleanManText(v) {
+        var t = R.normalizeDigits(v).replace(/[^\d.]/g, '');
+        var i = t.indexOf('.');
+        if (i >= 0) t = t.slice(0, i + 1) + t.slice(i + 1).replace(/\./g, '').slice(0, 4); // 小数は4桁（1円単位）まで
+        return t;
     }
 
-    function manHint(v) {
-        var n = R.toInt(v);
+    /** 万円の入力文字列 → 円（文字列）。空欄は '' */
+    function parseMan(v) {
+        var t = cleanManText(v);
+        if (!t || t === '.') return '';
+        var parts = t.split('.');
+        var yen = (Number(parts[0] || 0) * 10000) + Number(((parts[1] || '') + '0000').slice(0, 4));
+        return isFinite(yen) ? String(yen) : '';
+    }
+
+    /** 円 → 万円の表示文字列（例：5000000 → "500"、48372 → "4.8372"、空欄は ''） */
+    function fmtMan(yen) {
+        if (yen === '' || yen == null) return '';
+        var n = R.toInt(yen);
+        var intPart = Math.floor(n / 10000), frac = n % 10000;
+        var out = intPart.toLocaleString('ja-JP');
+        if (frac) out += '.' + ('000' + frac).slice(-4).replace(/0+$/, '');
+        return out;
+    }
+
+    /** 入力欄の下に出す円換算（例："= 5,000,000円"） */
+    function yenHint(yen) {
+        var n = R.toInt(yen);
+        return n ? '= ' + n.toLocaleString('ja-JP') + '円' : '';
+    }
+
+    /** 円単位の欄の下に出す万円換算（例："= 4.8万円"） */
+    function manHint(yen) {
+        var n = R.toInt(yen);
         if (!n) return '';
-        var man = n / 10000;
-        return '= ' + (Number.isInteger(man) ? man : man.toFixed(1)) + '万円';
+        var m = n / 10000;
+        return '= ' + (Number.isInteger(m) ? m : m.toFixed(1)) + '万円';
+    }
+
+    /**
+     * 欄ごとの入力単位。
+     *   収入・所得 … 万円（'man'）
+     *   保険料・掛金・住宅ローン控除 … 控除証明書の金額をそのまま転記するため円（'yen'）
+     */
+    function unitOfPath(path) {
+        return (/^insurance\./.test(path) || path === 'housingLoan') ? 'yen' : 'man';
+    }
+    function cleanMoneyText(v, unit) {
+        return unit === 'yen' ? R.normalizeDigits(v).replace(/[^\d]/g, '') : cleanManText(v);
+    }
+    function parseMoney(v, unit) {
+        return unit === 'yen' ? cleanMoneyText(v, 'yen') : parseMan(v);
+    }
+    function fmtMoney(yen, unit) {
+        if (unit !== 'yen') return fmtMan(yen);
+        return (yen === '' || yen == null) ? '' : R.toInt(yen).toLocaleString('ja-JP');
+    }
+    function hintMoney(yen, unit) {
+        return unit === 'yen' ? manHint(yen) : yenHint(yen);
     }
 
     function wareki(y) {
@@ -150,14 +202,15 @@
     // ------------------------------------------------------------------
     function moneyField(path, label, help, placeholder) {
         var v = getPath(state, path);
+        var unit = unitOfPath(path);
         return '<div class="nencho-field">' +
             '<label class="nencho-label" for="f-' + path.replace(/\./g, '-') + '">' + label +
             (help ? '<small>' + help + '</small>' : '') + '</label>' +
             '<div class="nencho-money">' +
-            '<input class="nencho-input" type="text" inputmode="numeric" autocomplete="off" id="f-' + path.replace(/\./g, '-') + '" ' +
-            'data-path="' + path + '" data-money="1" value="' + esc(fmtInput(v)) + '" placeholder="' + esc(placeholder || '0') + '">' +
-            '<span class="unit">円</span></div>' +
-            '<div class="nencho-money-hint" data-hint-for="' + path + '">' + manHint(v) + '</div>' +
+            '<input class="nencho-input" type="text" inputmode="' + (unit === 'yen' ? 'numeric' : 'decimal') + '" autocomplete="off" id="f-' + path.replace(/\./g, '-') + '" ' +
+            'data-path="' + path + '" data-money="' + unit + '" value="' + esc(fmtMoney(v, unit)) + '" placeholder="' + esc(placeholder || '0') + '">' +
+            '<span class="unit">' + (unit === 'yen' ? '円' : '万円') + '</span></div>' +
+            '<div class="nencho-money-hint" data-hint-for="' + path + '">' + hintMoney(v, unit) + '</div>' +
             '</div>';
     }
 
@@ -293,7 +346,7 @@
             '<div class="nencho-field"><label class="nencho-label" for="f-year">対象年分</label>' +
             '<select class="nencho-select" id="f-year" data-path="year" data-rerender="1" style="max-width:260px">' + yearOpts + '</select></div>' +
             moneyField('self.salary', '給与収入（年収・額面）の見込み',
-                '源泉徴収票の「支払金額」にあたる金額。賞与を含む1年分の総支給額で、手取りではありません。', '例：4,500,000') +
+                '源泉徴収票の「支払金額」にあたる金額。賞与を含む1年分の総支給額で、手取りではありません。', '例：450') +
             moneyField('self.otherIncome', '給与以外の所得金額（あれば）',
                 '副業・不動産などの「所得」（収入から経費を引いた後）。なければ空欄で結構です。') +
             disabilityField('self', 'ご本人の障害者手帳・認定') +
@@ -342,7 +395,7 @@
         return '<h3>配偶者について</h3>' +
             '<p class="nencho-lead">配偶者控除・配偶者特別控除は、配偶者の所得とご本人の所得の組み合わせで控除額が決まります。</p>' +
             dateField('spouse.birth', '配偶者の生年月日', '70歳以上（' + R.RULES[state.year].judgeDateLabel + '時点）だと「老人控除対象配偶者」として控除額が増えます。') +
-            moneyField('spouse.salary', '配偶者の給与収入（年収・額面）の見込み', 'パート・アルバイト収入など。給与収入' + man(rules().salaryHints.dependent) + '以下なら所得' + man(rules().dependentIncomeLimit) + '以下となり配偶者控除の対象です。', '例：1,030,000') +
+            moneyField('spouse.salary', '配偶者の給与収入（年収・額面）の見込み', 'パート・アルバイト収入など。給与収入' + man(rules().salaryHints.dependent) + '以下なら所得' + man(rules().dependentIncomeLimit) + '以下となり配偶者控除の対象です。', '例：103') +
             moneyField('spouse.otherIncome', '配偶者の給与以外の所得金額（あれば）', '年金のみの場合の目安：65歳以上は年金収入－110万円、65歳未満は年金収入－60万円（マイナスなら0）。') +
             (disKind(state.spouse) === 'special' ? checkField('spouse.cohabiting', 'ご本人または生計を一にする親族と同居している', '同居している特別障害者は「同居特別障害者」として控除額が75万円になります。') : '') +
             disabilityField('spouse', '配偶者の障害者手帳・認定', { cohabitingPath: 'spouse.cohabiting' }) +
@@ -391,7 +444,7 @@
         var lifeItem = result.items.filter(function (i) { return i.key === 'life'; })[0];
         var tokurei = lifeItem && lifeItem.detail && lifeItem.detail.generalNewCap > rules.lifeInsurance.newCap;
         return '<h3>保険料・掛金など</h3>' +
-            '<p class="nencho-lead">お手元の控除証明書の金額（1年間の支払見込額）を入力してください。該当がない項目は空欄のままで結構です。</p>' +
+            '<p class="nencho-lead">お手元の控除証明書の金額（1年間の支払見込額）を<strong>円単位</strong>でそのまま入力してください。該当がない項目は空欄のままで結構です。</p>' +
             '<h4 class="nencho-result-title">社会保険料・共済掛金</h4>' +
             moneyField('insurance.social', '社会保険料（ご自身で支払った分）', '国民年金・国民健康保険など。給与から天引きされている分は会社側で集計されるため、ここには含めません。') +
             moneyField('insurance.mutual', '小規模企業共済等掛金（iDeCo など）', 'iDeCo（個人型確定拠出年金）・小規模企業共済・心身障害者扶養共済の掛金。') +
@@ -480,11 +533,6 @@
         html += '<div class="nencho-nav">' +
             '<button type="button" class="nencho-btn ghost" data-action="back">入力内容を修正する</button>' +
             '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
-            (state.confirmReset
-                ? '<span class="nencho-confirm">入力内容をすべて消去しますか？ ' +
-                  '<button type="button" class="nencho-btn danger" data-action="reset-confirm">はい、消去する</button>' +
-                  '<button type="button" class="nencho-btn text" data-action="reset-cancel">キャンセル</button></span>'
-                : '<button type="button" class="nencho-btn text" data-action="reset">最初からやり直す</button>') +
             '<button type="button" class="nencho-btn primary" data-action="print">印刷・PDF保存</button>' +
             '</div></div>';
         return html;
@@ -497,6 +545,17 @@
         return '<div class="nencho-tabs" role="tablist">' +
             '<button type="button" role="tab" class="nencho-tab' + (state.view === 'household' ? ' is-active' : '') + '" data-view="household" aria-selected="' + (state.view === 'household') + '">世帯の控除額<small>本人・家族・保険料をまとめて計算</small></button>' +
             '<button type="button" role="tab" class="nencho-tab' + (state.view === 'person' ? ' is-active' : '') + '" data-view="person" aria-selected="' + (state.view === 'person') + '">一人ひとりの判定<small>この人は何に該当し、控除はいくらか</small></button>' +
+            '</div>';
+    }
+
+    function clearBar() {
+        var label = state.view === 'person' ? '「一人ひとりの判定」' : '「世帯の控除額」';
+        return '<div class="nencho-clearbar">' +
+            (state.confirmReset
+                ? '<span class="nencho-confirm">' + label + 'の入力内容をすべて消去しますか？ ' +
+                  '<button type="button" class="nencho-btn danger" data-action="reset-confirm">はい、消去する</button>' +
+                  '<button type="button" class="nencho-btn text" data-action="reset-cancel">キャンセル</button></span>'
+                : '<button type="button" class="nencho-clear-btn" data-action="reset">入力をすべてクリア</button>') +
             '</div>';
     }
 
@@ -537,7 +596,7 @@
         html += checkField('personTab.person.businessEmployee', '青色事業専従者として給与を受けている／白色事業専従者である', '該当する場合は配偶者控除・扶養控除等の対象外です。') +
             checkField('personTab.person.claimedByOther', '他の人の同一生計配偶者・扶養親族として申告されている', '同じ人を2人以上で重複して控除することはできません。') +
             '<h4 class="nencho-result-title">ご本人（控除を受ける方）の収入</h4>' +
-            moneyField('personTab.self.salary', 'ご本人の給与収入（年収・額面）の見込み', '配偶者控除の控除額と、所得制限（900万・950万・1,000万円）の判定に使います。', '例：5,000,000') +
+            moneyField('personTab.self.salary', 'ご本人の給与収入（年収・額面）の見込み', '配偶者控除の控除額と、所得制限（900万・950万・1,000万円）の判定に使います。', '例：500') +
             moneyField('personTab.self.otherIncome', 'ご本人の給与以外の所得金額（あれば）');
         return html;
     }
@@ -598,7 +657,7 @@
 
     function render() {
         if (state.view === 'person') {
-            app.innerHTML = tabBar() + renderPersonView();
+            app.innerHTML = tabBar() + clearBar() + renderPersonView();
             return;
         }
         var result = R.calculate(buildInput());
@@ -610,7 +669,7 @@
             case 3: panel = renderInsurance(result); break;
             default: panel = renderResult(result);
         }
-        app.innerHTML = tabBar() + stepsIndicator() + '<div class="nencho-panel">' + panel + '</div>';
+        app.innerHTML = tabBar() + clearBar() + stepsIndicator() + '<div class="nencho-panel">' + panel + '</div>';
     }
 
     function refreshPersonResult() {
@@ -644,7 +703,7 @@
     // ------------------------------------------------------------------
     function readValue(el) {
         if (el.type === 'checkbox') return el.checked;
-        if (el.getAttribute('data-money')) return R.normalizeDigits(el.value).replace(/[^\d]/g, '');
+        if (el.getAttribute('data-money')) return parseMoney(el.value, el.getAttribute('data-money'));
         return el.value;
     }
 
@@ -656,7 +715,7 @@
         setPath(state, path, readValue(el));
         if (el.getAttribute('data-money')) {
             var hint = app.querySelector('[data-hint-for="' + path + '"]');
-            if (hint) hint.textContent = manHint(el.value);
+            if (hint) hint.textContent = hintMoney(getPath(state, path), el.getAttribute('data-money'));
         }
         if (state.view === 'person') refreshPersonResult();
     });
@@ -667,7 +726,7 @@
         if (!path) return;
         setPath(state, path, readValue(el));
         if (el.getAttribute('data-money')) {
-            el.value = fmtInput(el.value);
+            el.value = fmtMoney(getPath(state, path), el.getAttribute('data-money'));
             if (state.view === 'person') { refreshPersonResult(); return; }
             // 金額の変更は判定表示に影響するので、人物カード等の表示を更新
             if (state.step === 1 || state.step === 2 || state.step === 3) render();
@@ -682,17 +741,21 @@
         var el = e.target;
         var path = el.getAttribute && el.getAttribute('data-path');
         if (!path || !el.getAttribute('data-money')) return;
-        var digits = R.normalizeDigits(el.value).replace(/[^\d]/g, '');
-        el.value = digits;
-        setPath(state, path, digits);
+        var unit = el.getAttribute('data-money');
+        var text = cleanMoneyText(el.value, unit);
+        el.value = text;
+        setPath(state, path, parseMoney(text, unit));
         var hint = app.querySelector('[data-hint-for="' + path + '"]');
-        if (hint) hint.textContent = manHint(digits);
+        if (hint) hint.textContent = hintMoney(getPath(state, path), unit);
         if (state.view === 'person') refreshPersonResult();
     });
 
     app.addEventListener('focusout', function (e) {
         var el = e.target;
-        if (el.getAttribute && el.getAttribute('data-money')) el.value = fmtInput(el.value);
+        if (el.getAttribute && el.getAttribute('data-money')) {
+            var u = el.getAttribute('data-money');
+            el.value = fmtMoney(parseMoney(el.value, u), u);
+        }
     });
 
     app.addEventListener('click', function (e) {
@@ -716,7 +779,21 @@
             else if (action === 'print') window.print();
             else if (action === 'reset') { state.confirmReset = true; render(); }
             else if (action === 'reset-cancel') { state.confirmReset = false; render(); }
-            else if (action === 'reset-confirm') { state = initialState(); goTo(0); }
+            else if (action === 'reset-confirm') {
+                // 開いているタブの入力だけを消去する（対象年分と、もう一方のタブの入力は残す）
+                if (state.view === 'person') {
+                    state.personTab = initialPerson();
+                    state.confirmReset = false;
+                    render();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    var keep = { year: state.year, personTab: state.personTab };
+                    state = initialState();
+                    state.year = keep.year;
+                    state.personTab = keep.personTab;
+                    goTo(0);
+                }
+            }
             return;
         }
         var stepEl = e.target.closest('.nencho-step.is-done');
