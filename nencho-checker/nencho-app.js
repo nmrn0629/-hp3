@@ -9,7 +9,7 @@
     var app = document.getElementById('nencho-app');
     if (!R || !app) return;
 
-    var STEPS = ['ご本人', '配偶者', '扶養親族', '保険料、<br>掛金', '結果'];
+    var STEPS = ['ご本人', '配偶者', '扶養親族', '保険料・<br>掛金', '結果'];
     var man = R.man;
     function rules() { return R.RULES[state.year] || R.RULES[R.years[0]]; }
     var CURRENT_YEAR = new Date().getFullYear();
