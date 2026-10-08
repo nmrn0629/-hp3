@@ -22,7 +22,7 @@
     function newDependent() {
         return {
             name: '', relation: 'child', birth: emptyBirth(),
-            salary: '', otherIncome: '', cohabiting: true, disability: 'none'
+            salary: '', otherIncome: '', cohabiting: true, handbook: 'none', grade: ''
         };
     }
 
@@ -43,12 +43,12 @@
             year: R.years[0],
             personTab: initialPerson(),
             self: {
-                salary: '', otherIncome: '', disability: 'none',
+                salary: '', otherIncome: '', handbook: 'none', grade: '',
                 marital: 'married', commonLawSpouse: false, workingStudent: false
             },
             spouse: {
                 birth: emptyBirth(), salary: '', otherIncome: '',
-                disability: 'none', cohabiting: true
+                handbook: 'none', grade: '', cohabiting: true
             },
             dependents: [],
             insurance: {
@@ -113,13 +113,15 @@
 
     function isMarried() { return state.self.marital === 'married'; }
 
+    function disKind(obj) { return R.classifyDisability(obj.handbook, obj.grade).kind; }
+
     function buildInput() {
         return {
             year: state.year,
             self: {
                 salary: state.self.salary,
                 otherIncome: state.self.otherIncome,
-                disability: state.self.disability,
+                disability: disKind(state.self),
                 marital: state.self.marital,
                 commonLawSpouse: state.self.commonLawSpouse,
                 workingStudent: state.self.workingStudent
@@ -128,14 +130,14 @@
                 birth: birthToInput(state.spouse.birth),
                 salary: state.spouse.salary,
                 otherIncome: state.spouse.otherIncome,
-                disability: state.spouse.disability,
+                disability: disKind(state.spouse),
                 cohabiting: state.spouse.cohabiting
             } : null,
             dependents: state.dependents.map(function (d) {
                 return {
                     name: d.name, relation: d.relation, birth: birthToInput(d.birth),
                     salary: d.salary, otherIncome: d.otherIncome,
-                    cohabiting: d.cohabiting, disability: d.disability
+                    cohabiting: d.cohabiting, disability: disKind(d)
                 };
             }),
             insurance: state.insurance,
@@ -183,6 +185,10 @@
         } else if (b.y && isJan && String(b.d) === '1') {
             msg = '<div class="nencho-date-note">1月1日生まれのため、' + R.RULES[state.year].judgeDateLabel + 'に1つ上の年齢として判定します。</div>';
         }
+        var age = R.ageAtYearEnd(birthToInput(b), Number(state.year));
+        var ageBadge = age != null
+            ? '<span class="nencho-age-badge" title="' + R.RULES[state.year].judgeDateLabel + '時点">→ ' + age + '歳<small>' + R.RULES[state.year].judgeDateLabel + '時点</small></span>'
+            : '';
         return '<div class="nencho-field">' +
             '<span class="nencho-label">' + label + (help ? '<small>' + help + '</small>' : '') + '</span>' +
             '<div class="nencho-date">' +
@@ -190,6 +196,7 @@
             '<select class="nencho-select month" data-path="' + path + '.m" data-rerender="1" aria-label="月（任意）"><option value="">月（任意）</option>' + months + '</select>' +
             '<select class="nencho-select day' + (dayDisabled ? ' is-disabled' : '') + '" data-path="' + path + '.d" data-rerender="1" aria-label="日（1月生まれのみ）"' +
             (dayDisabled ? ' disabled title="1月生まれの場合のみ入力します"' : '') + '><option value="">日</option>' + days + '</select>' +
+            ageBadge +
             '</div>' + msg + '</div>';
     }
 
@@ -213,7 +220,49 @@
             '<span>' + label + (help ? '<small class="nencho-help">' + help + '</small>' : '') + '</span></label></div>';
     }
 
-    var DISABILITY_OPTIONS = [['none', 'なし'], ['general', '一般の障害者'], ['special', '特別障害者']];
+    /**
+     * 障害者手帳・認定の選択 + 区分判定の即時表示
+     * base … 'self' / 'spouse' / 'dependents.0' / 'personTab.person'
+     * opts.cohabitingPath … 同居チェックのパス（指定時は同居特別障害者の判定も表示）
+     */
+    function disabilityField(base, label, opts) {
+        opts = opts || {};
+        var obj = getPath(state, base) || {};
+        var hb = R.DISABILITY_HANDBOOKS.filter(function (h) { return h.key === obj.handbook; })[0];
+        var hbOpts = R.DISABILITY_HANDBOOKS.map(function (h) {
+            return '<option value="' + h.key + '"' + (obj.handbook === h.key ? ' selected' : '') + '>' + esc(h.label) + '</option>';
+        }).join('');
+        var id = 'f-' + base.replace(/\./g, '-') + '-handbook';
+        var html = '<div class="nencho-field"><label class="nencho-label" for="' + id + '">' + label +
+            '<small>手帳・認定の種類と等級から、所得税法上の「一般の障害者」「特別障害者」を判定します。</small></label>' +
+            '<select class="nencho-select" id="' + id + '" data-path="' + base + '.handbook" data-rerender="1">' + hbOpts + '</select>';
+        if (hb && hb.grades) {
+            html += '<div class="nencho-choices" style="margin-top:10px">';
+            hb.grades.forEach(function (g) {
+                html += '<label class="nencho-choice"><input type="radio" name="c-' + base.replace(/\./g, '-') + '-grade" value="' + esc(g.v) + '" data-path="' + base + '.grade" data-rerender="1"' +
+                    (String(obj.grade) === String(g.v) ? ' checked' : '') + '><span>' + esc(g.label) + '</span></label>';
+            });
+            html += '</div>';
+        }
+        var dis = R.classifyDisability(obj.handbook, obj.grade);
+        if (obj.handbook && obj.handbook !== 'none') {
+            if (dis.pending) {
+                html += '<div class="nencho-date-warn">等級・区分を選択すると判定します。</div>';
+            } else {
+                var cohab = opts.cohabitingPath ? !!getPath(state, opts.cohabitingPath) : null;
+                var text = '判定：<strong>' + esc(dis.label) + '</strong>（' + esc(dis.basis) + '）';
+                if (dis.kind === 'special' && cohab !== null) {
+                    text += cohab ? ' → 同居のため<strong>同居特別障害者</strong>（控除額75万円）' : ' → 別居のため特別障害者（控除額40万円）';
+                } else if (dis.kind === 'special') {
+                    text += '（控除額40万円）';
+                } else {
+                    text += '（控除額27万円）';
+                }
+                html += '<div class="nencho-dis-judge' + (dis.kind === 'special' ? ' is-special' : '') + '">' + text + '</div>';
+            }
+        }
+        return html + '</div>';
+    }
 
     function navButtons(backLabel, nextLabel) {
         return '<div class="nencho-nav">' +
@@ -247,8 +296,7 @@
                 '源泉徴収票の「支払金額」にあたる金額。賞与を含む1年分の総支給額で、手取りではありません。', '例：4,500,000') +
             moneyField('self.otherIncome', '給与以外の所得金額（あれば）',
                 '副業・不動産などの「所得」（収入から経費を引いた後）。なければ空欄で結構です。') +
-            choiceField('self.disability', 'ご本人の障害者区分', DISABILITY_OPTIONS,
-                '特別障害者：身体障害者手帳1・2級、精神障害者保健福祉手帳1級、療育手帳A（重度）など') +
+            disabilityField('self', 'ご本人の障害者手帳・認定') +
             choiceField('self.marital', '配偶者（結婚）の状況', [
                 ['married', '配偶者がいる'], ['single', '未婚'], ['divorced', '離婚している'], ['widowed', '死別・生死不明']
             ], '令和' + (Number(state.year) - 2018) + '年12月31日時点の状況で選んでください。') +
@@ -296,8 +344,8 @@
             dateField('spouse.birth', '配偶者の生年月日', '70歳以上（' + R.RULES[state.year].judgeDateLabel + '時点）だと「老人控除対象配偶者」として控除額が増えます。') +
             moneyField('spouse.salary', '配偶者の給与収入（年収・額面）の見込み', 'パート・アルバイト収入など。給与収入' + man(rules().salaryHints.dependent) + '以下なら所得' + man(rules().dependentIncomeLimit) + '以下となり配偶者控除の対象です。', '例：1,030,000') +
             moneyField('spouse.otherIncome', '配偶者の給与以外の所得金額（あれば）', '年金のみの場合の目安：65歳以上は年金収入－110万円、65歳未満は年金収入－60万円（マイナスなら0）。') +
-            choiceField('spouse.disability', '配偶者の障害者区分', DISABILITY_OPTIONS) +
-            (state.spouse.disability === 'special' ? checkField('spouse.cohabiting', 'ご本人または生計を一にする親族と同居している', '同居している特別障害者は「同居特別障害者」として控除額が75万円になります。') : '') +
+            (disKind(state.spouse) === 'special' ? checkField('spouse.cohabiting', 'ご本人または生計を一にする親族と同居している', '同居している特別障害者は「同居特別障害者」として控除額が75万円になります。') : '') +
+            disabilityField('spouse', '配偶者の障害者手帳・認定', { cohabitingPath: 'spouse.cohabiting' }) +
             judgeBox(sp) +
             navButtons('戻る', '次へ：扶養親族について');
     }
@@ -328,10 +376,10 @@
                 '<div class="span-2">' + dateField(base + '.birth', '生年月日') + '</div>' +
                 moneyField(base + '.salary', '給与収入（年収・額面）の見込み', 'アルバイト収入など。なければ空欄。') +
                 moneyField(base + '.otherIncome', '給与以外の所得金額（あれば）', '年金のみの目安：65歳以上は年金収入－110万円、65歳未満は－60万円。') +
-                '<div class="span-2">' + choiceField(base + '.disability', '障害者区分', DISABILITY_OPTIONS) + '</div>' +
                 '<div class="span-2">' + checkField(base + '.cohabiting', '同居している（ご本人または配偶者と）',
                     d.relation === 'parent' ? '70歳以上の父母・祖父母と同居している場合は「同居老親等」として控除額が58万円になります。' :
-                        (d.disability === 'special' ? '同居している特別障害者は「同居特別障害者」として75万円になります。' : '')) + '</div>' +
+                        (disKind(d) === 'special' ? '同居している特別障害者は「同居特別障害者」として75万円になります。' : '')) + '</div>' +
+                '<div class="span-2">' + disabilityField(base, '障害者手帳・認定', { cohabitingPath: base + '.cohabiting' }) + '</div>' +
                 '</div>' + judgeBox(person) + '</div>';
         });
         html += '<button type="button" class="nencho-add" data-action="add">扶養親族を追加する</button>';
@@ -470,12 +518,8 @@
     function renderPersonForm() {
         var pt = state.personTab;
         var isSpouse = pt.person.relation === 'spouse';
-        var hb = R.DISABILITY_HANDBOOKS.filter(function (h) { return h.key === pt.person.handbook; })[0];
         var yearOpts = R.years.map(function (y) {
             return '<option value="' + y + '"' + (Number(state.year) === y ? ' selected' : '') + '>' + R.RULES[y].label + '</option>';
-        }).join('');
-        var hbOpts = R.DISABILITY_HANDBOOKS.map(function (h) {
-            return '<option value="' + h.key + '"' + (pt.person.handbook === h.key ? ' selected' : '') + '>' + esc(h.label) + '</option>';
         }).join('');
         var html = '<h3>判定する家族の情報</h3>' +
             '<p class="nencho-lead">配偶者・お子さん・ご両親など、1人分を入力すると右側（スマホでは下）に判定が表示されます。</p>' +
@@ -489,16 +533,7 @@
             moneyField('personTab.person.otherIncome', 'この方の給与以外の所得金額（あれば）', '年金のみの目安：65歳以上は年金収入－110万円、65歳未満は年金収入－60万円（マイナスなら0）。') +
             checkField('personTab.person.cohabiting', 'ご本人（または配偶者・生計を一にする親族）と同居している',
                 '同居老親等・同居特別障害者の判定に使います。病気の治療のための入院は同居扱い、老人ホーム等への入所は別居扱いです。') +
-            '<div class="nencho-field"><label class="nencho-label" for="f-handbook">障害者手帳・認定の種類</label>' +
-            '<select class="nencho-select" id="f-handbook" data-path="personTab.person.handbook" data-rerender="1">' + hbOpts + '</select></div>';
-        if (hb && hb.grades) {
-            html += '<div class="nencho-field"><span class="nencho-label">等級・区分</span><div class="nencho-choices">';
-            hb.grades.forEach(function (g) {
-                html += '<label class="nencho-choice"><input type="radio" name="c-grade" value="' + esc(g.v) + '" data-path="personTab.person.grade" data-rerender="1"' +
-                    (String(pt.person.grade) === String(g.v) ? ' checked' : '') + '><span>' + esc(g.label) + '</span></label>';
-            });
-            html += '</div></div>';
-        }
+            disabilityField('personTab.person', '障害者手帳・認定の種類', { cohabitingPath: 'personTab.person.cohabiting' });
         html += checkField('personTab.person.businessEmployee', '青色事業専従者として給与を受けている／白色事業専従者である', '該当する場合は配偶者控除・扶養控除等の対象外です。') +
             checkField('personTab.person.claimedByOther', '他の人の同一生計配偶者・扶養親族として申告されている', '同じ人を2人以上で重複して控除することはできません。') +
             '<h4 class="nencho-result-title">ご本人（控除を受ける方）の収入</h4>' +
@@ -638,7 +673,7 @@
             if (state.step === 1 || state.step === 2 || state.step === 3) render();
             return;
         }
-        if (path === 'personTab.person.handbook') state.personTab.person.grade = '';
+        if (/\.handbook$/.test(path)) setPath(state, path.replace(/\.handbook$/, '.grade'), '');
         if (/\.birth\.m$/.test(path) && String(readValue(el)) !== '1') setPath(state, path.replace(/\.m$/, '.d'), '');
         if (el.getAttribute('data-rerender')) render();
     });
