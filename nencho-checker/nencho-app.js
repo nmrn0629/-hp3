@@ -467,6 +467,7 @@
 
     app.addEventListener('input', function (e) {
         var el = e.target;
+        if (e.isComposing) return; // IME変換中は確定を待つ
         var path = el.getAttribute('data-path');
         if (!path || el.tagName === 'SELECT' || el.type === 'radio' || el.type === 'checkbox') return;
         setPath(state, path, readValue(el));
@@ -494,6 +495,17 @@
             return;
         }
         if (el.getAttribute('data-rerender')) render();
+    });
+
+    app.addEventListener('compositionend', function (e) {
+        var el = e.target;
+        var path = el.getAttribute && el.getAttribute('data-path');
+        if (!path || !el.getAttribute('data-money')) return;
+        var digits = R.normalizeDigits(el.value).replace(/[^\d]/g, '');
+        el.value = digits;
+        setPath(state, path, digits);
+        var hint = app.querySelector('[data-hint-for="' + path + '"]');
+        if (hint) hint.textContent = manHint(digits);
     });
 
     app.addEventListener('focusout', function (e) {
@@ -527,6 +539,8 @@
     });
 
     app.addEventListener('keydown', function (e) {
+        // 日本語IMEの変換確定Enter（isComposing / keyCode 229）は無視する
+        if (e.isComposing || e.keyCode === 229) return;
         if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type === 'text') {
             e.preventDefault();
             e.target.blur();
