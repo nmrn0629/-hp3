@@ -4,7 +4,7 @@
  * 方針：ネットワーク優先（常に最新を取りに行き、取れなければキャッシュを返す）。
  *       ファイルを更新したら CACHE_VERSION を上げると古いキャッシュが破棄される。
  */
-var CACHE_VERSION = 'nencho-v5';
+var CACHE_VERSION = 'nencho-v6';
 var PRECACHE = [
     './',
     './index.html',
