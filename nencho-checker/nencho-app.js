@@ -10,6 +10,7 @@
     if (!R || !app) return;
 
     var STEPS = ['ご本人', '配偶者', '扶養親族', '保険料・<br>掛金', '結果'];
+    var saveUiHook = function () {}; // 表示位置の保存（定義はファイル末尾）
     var man = R.man;
     function rules() { return R.RULES[state.year] || R.RULES[R.years[0]]; }
     var CURRENT_YEAR = new Date().getFullYear();
@@ -853,6 +854,7 @@
     });
 
     app.addEventListener('click', function (e) {
+        if (e.target.closest('.nencho-guide-link')) saveUiHook(); // 国税庁のページへ移動する直前の位置を覚える
         var jump = e.target.closest('[data-guide-jump]');
         if (jump) {
             var sec = document.getElementById('guide-' + jump.getAttribute('data-guide-jump'));
@@ -867,6 +869,7 @@
             state.view = tab.getAttribute('data-view');
             state.confirmReset = false;
             render();
+            saveUiHook();
             return;
         }
         var btn = e.target.closest('[data-action]');
@@ -928,5 +931,45 @@
     var ver = document.getElementById("app-version");
     if (ver) ver.textContent = "対応年分：" + R.years.map(function (y) { return R.RULES[y].label; }).join("・");
 
+    // ------------------------------------------------------------------
+    // 表示位置の復元
+    //   国税庁のページを開いて「戻る」で帰ってきたとき、ページが読み込み直されても
+    //   見ていたタブ・スクロール位置・絞り込みキーワードに戻れるようにする。
+    //   覚えるのは画面の表示位置だけで、入力した金額や生年月日は保存しない。
+    //   sessionStorage を使うので、タブ（アプリ）を閉じれば消える。
+    // ------------------------------------------------------------------
+    var UI_KEY = 'nencho-ui';
+    function saveUi() {
+        try {
+            sessionStorage.setItem(UI_KEY, JSON.stringify({
+                view: state.view,
+                guideFilter: state.guideFilter || '',
+                scrollY: Math.round(window.pageYOffset || 0)
+            }));
+        } catch (err) { /* 保存できない環境では何もしない */ }
+    }
+    function loadUi() {
+        try { return JSON.parse(sessionStorage.getItem(UI_KEY) || 'null'); } catch (err) { return null; }
+    }
+    saveUiHook = saveUi;
+    window.addEventListener('pagehide', saveUi);
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') saveUi(); });
+
+    var saved = loadUi();
+    if (saved && (saved.view === 'guide' || saved.view === 'person' || saved.view === 'household')) {
+        if (saved.view === 'guide' && !window.NenchoLinks) saved.view = 'household';
+        state.view = saved.view;
+        state.guideFilter = saved.guideFilter || '';
+    }
+
     render();
+
+    // スクロール位置の復元は「年末調整のしかた」タブのときだけ（他のタブは入力が消えているため先頭から）
+    if (saved && state.view === 'guide' && saved.scrollY > 0) {
+        try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (err) { /* 無視 */ }
+        var restore = function () { window.scrollTo(0, saved.scrollY); };
+        restore();
+        window.addEventListener('load', restore);                       // 画像・スタイルの読み込み後
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(restore); // フォント適用で高さが変わった後
+    }
 })();
