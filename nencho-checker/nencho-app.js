@@ -707,8 +707,41 @@
         return el.value;
     }
 
+    // ---- 金額欄：タップし直した直後は Backspace 1回で全消去（全選択もするので、そのまま打てば上書き） ----
+    app.addEventListener('focusin', function (e) {
+        var el = e.target;
+        if (!el.getAttribute || !el.getAttribute('data-money')) return;
+        el.setAttribute('data-fresh', '1');
+        el.setAttribute('data-just-focused', '1');
+        setTimeout(function () {
+            if (document.activeElement === el) { try { el.select(); } catch (err) { /* 非対応環境は無視 */ } }
+        }, 0);
+    });
+
+    // タップ／クリックでフォーカスした場合、ブラウザがクリック完了時に選択を解除するので選び直す。
+    // 2回目以降のタップ（カーソル位置を選びたい操作）は邪魔しない。
+    app.addEventListener('click', function (e) {
+        var el = e.target;
+        if (!el.getAttribute || !el.getAttribute('data-money') || !el.getAttribute('data-just-focused')) return;
+        el.removeAttribute('data-just-focused');
+        if (el.getAttribute('data-fresh') === '1') { try { el.select(); } catch (err) { /* 無視 */ } }
+    });
+
+    app.addEventListener('beforeinput', function (e) {
+        var el = e.target;
+        if (!el.getAttribute || !el.getAttribute('data-money')) return;
+        if (el.getAttribute('data-fresh') !== '1' || e.isComposing) return;
+        if (/^delete/.test(e.inputType || '') && el.value !== '') {
+            e.preventDefault();
+            el.value = '';
+            el.setAttribute('data-cleared', '1');
+            el.dispatchEvent(new Event('input', { bubbles: true })); // 状態・換算表示・判定を更新
+        }
+    });
+
     app.addEventListener('input', function (e) {
         var el = e.target;
+        if (el.removeAttribute) { el.removeAttribute('data-fresh'); el.removeAttribute('data-just-focused'); }
         if (e.isComposing) return; // IME変換中は確定を待つ
         var path = el.getAttribute('data-path');
         if (!path || el.tagName === 'SELECT' || el.type === 'radio' || el.type === 'checkbox') return;
@@ -755,6 +788,12 @@
         if (el.getAttribute && el.getAttribute('data-money')) {
             var u = el.getAttribute('data-money');
             el.value = fmtMoney(parseMoney(el.value, u), u);
+            el.removeAttribute('data-fresh');
+            // スクリプトで消去した場合はブラウザが change を出さないので、こちらで通知する
+            if (el.getAttribute('data-cleared')) {
+                el.removeAttribute('data-cleared');
+                if (el.value === '') el.dispatchEvent(new Event('change', { bubbles: true }));
+            }
         }
     });
 
@@ -812,6 +851,15 @@
             e.target.blur();
         }
     });
+
+    function syncHeaderHeight() {
+        var h = document.querySelector('.app-header');
+        if (h) document.documentElement.style.setProperty('--app-header-h', h.offsetHeight + 'px');
+    }
+    syncHeaderHeight();
+    window.addEventListener('resize', syncHeaderHeight);
+    window.addEventListener('load', syncHeaderHeight);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncHeaderHeight);
 
     var ver = document.getElementById("app-version");
     if (ver) ver.textContent = "対応年分：" + R.years.map(function (y) { return R.RULES[y].label; }).join("・");
