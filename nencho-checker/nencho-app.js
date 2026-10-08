@@ -545,6 +545,7 @@
         return '<div class="nencho-tabs" role="tablist">' +
             '<button type="button" role="tab" class="nencho-tab' + (state.view === 'household' ? ' is-active' : '') + '" data-view="household" aria-selected="' + (state.view === 'household') + '">世帯の控除額<small>本人・家族・保険料をまとめて計算</small></button>' +
             '<button type="button" role="tab" class="nencho-tab' + (state.view === 'person' ? ' is-active' : '') + '" data-view="person" aria-selected="' + (state.view === 'person') + '">一人ひとりの判定<small>この人は何に該当し、控除はいくらか</small></button>' +
+            (window.NenchoLinks ? '<button type="button" role="tab" class="nencho-tab' + (state.view === 'guide' ? ' is-active' : '') + '" data-view="guide" aria-selected="' + (state.view === 'guide') + '">年末調整のしかた<small>国税庁の該当ページを開く</small></button>' : '') +
             '</div>';
     }
 
@@ -655,7 +656,60 @@
             '</div>';
     }
 
+    // ---------------- 年末調整のしかた（国税庁ホームページへのリンク集） ----------------
+    function renderGuideView() {
+        var L = window.NenchoLinks;
+        var html = '<div class="nencho-panel nencho-guide">' +
+            '<h3>年末調整のしかた（' + esc(L.yearLabel) + '）</h3>' +
+            '<p class="nencho-lead">年末調整でよく確認する項目を、国税庁ホームページの該当ページにまとめました。ボタンを押すと国税庁のページが開きます。</p>' +
+            '<div class="nencho-field" style="margin-bottom:14px"><label class="nencho-label" for="guide-filter">キーワードで絞り込み</label>' +
+            '<input class="nencho-input" type="search" id="guide-filter" autocomplete="off" placeholder="例：配偶者、障害者、住宅、源泉徴収票" value="' + esc(state.guideFilter || '') + '"></div>' +
+            '<nav class="nencho-guide-toc" aria-label="目次">';
+        L.groups.forEach(function (g) {
+            html += '<button type="button" class="nencho-guide-chip" data-guide-jump="' + esc(g.id) + '">' + esc(g.title.replace(/（.*$/, '')) + '</button>';
+        });
+        html += '</nav><p class="nencho-empty" id="guide-empty" hidden>該当する項目がありません。</p>';
+        L.groups.forEach(function (g) {
+            html += '<section class="nencho-guide-group" id="guide-' + esc(g.id) + '">' +
+                '<h4 class="nencho-result-title">' + esc(g.title) + '</h4><div class="nencho-guide-list">';
+            g.items.forEach(function (it) {
+                html += '<a class="nencho-guide-link" href="' + esc(L.base + it.u) + '" target="_blank" rel="noopener noreferrer" data-search="' + esc((it.t + ' ' + it.d).toLowerCase()) + '">' +
+                    '<span class="g-title">' + esc(it.t) + '</span>' +
+                    '<span class="g-desc">' + esc(it.d) + '</span>' +
+                    '<span class="g-go" aria-hidden="true">国税庁 ↗</span></a>';
+            });
+            html += '</div></section>';
+        });
+        html += '<div class="nencho-note">リンク先はすべて国税庁ホームページ（www.nta.go.jp）です。' + esc(L.checkedAt) + '時点で全リンクが開けることを確認しています。' +
+            '国税庁側でページが移動・更新された場合は開けないことがあります。</div></div>';
+        return html;
+    }
+
+    function applyGuideFilter() {
+        var q = R.normalizeDigits(state.guideFilter || '').toLowerCase().trim();
+        var words = q ? q.split(/[\s　]+/) : [];
+        var any = false;
+        Array.prototype.forEach.call(app.querySelectorAll('.nencho-guide-group'), function (sec) {
+            var shown = 0;
+            Array.prototype.forEach.call(sec.querySelectorAll('.nencho-guide-link'), function (a) {
+                var text = a.getAttribute('data-search');
+                var hit = words.every(function (w) { return text.indexOf(w) >= 0; });
+                a.hidden = !hit;
+                if (hit) shown++;
+            });
+            sec.hidden = shown === 0;
+            if (shown) any = true;
+        });
+        var empty = document.getElementById('guide-empty');
+        if (empty) empty.hidden = any;
+    }
+
     function render() {
+        if (state.view === 'guide' && window.NenchoLinks) {
+            app.innerHTML = tabBar() + renderGuideView();
+            applyGuideFilter();
+            return;
+        }
         if (state.view === 'person') {
             app.innerHTML = tabBar() + clearBar() + renderPersonView();
             return;
@@ -741,6 +795,7 @@
 
     app.addEventListener('input', function (e) {
         var el = e.target;
+        if (el.id === 'guide-filter') { state.guideFilter = el.value; applyGuideFilter(); return; }
         if (el.removeAttribute) { el.removeAttribute('data-fresh'); el.removeAttribute('data-just-focused'); }
         if (e.isComposing) return; // IME変換中は確定を待つ
         var path = el.getAttribute('data-path');
@@ -798,6 +853,15 @@
     });
 
     app.addEventListener('click', function (e) {
+        var jump = e.target.closest('[data-guide-jump]');
+        if (jump) {
+            var sec = document.getElementById('guide-' + jump.getAttribute('data-guide-jump'));
+            if (sec && !sec.hidden) {
+                var headerH = (document.querySelector('.app-header') || {}).offsetHeight || 76;
+                window.scrollTo({ top: sec.getBoundingClientRect().top + window.pageYOffset - headerH - 12, behavior: 'smooth' });
+            }
+            return;
+        }
         var tab = e.target.closest('[data-view]');
         if (tab) {
             state.view = tab.getAttribute('data-view');
