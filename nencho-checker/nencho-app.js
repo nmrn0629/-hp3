@@ -106,6 +106,36 @@
         return n ? '= ' + n.toLocaleString('ja-JP') + '円' : '';
     }
 
+    /** 円単位の欄の下に出す万円換算（例："= 4.8万円"） */
+    function manHint(yen) {
+        var n = R.toInt(yen);
+        if (!n) return '';
+        var m = n / 10000;
+        return '= ' + (Number.isInteger(m) ? m : m.toFixed(1)) + '万円';
+    }
+
+    /**
+     * 欄ごとの入力単位。
+     *   収入・所得 … 万円（'man'）
+     *   保険料・掛金・住宅ローン控除 … 控除証明書の金額をそのまま転記するため円（'yen'）
+     */
+    function unitOfPath(path) {
+        return (/^insurance\./.test(path) || path === 'housingLoan') ? 'yen' : 'man';
+    }
+    function cleanMoneyText(v, unit) {
+        return unit === 'yen' ? R.normalizeDigits(v).replace(/[^\d]/g, '') : cleanManText(v);
+    }
+    function parseMoney(v, unit) {
+        return unit === 'yen' ? cleanMoneyText(v, 'yen') : parseMan(v);
+    }
+    function fmtMoney(yen, unit) {
+        if (unit !== 'yen') return fmtMan(yen);
+        return (yen === '' || yen == null) ? '' : R.toInt(yen).toLocaleString('ja-JP');
+    }
+    function hintMoney(yen, unit) {
+        return unit === 'yen' ? manHint(yen) : yenHint(yen);
+    }
+
     function wareki(y) {
         if (y >= 2020) return '令和' + (y - 2018) + '年';
         if (y === 2019) return '平成31年／令和元年';
@@ -172,14 +202,15 @@
     // ------------------------------------------------------------------
     function moneyField(path, label, help, placeholder) {
         var v = getPath(state, path);
+        var unit = unitOfPath(path);
         return '<div class="nencho-field">' +
             '<label class="nencho-label" for="f-' + path.replace(/\./g, '-') + '">' + label +
             (help ? '<small>' + help + '</small>' : '') + '</label>' +
             '<div class="nencho-money">' +
-            '<input class="nencho-input" type="text" inputmode="decimal" autocomplete="off" id="f-' + path.replace(/\./g, '-') + '" ' +
-            'data-path="' + path + '" data-money="1" value="' + esc(fmtMan(v)) + '" placeholder="' + esc(placeholder || '0') + '">' +
-            '<span class="unit">万円</span></div>' +
-            '<div class="nencho-money-hint" data-hint-for="' + path + '">' + yenHint(v) + '</div>' +
+            '<input class="nencho-input" type="text" inputmode="' + (unit === 'yen' ? 'numeric' : 'decimal') + '" autocomplete="off" id="f-' + path.replace(/\./g, '-') + '" ' +
+            'data-path="' + path + '" data-money="' + unit + '" value="' + esc(fmtMoney(v, unit)) + '" placeholder="' + esc(placeholder || '0') + '">' +
+            '<span class="unit">' + (unit === 'yen' ? '円' : '万円') + '</span></div>' +
+            '<div class="nencho-money-hint" data-hint-for="' + path + '">' + hintMoney(v, unit) + '</div>' +
             '</div>';
     }
 
@@ -413,7 +444,7 @@
         var lifeItem = result.items.filter(function (i) { return i.key === 'life'; })[0];
         var tokurei = lifeItem && lifeItem.detail && lifeItem.detail.generalNewCap > rules.lifeInsurance.newCap;
         return '<h3>保険料・掛金など</h3>' +
-            '<p class="nencho-lead">お手元の控除証明書の金額（1年間の支払見込額）を入力してください。該当がない項目は空欄のままで結構です。</p>' +
+            '<p class="nencho-lead">お手元の控除証明書の金額（1年間の支払見込額）を<strong>円単位</strong>でそのまま入力してください。該当がない項目は空欄のままで結構です。</p>' +
             '<h4 class="nencho-result-title">社会保険料・共済掛金</h4>' +
             moneyField('insurance.social', '社会保険料（ご自身で支払った分）', '国民年金・国民健康保険など。給与から天引きされている分は会社側で集計されるため、ここには含めません。') +
             moneyField('insurance.mutual', '小規模企業共済等掛金（iDeCo など）', 'iDeCo（個人型確定拠出年金）・小規模企業共済・心身障害者扶養共済の掛金。') +
@@ -672,7 +703,7 @@
     // ------------------------------------------------------------------
     function readValue(el) {
         if (el.type === 'checkbox') return el.checked;
-        if (el.getAttribute('data-money')) return parseMan(el.value);
+        if (el.getAttribute('data-money')) return parseMoney(el.value, el.getAttribute('data-money'));
         return el.value;
     }
 
@@ -684,7 +715,7 @@
         setPath(state, path, readValue(el));
         if (el.getAttribute('data-money')) {
             var hint = app.querySelector('[data-hint-for="' + path + '"]');
-            if (hint) hint.textContent = yenHint(getPath(state, path));
+            if (hint) hint.textContent = hintMoney(getPath(state, path), el.getAttribute('data-money'));
         }
         if (state.view === 'person') refreshPersonResult();
     });
@@ -695,7 +726,7 @@
         if (!path) return;
         setPath(state, path, readValue(el));
         if (el.getAttribute('data-money')) {
-            el.value = fmtMan(getPath(state, path));
+            el.value = fmtMoney(getPath(state, path), el.getAttribute('data-money'));
             if (state.view === 'person') { refreshPersonResult(); return; }
             // 金額の変更は判定表示に影響するので、人物カード等の表示を更新
             if (state.step === 1 || state.step === 2 || state.step === 3) render();
@@ -710,17 +741,21 @@
         var el = e.target;
         var path = el.getAttribute && el.getAttribute('data-path');
         if (!path || !el.getAttribute('data-money')) return;
-        var text = cleanManText(el.value);
+        var unit = el.getAttribute('data-money');
+        var text = cleanMoneyText(el.value, unit);
         el.value = text;
-        setPath(state, path, parseMan(text));
+        setPath(state, path, parseMoney(text, unit));
         var hint = app.querySelector('[data-hint-for="' + path + '"]');
-        if (hint) hint.textContent = yenHint(getPath(state, path));
+        if (hint) hint.textContent = hintMoney(getPath(state, path), unit);
         if (state.view === 'person') refreshPersonResult();
     });
 
     app.addEventListener('focusout', function (e) {
         var el = e.target;
-        if (el.getAttribute && el.getAttribute('data-money')) el.value = fmtMan(parseMan(el.value));
+        if (el.getAttribute && el.getAttribute('data-money')) {
+            var u = el.getAttribute('data-money');
+            el.value = fmtMoney(parseMoney(el.value, u), u);
+        }
     });
 
     app.addEventListener('click', function (e) {
