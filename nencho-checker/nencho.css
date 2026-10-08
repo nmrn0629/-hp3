@@ -904,6 +904,36 @@ button, input, select { font-family: inherit; }
     padding-top: 3px;
 }
 
+.nencho-top-btn {
+    position: fixed;
+    right: 16px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    z-index: 8;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 12px 18px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s, background 0.2s ease;
+}
+
+.nencho-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.nencho-top-btn:hover {
+    background: var(--color-primary-dark);
+}
+
 /* ---- 一人ひとりの判定 ---- */
 .nencho-person-layout {
     display: grid;
@@ -1045,7 +1075,7 @@ button, input, select { font-family: inherit; }
 
 /* ---- 印刷 ---- */
 @media print {
-    .app-header, .app-footer, .nencho-nav, .nencho-steps, .nencho-tabs, .nencho-clearbar {
+    .app-header, .app-footer, .nencho-nav, .nencho-steps, .nencho-tabs, .nencho-clearbar, .nencho-top-btn {
         display: none !important;
     }
 

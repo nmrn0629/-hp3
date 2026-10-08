@@ -682,7 +682,8 @@
             html += '</div></section>';
         });
         html += '<div class="nencho-note">リンク先はすべて国税庁ホームページ（www.nta.go.jp）です。' + esc(L.checkedAt) + '時点で全リンクが開けることを確認しています。' +
-            '国税庁側でページが移動・更新された場合は開けないことがあります。</div></div>';
+            '国税庁側でページが移動・更新された場合は開けないことがあります。</div></div>' +
+            '<button type="button" class="nencho-top-btn" data-scroll-top="1" aria-label="一番上へ戻る"><span aria-hidden="true">↑</span> 一番上へ</button>';
         return html;
     }
 
@@ -705,10 +706,18 @@
         if (empty) empty.hidden = any;
     }
 
+    /** 「一番上へ」ボタンは少しスクロールしたら表示する */
+    function syncTopButton() {
+        var btn = app.querySelector('.nencho-top-btn');
+        if (btn) btn.classList.toggle('is-visible', (window.pageYOffset || 0) > 300);
+    }
+    window.addEventListener('scroll', syncTopButton, { passive: true });
+
     function render() {
         if (state.view === 'guide' && window.NenchoLinks) {
             app.innerHTML = tabBar() + renderGuideView();
             applyGuideFilter();
+            syncTopButton();
             return;
         }
         if (state.view === 'person') {
@@ -854,6 +863,10 @@
     });
 
     app.addEventListener('click', function (e) {
+        if (e.target.closest('[data-scroll-top]')) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
         if (e.target.closest('.nencho-guide-link')) saveUiHook(); // 国税庁のページへ移動する直前の位置を覚える
         var jump = e.target.closest('[data-guide-jump]');
         if (jump) {
