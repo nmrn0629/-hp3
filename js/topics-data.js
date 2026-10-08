@@ -1,6 +1,24 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/10/08",
+        "dateType": "掲載日",
+        "content": "所得税徴収高計算書（源泉所得税の納付書）の送付に関するお知らせ",
+        "url": "https://www.nta.go.jp/users/gensen/index.htm"
+    },
+    {
+        "date": "2026/10/06",
+        "dateType": "掲載日",
+        "content": "「振替納税結果表示」画面に「振替不能」等と表示された方へ",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20261006_nozei.htm"
+    },
+    {
+        "date": "2026/10/05",
+        "dateType": "掲載日",
+        "content": "税務相談チャットボットで年末調整（令和８年分）の相談を開始しました",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/chatbot/index.htm"
+    },
+    {
         "date": "2026/10/02",
         "dateType": "掲載日",
         "content": "外部委託による記帳指導について、「会計ソフト方式（コンパクト型）」の概要等を掲載しました",
@@ -101,7 +119,10 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "電子的控除証明書等作成ソフト等で作成した認定NPO法人等に対する寄附金に係る「寄附金受領証明書」に表示される文言の読み替えについて",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260826.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/08/19",
         "dateType": "掲載日",
@@ -119,10 +140,7 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "e-Tax等による法定調書の提出が義務化されています（チラシ）",
         "url": "https://www.nta.go.jp/publication/pamph/hotei/hikari_gimu.pdf"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/08/19",
         "dateType": "掲載日",
