@@ -61,7 +61,7 @@
     function fmt(n) { return R.toInt(n).toLocaleString('ja-JP'); }
 
     function fmtInput(v) {
-        var s = String(v == null ? '' : v).replace(/[^\d]/g, '');
+        var s = R.normalizeDigits(v).replace(/[^\d]/g, '');
         return s ? Number(s).toLocaleString('ja-JP') : '';
     }
 
@@ -409,7 +409,11 @@
         html += '<div class="nencho-nav">' +
             '<button type="button" class="nencho-btn ghost" data-action="back">入力内容を修正する</button>' +
             '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
-            '<button type="button" class="nencho-btn text" data-action="reset">最初からやり直す</button>' +
+            (state.confirmReset
+                ? '<span class="nencho-confirm">入力内容をすべて消去しますか？ ' +
+                  '<button type="button" class="nencho-btn danger" data-action="reset-confirm">はい、消去する</button>' +
+                  '<button type="button" class="nencho-btn text" data-action="reset-cancel">キャンセル</button></span>'
+                : '<button type="button" class="nencho-btn text" data-action="reset">最初からやり直す</button>') +
             '<button type="button" class="nencho-btn primary" data-action="print">印刷・PDF保存</button>' +
             '</div></div>';
         return html;
@@ -432,6 +436,7 @@
     }
 
     function goTo(step) {
+        state.confirmReset = false;
         state.step = Math.max(0, Math.min(STEPS.length - 1, step));
         render();
         var top = app.getBoundingClientRect().top + window.pageYOffset - 90;
@@ -456,7 +461,7 @@
     // ------------------------------------------------------------------
     function readValue(el) {
         if (el.type === 'checkbox') return el.checked;
-        if (el.getAttribute('data-money')) return String(el.value).replace(/[^\d]/g, '');
+        if (el.getAttribute('data-money')) return R.normalizeDigits(el.value).replace(/[^\d]/g, '');
         return el.value;
     }
 
@@ -508,12 +513,9 @@
                 render();
             }
             else if (action === 'print') window.print();
-            else if (action === 'reset') {
-                if (window.confirm('入力内容をすべて消去して最初からやり直しますか？')) {
-                    state = initialState();
-                    goTo(0);
-                }
-            }
+            else if (action === 'reset') { state.confirmReset = true; render(); }
+            else if (action === 'reset-cancel') { state.confirmReset = false; render(); }
+            else if (action === 'reset-confirm') { state = initialState(); goTo(0); }
             return;
         }
         var stepEl = e.target.closest('.nencho-step.is-done');

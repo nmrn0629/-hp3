@@ -183,8 +183,17 @@
     // ------------------------------------------------------------------
     // ユーティリティ
     // ------------------------------------------------------------------
+    /** 全角数字・全角記号を半角に正規化する（例："１，２３４" → "1,234"） */
+    function normalizeDigits(v) {
+        return String(v == null ? '' : v)
+            .replace(/[０-９]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+            .replace(/[，、]/g, ',')
+            .replace(/[．。]/g, '.')
+            .replace(/[－ー−]/g, '-');
+    }
+
     function toInt(v) {
-        var n = Number(String(v == null ? '' : v).replace(/[^\d.-]/g, ''));
+        var n = Number(normalizeDigits(v).replace(/[^\d.-]/g, ''));
         return isFinite(n) ? Math.max(0, Math.floor(n)) : 0;
     }
 
@@ -669,6 +678,7 @@
         RULES: RULES,
         years: Object.keys(RULES).map(Number).sort(function (a, b) { return b - a; }),
         toInt: toInt,
+        normalizeDigits: normalizeDigits,
         ageAtYearEnd: ageAtYearEnd,
         salaryIncome: salaryIncome,
         salaryDeductionAmount: salaryDeductionAmount,

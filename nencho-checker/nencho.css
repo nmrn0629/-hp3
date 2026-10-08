@@ -506,6 +506,30 @@ button, input, select { font-family: inherit; }
     padding-right: 10px;
 }
 
+.nencho-btn.danger {
+    background: #c0392b;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 0.92rem;
+}
+
+.nencho-btn.danger:hover {
+    background: #a93226;
+}
+
+.nencho-confirm {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    background: #fdf1ef;
+    color: #7a2e25;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
 /* ---- 結果 ---- */
 .nencho-total {
     text-align: center;
