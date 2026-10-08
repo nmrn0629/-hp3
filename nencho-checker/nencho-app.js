@@ -683,7 +683,7 @@
         });
         html += '<div class="nencho-note">リンク先はすべて国税庁ホームページ（www.nta.go.jp）です。' + esc(L.checkedAt) + '時点で全リンクが開けることを確認しています。' +
             '国税庁側でページが移動・更新された場合は開けないことがあります。</div></div>' +
-            '<button type="button" class="nencho-top-btn" data-scroll-top="1" aria-label="一番上へ戻る"><span aria-hidden="true">↑</span> 一番上へ</button>';
+            '<button type="button" class="nencho-top-btn" data-scroll-top="1" aria-label="一番上へ戻る" title="一番上へ戻る"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 5 L21 19 H3 Z" fill="currentColor"/></svg></button>';
         return html;
     }
 
