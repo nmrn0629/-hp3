@@ -107,8 +107,8 @@
     }
 
     function birthToInput(b) {
-        if (!b || !b.y || !b.m || !b.d) return null;
-        return { y: Number(b.y), m: Number(b.m), d: Number(b.d) };
+        if (!b || !b.y) return null;
+        return { y: Number(b.y), m: Number(b.m) || 0, d: Number(b.d) || 0 };
     }
 
     function isMarried() { return state.self.marital === 'married'; }
@@ -161,6 +161,8 @@
 
     function dateField(path, label, help) {
         var b = getPath(state, path) || emptyBirth();
+        var isJan = String(b.m) === '1';
+        var dayDisabled = !isJan;
         var years = '';
         for (var y = CURRENT_YEAR; y >= 1915; y--) {
             years += '<option value="' + y + '"' + (String(b.y) === String(y) ? ' selected' : '') + '>' +
@@ -171,15 +173,24 @@
             months += '<option value="' + m + '"' + (String(b.m) === String(m) ? ' selected' : '') + '>' + m + '月</option>';
         }
         for (var d = 1; d <= 31; d++) {
-            days += '<option value="' + d + '"' + (String(b.d) === String(d) ? ' selected' : '') + '>' + d + '日</option>';
+            days += '<option value="' + d + '"' + (isJan && String(b.d) === String(d) ? ' selected' : '') + '>' + d + '日</option>';
+        }
+        var msg = '';
+        if (b.y && R.birthNeedsDay(b)) {
+            msg = '<div class="nencho-date-warn">1月生まれは「1日」かどうかで' + R.RULES[state.year].judgeDateLabel + '時点の年齢が1歳変わります。日を入力してください（未入力の間は1月2日以降生まれとして判定）。</div>';
+        } else if (b.y && !b.m) {
+            msg = '<div class="nencho-date-note">年だけで判定できます。1月1日生まれの方のみ、月（1月）と日（1日）も選んでください。</div>';
+        } else if (b.y && isJan && String(b.d) === '1') {
+            msg = '<div class="nencho-date-note">1月1日生まれのため、' + R.RULES[state.year].judgeDateLabel + 'に1つ上の年齢として判定します。</div>';
         }
         return '<div class="nencho-field">' +
             '<span class="nencho-label">' + label + (help ? '<small>' + help + '</small>' : '') + '</span>' +
             '<div class="nencho-date">' +
             '<select class="nencho-select year" data-path="' + path + '.y" data-rerender="1" aria-label="生年"><option value="">年を選択</option>' + years + '</select>' +
-            '<select class="nencho-select month" data-path="' + path + '.m" data-rerender="1" aria-label="月"><option value="">月</option>' + months + '</select>' +
-            '<select class="nencho-select day" data-path="' + path + '.d" data-rerender="1" aria-label="日"><option value="">日</option>' + days + '</select>' +
-            '</div></div>';
+            '<select class="nencho-select month" data-path="' + path + '.m" data-rerender="1" aria-label="月（任意）"><option value="">月（任意）</option>' + months + '</select>' +
+            '<select class="nencho-select day' + (dayDisabled ? ' is-disabled' : '') + '" data-path="' + path + '.d" data-rerender="1" aria-label="日（1月生まれのみ）"' +
+            (dayDisabled ? ' disabled title="1月生まれの場合のみ入力します"' : '') + '><option value="">日</option>' + days + '</select>' +
+            '</div>' + msg + '</div>';
     }
 
     function choiceField(path, label, options, help) {
@@ -628,6 +639,7 @@
             return;
         }
         if (path === 'personTab.person.handbook') state.personTab.person.grade = '';
+        if (/\.birth\.m$/.test(path) && String(readValue(el)) !== '1') setPath(state, path.replace(/\.m$/, '.d'), '');
         if (el.getAttribute('data-rerender')) render();
     });
 

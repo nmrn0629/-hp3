@@ -208,14 +208,21 @@
      * 年齢（その年の12月31日時点）。
      * 年齢計算ニ関スル法律により誕生日の前日に加齢するため、
      * 1月1日生まれは前年12月31日に満年齢に達する。
-     * → 翌年1月1日時点の通常計算と同値になる。
+     * → 同じ年に生まれた人は「1月1日生まれ」だけが1歳上になり、それ以外は全員同じ年齢。
+     * したがって判定に必要なのは「年」と「1月1日生まれか否か」のみ。
+     *   - 月・日が未入力 … 1月2日以降生まれとして扱う（= year - birth.y）
+     *   - 1月で日が未入力 … 同上（UI 側で警告を出す）
      */
     function ageAtYearEnd(birth, year) {
-        if (!birth || !birth.y || !birth.m || !birth.d) return null;
-        var age = (year + 1) - birth.y;
-        // 翌年1月1日より誕生日(月日)が後なら未到達
-        if (birth.m > 1 || (birth.m === 1 && birth.d > 1)) age -= 1;
-        return age;
+        if (!birth || !birth.y) return null;
+        var y = Number(birth.y), m = Number(birth.m) || 0, d = Number(birth.d) || 0;
+        var isJan1 = (m === 1 && d === 1);
+        return isJan1 ? (year + 1) - y : year - y;
+    }
+
+    /** 生年月日の入力が年齢判定に十分か（1月生まれで日が未入力なら要確認） */
+    function birthNeedsDay(birth) {
+        return !!(birth && birth.y && Number(birth.m) === 1 && !Number(birth.d));
     }
 
     /** 給与所得（所得金額調整控除 適用前）。年末調整等のための給与所得控除後の給与等の金額の表（別表第五）に準拠。 */
@@ -860,6 +867,7 @@
         toInt: toInt,
         normalizeDigits: normalizeDigits,
         ageAtYearEnd: ageAtYearEnd,
+        birthNeedsDay: birthNeedsDay,
         salaryIncome: salaryIncome,
         salaryDeductionAmount: salaryDeductionAmount,
         lifeNewFormula: lifeNewFormula,
