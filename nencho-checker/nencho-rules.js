@@ -674,8 +674,188 @@
         };
     }
 
+    // ------------------------------------------------------------------
+    // 障害者手帳等 → 所得税法上の障害者区分（所得税法施行令第10条、タックスアンサー No.1160）
+    // ------------------------------------------------------------------
+    var DISABILITY_HANDBOOKS = [
+        { key: 'none', label: '手帳・認定なし' },
+        { key: 'shintai', label: '身体障害者手帳', grades: [
+            { v: '1', label: '1級', kind: 'special' }, { v: '2', label: '2級', kind: 'special' },
+            { v: '3', label: '3級', kind: 'general' }, { v: '4', label: '4級', kind: 'general' },
+            { v: '5', label: '5級', kind: 'general' }, { v: '6', label: '6級', kind: 'general' }
+        ] },
+        { key: 'seishin', label: '精神障害者保健福祉手帳', grades: [
+            { v: '1', label: '1級', kind: 'special' }, { v: '2', label: '2級', kind: 'general' }, { v: '3', label: '3級', kind: 'general' }
+        ] },
+        { key: 'ryoiku', label: '療育手帳（愛の手帳・みどりの手帳など）', grades: [
+            { v: 'A', label: '重度（A・Ⓐ・1度・2度 など）', kind: 'special' },
+            { v: 'B', label: '中度・軽度（B・3度・4度 など）', kind: 'general' }
+        ] },
+        { key: 'sensho', label: '戦傷病者手帳', grades: [
+            { v: 'special', label: '特別項症〜第3項症', kind: 'special' },
+            { v: 'other', label: '第4項症以下・款症', kind: 'general' }
+        ] },
+        { key: 'genbaku', label: '原子爆弾被爆者（厚生労働大臣の認定）', kind: 'special' },
+        { key: 'netakiri', label: '常に就床を要し複雑な介護を要する（寝たきり・引き続き6か月以上）', kind: 'special' },
+        { key: 'kouken', label: '精神上の障害により事理を弁識する能力を欠く常況（成年被後見人など）', kind: 'special' },
+        { key: 'nintei', label: '65歳以上で市町村長等の認定を受けている（障害者控除対象者認定書）', grades: [
+            { v: 'general', label: '障害者に準ずる認定', kind: 'general' },
+            { v: 'special', label: '特別障害者に準ずる認定', kind: 'special' }
+        ] }
+    ];
+
+    function classifyDisability(handbook, grade) {
+        var hb = null;
+        for (var i = 0; i < DISABILITY_HANDBOOKS.length; i++) {
+            if (DISABILITY_HANDBOOKS[i].key === handbook) { hb = DISABILITY_HANDBOOKS[i]; break; }
+        }
+        if (!hb || hb.key === 'none') return { kind: 'none', label: '該当なし', basis: '' };
+        if (hb.grades) {
+            for (var j = 0; j < hb.grades.length; j++) {
+                if (hb.grades[j].v === String(grade)) {
+                    return { kind: hb.grades[j].kind, label: hb.grades[j].kind === 'special' ? '特別障害者' : '一般の障害者',
+                        basis: hb.label + ' ' + hb.grades[j].label };
+                }
+            }
+            return { kind: 'none', label: '等級を選択してください', basis: hb.label, pending: true };
+        }
+        return { kind: hb.kind, label: hb.kind === 'special' ? '特別障害者' : '一般の障害者', basis: hb.label };
+    }
+
+    // ------------------------------------------------------------------
+    // 家族一人ひとりの判定
+    // ------------------------------------------------------------------
+    function judgePerson(input) {
+        var year = Number(input.year) || 2026;
+        var rules = RULES[year] || RULES[2026];
+        var self = input.self || {};
+        var p = input.person || {};
+        var limit = rules.dependentIncomeLimit;
+        var specRelMax = rules.specificRelative[rules.specificRelative.length - 1][0];
+        var spouseSpecialMax = rules.spouseSpecial[rules.spouseSpecial.length - 1][0];
+
+        var selfIncome = salaryIncome(self.salary, rules) + toInt(self.otherIncome);
+        var selfSalary = toInt(self.salary);
+        var income = salaryIncome(p.salary, rules) + toInt(p.otherIncome);
+        var age = ageAtYearEnd(p.birth, year);
+        var cohabiting = p.cohabiting !== false;
+        var dis = classifyDisability(p.handbook, p.grade);
+        var excluded = [];
+        if (p.businessEmployee) excluded.push('青色事業専従者として給与を受けている（または白色事業専従者）');
+        if (p.claimedByOther) excluded.push('他の人の同一生計配偶者・扶養親族として申告されている');
+        var isExcluded = excluded.length > 0;
+
+        var categories = [];
+        var deductions = [];
+        var notes = [];
+        var adjReasons = [];
+        function cat(key, label, ok, reason, form) { categories.push({ key: key, label: label, ok: !!ok, reason: reason || '', form: form || '' }); return !!ok; }
+        function ded(name, amount, applied, note, form) { deductions.push({ name: name, amount: amount || 0, applied: !!applied, note: note || '', form: form || '' }); }
+
+        var disCohab = dis.kind === 'special' && cohabiting;
+        var disLabelFull = dis.kind === 'special' ? (disCohab ? '同居特別障害者' : '特別障害者') : (dis.kind === 'general' ? '一般の障害者' : '該当なし');
+        var disAmount = disabilityAmount(dis.kind, cohabiting, rules);
+
+        if (p.relation === 'spouse') {
+            var douitsu = cat('douitsu', '同一生計配偶者', !isExcluded && income <= limit,
+                isExcluded ? excluded.join('、') : (income <= limit ? '合計所得金額 ' + yen(income) + '（' + man(limit) + '以下）' : '合計所得金額 ' + yen(income) + ' が' + man(limit) + 'を超える'));
+            var koujo = cat('koujo', '控除対象配偶者', douitsu && selfIncome <= 10000000,
+                !douitsu ? '同一生計配偶者に該当しない' : (selfIncome <= 10000000 ? 'ご本人の合計所得金額 ' + yen(selfIncome) + '（1,000万円以下）' : 'ご本人の合計所得金額が1,000万円を超える'),
+                '給与所得者の配偶者控除等申告書');
+            var roujin = cat('roujin', '老人控除対象配偶者', koujo && age != null && age >= 70,
+                age == null ? '生年月日未入力' : (koujo && age >= 70 ? rules.judgeDateLabel + '時点 ' + age + '歳' : (koujo ? rules.judgeDateLabel + '時点 ' + age + '歳（70歳未満）' : '控除対象配偶者に該当しない')));
+            cat('gensen', '源泉控除対象配偶者', !isExcluded && selfIncome <= 9000000 && income <= 950000,
+                isExcluded ? excluded.join('、') : (selfIncome > 9000000 ? 'ご本人の合計所得金額が900万円を超える' : (income <= 950000 ? '配偶者の所得95万円以下・ご本人の所得900万円以下' : '配偶者の合計所得金額が95万円を超える')),
+                '給与所得者の扶養控除等（異動）申告書 A欄');
+            var tokubetsu = cat('tokubetsu', '配偶者特別控除の対象', !isExcluded && income > limit && income <= spouseSpecialMax && selfIncome <= 10000000,
+                isExcluded ? excluded.join('、') : (income <= limit ? '所得' + man(limit) + '以下のため配偶者控除の対象（特別控除ではない）' : (income > spouseSpecialMax ? '合計所得金額が' + man(spouseSpecialMax) + 'を超える' : (selfIncome > 10000000 ? 'ご本人の合計所得金額が1,000万円を超える' : '配偶者の合計所得金額 ' + yen(income) + '（' + man(limit) + '超' + man(spouseSpecialMax) + '以下）'))),
+                '給与所得者の配偶者控除等申告書');
+
+            if (koujo) {
+                var amt = lookup(rules.spouse, selfIncome, roujin ? 2 : 1);
+                ded(roujin ? '配偶者控除（老人控除対象配偶者）' : '配偶者控除', amt, amt > 0,
+                    'ご本人の合計所得金額 ' + yen(selfIncome) + '、配偶者の合計所得金額 ' + yen(income), '配偶者控除等申告書');
+            } else {
+                ded('配偶者控除', 0, false, !douitsu ? '同一生計配偶者に該当しない' : 'ご本人の合計所得金額が1,000万円を超えるため適用なし', '');
+            }
+            if (tokubetsu) {
+                var col = selfIncome <= 9000000 ? 1 : selfIncome <= 9500000 ? 2 : 3;
+                var amt2 = lookup(rules.spouseSpecial, income, col);
+                ded('配偶者特別控除', amt2, amt2 > 0, '配偶者の合計所得金額 ' + yen(income) + '、ご本人の合計所得金額 ' + yen(selfIncome), '配偶者控除等申告書');
+            } else {
+                ded('配偶者特別控除', 0, false, income <= limit && !isExcluded ? '配偶者控除の対象のため特別控除は適用なし' : '対象外', '');
+            }
+            if (dis.kind !== 'none') {
+                ded('障害者控除（' + disLabelFull + '）', douitsu ? disAmount : 0, douitsu && disAmount > 0,
+                    douitsu ? dis.basis + '。同一生計配偶者のため適用（ご本人の所得制限なし）' : '同一生計配偶者（所得' + man(limit) + '以下）に該当しないため適用なし',
+                    douitsu ? '扶養控除等（異動）申告書 C欄' : '');
+            }
+            if (douitsu && dis.kind === 'special') adjReasons.push('特別障害者である同一生計配偶者');
+            notes.push('配偶者は扶養控除・特定親族特別控除の対象にはなりません（配偶者控除・配偶者特別控除で判定します）。内縁関係の方は対象外です。');
+        } else {
+            var fuyou = cat('fuyou', '扶養親族', !isExcluded && income <= limit,
+                isExcluded ? excluded.join('、') : (income <= limit ? '合計所得金額 ' + yen(income) + '（' + man(limit) + '以下）、生計を一にする親族' : '合計所得金額 ' + yen(income) + ' が' + man(limit) + 'を超える'));
+            var ageText = age == null ? '生年月日未入力' : rules.judgeDateLabel + '時点 ' + age + '歳';
+            var under16 = fuyou && age != null && age < 16;
+            cat('nensho', '年少扶養親族（16歳未満）', under16, fuyou ? ageText : '扶養親族に該当しない', '扶養控除等（異動）申告書「住民税に関する事項」');
+            var koujoFuyou = cat('koujoFuyou', '控除対象扶養親族（16歳以上）', fuyou && age != null && age >= 16, fuyou ? ageText : '扶養親族に該当しない', '扶養控除等（異動）申告書 B欄');
+            var tokutei = cat('tokutei', '特定扶養親族（19歳以上23歳未満）', koujoFuyou && age >= 19 && age < 23, koujoFuyou ? ageText : '控除対象扶養親族に該当しない');
+            var roujinF = cat('roujinF', '老人扶養親族（70歳以上）', koujoFuyou && age >= 70, koujoFuyou ? ageText : '控除対象扶養親族に該当しない');
+            var doukyo = cat('doukyo', '同居老親等', roujinF && p.relation === 'parent' && cohabiting,
+                !roujinF ? '老人扶養親族に該当しない' : (p.relation !== 'parent' ? 'ご本人または配偶者の直系尊属（父母・祖父母）ではない' : (cohabiting ? '70歳以上の直系尊属と同居' : '別居のため同居老親等以外')));
+            var tokuteiShinzoku = cat('tokuteiShinzoku', '特定親族（特定親族特別控除）', !isExcluded && age != null && age >= 19 && age < 23 && income > limit && income <= specRelMax,
+                isExcluded ? excluded.join('、') : (age == null ? '生年月日未入力' : (age < 19 || age >= 23 ? ageText + '（19歳以上23歳未満ではない）' : (income <= limit ? '所得' + man(limit) + '以下のため扶養親族（特定扶養親族）に該当' : (income > specRelMax ? '合計所得金額が' + man(specRelMax) + 'を超える' : '合計所得金額 ' + yen(income) + '（' + man(limit) + '超' + man(specRelMax) + '以下）')))),
+                '給与所得者の特定親族特別控除申告書');
+            cat('gensenShinzoku', '源泉控除対象親族（扶養控除等申告書に記載）', koujoFuyou || (tokuteiShinzoku && income <= 1000000),
+                koujoFuyou ? '控除対象扶養親族' : (tokuteiShinzoku ? (income <= 1000000 ? '所得100万円以下の特定親族' : '特定親族だが所得100万円超（年末調整時に特定親族特別控除申告書で申告）') : '該当なし'),
+                '扶養控除等（異動）申告書 B欄');
+
+            if (koujoFuyou) {
+                var fAmt = doukyo ? rules.dependent.elderlyParent : roujinF ? rules.dependent.elderly : tokutei ? rules.dependent.specific : rules.dependent.general;
+                var fLabel = doukyo ? '同居老親等' : roujinF ? '老人扶養親族' : tokutei ? '特定扶養親族' : '一般の控除対象扶養親族';
+                ded('扶養控除（' + fLabel + '）', fAmt, true, ageText + '、合計所得金額 ' + yen(income), '扶養控除等（異動）申告書 B欄');
+            } else {
+                ded('扶養控除', 0, false, under16 ? '16歳未満のため扶養控除なし（住民税の非課税判定・所得金額調整控除・生命保険料控除の特例には影響）' : (fuyou ? '生年月日未入力' : '扶養親族に該当しない'), '');
+            }
+            if (tokuteiShinzoku) {
+                var sAmt = lookup(rules.specificRelative, income);
+                ded('特定親族特別控除', sAmt, sAmt > 0, ageText + '、合計所得金額 ' + yen(income), '特定親族特別控除申告書');
+            } else {
+                ded('特定親族特別控除', 0, false, categories.filter(function (c) { return c.key === 'tokuteiShinzoku'; })[0].reason, '');
+            }
+            if (dis.kind !== 'none') {
+                ded('障害者控除（' + disLabelFull + '）', fuyou ? disAmount : 0, fuyou && disAmount > 0,
+                    fuyou ? dis.basis + '。扶養親族のため適用（16歳未満でも可）' : '扶養親族（所得' + man(limit) + '以下）に該当しないため適用なし。特定親族には障害者控除はありません',
+                    fuyou ? '扶養控除等（異動）申告書 C欄' : '');
+            }
+            if (fuyou && age != null && age < 23) {
+                adjReasons.push('23歳未満の扶養親族');
+                if (rules.lifeInsurance.generalNewCapWithYoungDependent) notes.push(rules.label + 'は、23歳未満の扶養親族がいる場合に一般生命保険料（新契約）の控除限度額が6万円に引き上げられます（保険料控除申告書に記載）。');
+            }
+            if (fuyou && dis.kind === 'special') adjReasons.push('特別障害者である扶養親族');
+            if (fuyou && age != null && age < 16) notes.push('16歳未満の扶養親族は扶養控除等（異動）申告書の「住民税に関する事項」欄に記載します。');
+        }
+        if (adjReasons.length) {
+            notes.unshift('所得金額調整控除（子ども等）：この方は要件「' + adjReasons.join('」「') + '」に該当します。' +
+                (selfSalary > 8500000
+                    ? 'ご本人の給与収入が850万円超のため対象です（控除額 ' + yen(Math.floor((Math.min(selfSalary, rules.incomeAdjustment.cap) - rules.incomeAdjustment.threshold) * rules.incomeAdjustment.rate)) + '、所得金額調整控除申告書の提出が必要）。'
+                    : 'ご本人の給与収入が850万円を超える場合に最大15万円が給与所得から控除されます。'));
+        }
+
+        return {
+            year: year, rules: rules, age: age, income: income, salary: toInt(p.salary),
+            selfIncome: selfIncome, selfSalary: selfSalary,
+            disability: { kind: dis.kind, label: disLabelFull, basis: dis.basis, pending: !!dis.pending, cohabiting: cohabiting },
+            excluded: excluded, categories: categories, deductions: deductions, notes: notes,
+            total: deductions.reduce(function (t, d) { return t + (d.applied ? d.amount : 0); }, 0)
+        };
+    }
+
     return {
         RULES: RULES,
+        DISABILITY_HANDBOOKS: DISABILITY_HANDBOOKS,
+        classifyDisability: classifyDisability,
+        judgePerson: judgePerson,
         years: Object.keys(RULES).map(Number).sort(function (a, b) { return b - a; }),
         toInt: toInt,
         normalizeDigits: normalizeDigits,

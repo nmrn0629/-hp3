@@ -26,10 +26,22 @@
         };
     }
 
+    function initialPerson() {
+        return {
+            self: { salary: '', otherIncome: '' },
+            person: {
+                relation: 'spouse', birth: emptyBirth(), salary: '', otherIncome: '',
+                cohabiting: true, handbook: 'none', grade: '', businessEmployee: false, claimedByOther: false
+            }
+        };
+    }
+
     function initialState() {
         return {
+            view: 'household',
             step: 0,
             year: R.years[0],
+            personTab: initialPerson(),
             self: {
                 salary: '', otherIncome: '', disability: 'none',
                 marital: 'married', commonLawSpouse: false, workingStudent: false
@@ -422,7 +434,127 @@
     // ------------------------------------------------------------------
     // 描画
     // ------------------------------------------------------------------
+    function tabBar() {
+        return '<div class="nencho-tabs" role="tablist">' +
+            '<button type="button" role="tab" class="nencho-tab' + (state.view === 'household' ? ' is-active' : '') + '" data-view="household" aria-selected="' + (state.view === 'household') + '">世帯の控除額チェッカー<small>本人・家族・保険料をまとめて計算</small></button>' +
+            '<button type="button" role="tab" class="nencho-tab' + (state.view === 'person' ? ' is-active' : '') + '" data-view="person" aria-selected="' + (state.view === 'person') + '">家族一人ひとりの判定<small>この人は何に該当し、控除はいくらか</small></button>' +
+            '</div>';
+    }
+
+    // ---------------- 家族一人ひとりの判定 ----------------
+    function personInput() {
+        var pt = state.personTab;
+        return {
+            year: state.year,
+            self: pt.self,
+            person: {
+                relation: pt.person.relation, birth: birthToInput(pt.person.birth),
+                salary: pt.person.salary, otherIncome: pt.person.otherIncome,
+                cohabiting: pt.person.cohabiting, handbook: pt.person.handbook, grade: pt.person.grade,
+                businessEmployee: pt.person.businessEmployee, claimedByOther: pt.person.claimedByOther
+            }
+        };
+    }
+
+    function renderPersonForm() {
+        var pt = state.personTab;
+        var isSpouse = pt.person.relation === 'spouse';
+        var hb = R.DISABILITY_HANDBOOKS.filter(function (h) { return h.key === pt.person.handbook; })[0];
+        var yearOpts = R.years.map(function (y) {
+            return '<option value="' + y + '"' + (Number(state.year) === y ? ' selected' : '') + '>' + R.RULES[y].label + '</option>';
+        }).join('');
+        var hbOpts = R.DISABILITY_HANDBOOKS.map(function (h) {
+            return '<option value="' + h.key + '"' + (pt.person.handbook === h.key ? ' selected' : '') + '>' + esc(h.label) + '</option>';
+        }).join('');
+        var html = '<h3>判定する家族の情報</h3>' +
+            '<p class="nencho-lead">配偶者・お子さん・ご両親など、1人分を入力すると右側（スマホでは下）に判定が表示されます。</p>' +
+            '<div class="nencho-field"><label class="nencho-label" for="f-year2">対象年分</label>' +
+            '<select class="nencho-select" id="f-year2" data-path="year" data-rerender="1" style="max-width:260px">' + yearOpts + '</select></div>' +
+            choiceField('personTab.person.relation', 'ご本人との続柄', [
+                ['spouse', '配偶者'], ['child', '子'], ['parent', '父母・祖父母'], ['other', 'その他の親族']
+            ], isSpouse ? '民法上の配偶者（内縁関係は対象外）' : '6親等内の血族・3親等内の姻族、里子・養護を委託された老人を含みます。') +
+            dateField('personTab.person.birth', '生年月日', '年齢は' + R.RULES[state.year].judgeDateLabel + '時点で判定します。') +
+            moneyField('personTab.person.salary', 'この方の給与収入（年収・額面）の見込み', 'パート・アルバイト収入など。なければ空欄。') +
+            moneyField('personTab.person.otherIncome', 'この方の給与以外の所得金額（あれば）', '年金のみの目安：65歳以上は年金収入－110万円、65歳未満は年金収入－60万円（マイナスなら0）。') +
+            checkField('personTab.person.cohabiting', 'ご本人（または配偶者・生計を一にする親族）と同居している',
+                '同居老親等・同居特別障害者の判定に使います。病気の治療のための入院は同居扱い、老人ホーム等への入所は別居扱いです。') +
+            '<div class="nencho-field"><label class="nencho-label" for="f-handbook">障害者手帳・認定の種類</label>' +
+            '<select class="nencho-select" id="f-handbook" data-path="personTab.person.handbook" data-rerender="1">' + hbOpts + '</select></div>';
+        if (hb && hb.grades) {
+            html += '<div class="nencho-field"><span class="nencho-label">等級・区分</span><div class="nencho-choices">';
+            hb.grades.forEach(function (g) {
+                html += '<label class="nencho-choice"><input type="radio" name="c-grade" value="' + esc(g.v) + '" data-path="personTab.person.grade" data-rerender="1"' +
+                    (String(pt.person.grade) === String(g.v) ? ' checked' : '') + '><span>' + esc(g.label) + '</span></label>';
+            });
+            html += '</div></div>';
+        }
+        html += checkField('personTab.person.businessEmployee', '青色事業専従者として給与を受けている／白色事業専従者である', '該当する場合は配偶者控除・扶養控除等の対象外です。') +
+            checkField('personTab.person.claimedByOther', '他の人の同一生計配偶者・扶養親族として申告されている', '同じ人を2人以上で重複して控除することはできません。') +
+            '<h4 class="nencho-result-title">ご本人（控除を受ける方）の収入</h4>' +
+            moneyField('personTab.self.salary', 'ご本人の給与収入（年収・額面）の見込み', '配偶者控除の控除額と、所得制限（900万・950万・1,000万円）の判定に使います。', '例：5,000,000') +
+            moneyField('personTab.self.otherIncome', 'ご本人の給与以外の所得金額（あれば）');
+        return html;
+    }
+
+    function renderPersonResult() {
+        var res = R.judgePerson(personInput());
+        var pt = state.personTab;
+        var html = '<h3>判定結果（' + res.rules.label + '）</h3>';
+        html += '<div class="nencho-total compact"><div class="caption">この方に関して受けられる控除の合計</div>' +
+            '<div class="amount">' + fmt(res.total) + '<small>円</small></div>' +
+            '<div class="sub">' + (res.age != null ? res.rules.judgeDateLabel + '時点 ' + res.age + '歳　' : '生年月日を入力してください　') +
+            'この方の合計所得金額 ' + fmt(res.income) + '円　／　ご本人の合計所得金額 ' + fmt(res.selfIncome) + '円</div></div>';
+
+        if (res.excluded.length) {
+            html += '<div class="nencho-note" style="margin-top:0"><strong>対象外の理由：</strong>' + esc(res.excluded.join('、')) + '</div>';
+        }
+
+        html += '<h4 class="nencho-result-title">該当する区分</h4><ul class="nencho-cats">';
+        res.categories.forEach(function (c) {
+            html += '<li class="nencho-cat' + (c.ok ? ' is-ok' : '') + '"><span class="mark">' + (c.ok ? '✓' : '－') + '</span>' +
+                '<div><div class="cat-label">' + esc(c.label) + '</div>' +
+                (c.reason ? '<div class="cat-reason">' + esc(c.reason) + '</div>' : '') +
+                (c.ok && c.form ? '<div class="cat-form">記載：' + esc(c.form) + '</div>' : '') + '</div></li>';
+        });
+        html += '</ul>';
+
+        html += '<h4 class="nencho-result-title">障害者区分</h4>';
+        if (res.disability.kind === 'none') {
+            html += '<p class="nencho-help">' + (res.disability.pending ? esc(res.disability.basis) + ' の等級・区分を選択してください。' : '障害者控除の対象ではありません。') + '</p>';
+        } else {
+            html += '<div class="nencho-judge"><strong>' + esc(res.disability.label) + '</strong>（' + esc(res.disability.basis) + '）' +
+                (res.disability.kind === 'special' ? '<br>' + (res.disability.cohabiting ? '同居しているため「同居特別障害者」として75万円' : '別居のため「特別障害者」として40万円') : '<br>一般の障害者として27万円') +
+                '。ただし、控除を受けられるのは' + (pt.person.relation === 'spouse' ? '同一生計配偶者' : '扶養親族') + 'に該当する場合に限ります。</div>';
+        }
+
+        html += '<h4 class="nencho-result-title">控除額</h4><div class="nencho-items">';
+        res.deductions.forEach(function (d) {
+            html += '<div class="nencho-item' + (d.applied ? '' : ' is-off') + '"><div class="name">' + esc(d.name) + '</div>' +
+                '<div class="amt">' + (d.applied ? fmt(d.amount) + '円' : '—') + '</div>' +
+                '<div class="note">' + esc(d.note) + (d.applied && d.form ? '　【' + esc(d.form) + '】' : '') + '</div></div>';
+        });
+        html += '</div>';
+
+        if (res.notes.length) {
+            html += '<h4 class="nencho-result-title">関連する注意点</h4><ul class="nencho-notes">';
+            res.notes.forEach(function (n) { html += '<li>' + esc(n) + '</li>'; });
+            html += '</ul>';
+        }
+        return html;
+    }
+
+    function renderPersonView() {
+        return '<div class="nencho-person-layout">' +
+            '<div class="nencho-panel">' + renderPersonForm() + '</div>' +
+            '<div class="nencho-panel" id="person-result">' + renderPersonResult() + '</div>' +
+            '</div>';
+    }
+
     function render() {
+        if (state.view === 'person') {
+            app.innerHTML = tabBar() + renderPersonView();
+            return;
+        }
         var result = R.calculate(buildInput());
         var panel;
         switch (state.step) {
@@ -432,7 +564,12 @@
             case 3: panel = renderInsurance(result); break;
             default: panel = renderResult(result);
         }
-        app.innerHTML = stepsIndicator() + '<div class="nencho-panel">' + panel + '</div>';
+        app.innerHTML = tabBar() + stepsIndicator() + '<div class="nencho-panel">' + panel + '</div>';
+    }
+
+    function refreshPersonResult() {
+        var box = document.getElementById('person-result');
+        if (box) box.innerHTML = renderPersonResult();
     }
 
     function goTo(step) {
@@ -475,6 +612,7 @@
             var hint = app.querySelector('[data-hint-for="' + path + '"]');
             if (hint) hint.textContent = manHint(el.value);
         }
+        if (state.view === 'person') refreshPersonResult();
     });
 
     app.addEventListener('change', function (e) {
@@ -484,16 +622,12 @@
         setPath(state, path, readValue(el));
         if (el.getAttribute('data-money')) {
             el.value = fmtInput(el.value);
+            if (state.view === 'person') { refreshPersonResult(); return; }
             // 金額の変更は判定表示に影響するので、人物カード等の表示を更新
-            if (state.step === 1 || state.step === 2 || state.step === 3) {
-                var active = document.activeElement;
-                var id = active && active.id;
-                render();
-                // フォーカス中の要素が残っていれば復元しない（blur 後なので不要）
-                void id;
-            }
+            if (state.step === 1 || state.step === 2 || state.step === 3) render();
             return;
         }
+        if (path === 'personTab.person.handbook') state.personTab.person.grade = '';
         if (el.getAttribute('data-rerender')) render();
     });
 
@@ -506,6 +640,7 @@
         setPath(state, path, digits);
         var hint = app.querySelector('[data-hint-for="' + path + '"]');
         if (hint) hint.textContent = manHint(digits);
+        if (state.view === 'person') refreshPersonResult();
     });
 
     app.addEventListener('focusout', function (e) {
@@ -514,6 +649,13 @@
     });
 
     app.addEventListener('click', function (e) {
+        var tab = e.target.closest('[data-view]');
+        if (tab) {
+            state.view = tab.getAttribute('data-view');
+            state.confirmReset = false;
+            render();
+            return;
+        }
         var btn = e.target.closest('[data-action]');
         if (btn) {
             var action = btn.getAttribute('data-action');

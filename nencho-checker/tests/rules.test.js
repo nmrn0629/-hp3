@@ -113,4 +113,102 @@ eq('C1 長男 給与150万→所得76万 → 特定親族特別控除63万', get
 eq('C1 母 同居老親 58万', get(c1, 'dependent_2').amount, 580000);
 eq('C1 生保 12万', get(c1, 'life').amount, 120000);
 eq('C1 所得控除合計', c1.totals.deductions, 1040000 + 380000 + 630000 + 580000 + 200000 + 276000 + 120000 + 30000);
+
+// ===== 家族一人ひとりの判定（judgePerson / classifyDisability） =====
+const cd = R.classifyDisability;
+eq('身体1級 → 特別', cd('shintai','1').kind, 'special');
+eq('身体2級 → 特別', cd('shintai','2').kind, 'special');
+eq('身体3級 → 一般', cd('shintai','3').kind, 'general');
+eq('身体6級 → 一般', cd('shintai','6').kind, 'general');
+eq('精神1級 → 特別', cd('seishin','1').kind, 'special');
+eq('精神2級 → 一般', cd('seishin','2').kind, 'general');
+eq('療育A → 特別', cd('ryoiku','A').kind, 'special');
+eq('療育B → 一般', cd('ryoiku','B').kind, 'general');
+eq('被爆者 → 特別', cd('genbaku').kind, 'special');
+eq('寝たきり → 特別', cd('netakiri').kind, 'special');
+eq('成年被後見人 → 特別', cd('kouken').kind, 'special');
+eq('市町村認定(一般) → 一般', cd('nintei','general').kind, 'general');
+eq('なし', cd('none').kind, 'none');
+eq('等級未選択 → pending', cd('shintai','').pending, true);
+
+const jp = (person, self = { salary: 5000000 }, year = 2026) => R.judgePerson({ year, self, person });
+const catOk = (r, key) => r.categories.find(c => c.key === key).ok;
+const dedAmt = (r, name) => (r.deductions.find(d => d.name.startsWith(name)) || {}).amount;
+
+// 配偶者：パート136万（所得62万）・48歳
+let r = jp({ relation: 'spouse', birth: { y: 1978, m: 3, d: 3 }, salary: 1360000 });
+eq('配偶者 同一生計', catOk(r, 'douitsu'), true);
+eq('配偶者 控除対象', catOk(r, 'koujo'), true);
+eq('配偶者 源泉控除対象', catOk(r, 'gensen'), true);
+eq('配偶者 特別控除対象ではない', catOk(r, 'tokubetsu'), false);
+eq('配偶者控除 38万', dedAmt(r, '配偶者控除'), 380000);
+// 配偶者：所得96万（給与170万）→ 配偶者特別控除36万、源泉控除対象外（95万超）
+r = jp({ relation: 'spouse', birth: { y: 1978, m: 3, d: 3 }, salary: 1700000 });
+eq('配偶者 特別控除対象', catOk(r, 'tokubetsu'), true);
+eq('配偶者 源泉控除対象外', catOk(r, 'gensen'), false);
+eq('配偶者特別控除 36万', dedAmt(r, '配偶者特別控除'), 360000);
+// 配偶者：72歳・年金所得50万・身体2級・同居 → 老人控除対象配偶者48万 + 同居特別障害者75万
+r = jp({ relation: 'spouse', birth: { y: 1954, m: 1, d: 1 }, salary: 0, otherIncome: 500000, handbook: 'shintai', grade: '2', cohabiting: true });
+eq('老人控除対象配偶者', catOk(r, 'roujin'), true);
+eq('配偶者控除(老人) 48万', dedAmt(r, '配偶者控除（老人'), 480000);
+eq('配偶者 同居特別障害者 75万', dedAmt(r, '障害者控除（同居特別障害者）'), 750000);
+eq('合計 123万', r.total, 1230000);
+// 配偶者：本人所得1000万超（給与1300万）→ 配偶者控除なし、障害者控除は適用
+r = jp({ relation: 'spouse', birth: { y: 1980, m: 1, d: 1 }, salary: 0, handbook: 'seishin', grade: '2' }, { salary: 13000000 });
+eq('本人1000万超 控除対象配偶者ではない', catOk(r, 'koujo'), false);
+eq('本人1000万超 同一生計配偶者ではある', catOk(r, 'douitsu'), true);
+eq('本人1000万超 障害者控除27万は適用', dedAmt(r, '障害者控除（一般の障害者）'), 270000);
+// 配偶者：本人所得920万（給与1115万）配偶者所得63万 → 配偶者特別控除26万
+r = jp({ relation: 'spouse', birth: { y: 1980, m: 1, d: 1 }, salary: 1370000 }, { salary: 11150000 });
+eq('本人950万以下 配偶者特別控除26万', dedAmt(r, '配偶者特別控除'), 260000);
+
+// 子：10歳・療育A・同居 → 年少扶養、扶養控除0、障害者控除75万
+r = jp({ relation: 'child', birth: { y: 2016, m: 5, d: 5 }, salary: 0, handbook: 'ryoiku', grade: 'A', cohabiting: true });
+eq('子10歳 年少扶養', catOk(r, 'nensho'), true);
+eq('子10歳 控除対象扶養ではない', catOk(r, 'koujoFuyou'), false);
+eq('子10歳 扶養控除 0', dedAmt(r, '扶養控除'), 0);
+eq('子10歳 同居特別障害者 75万', dedAmt(r, '障害者控除（同居特別障害者）'), 750000);
+// 子：17歳・バイト100万 → 一般の控除対象扶養親族 38万
+r = jp({ relation: 'child', birth: { y: 2009, m: 8, d: 8 }, salary: 1000000 });
+eq('子17歳 一般 38万', dedAmt(r, '扶養控除（一般'), 380000);
+eq('子17歳 源泉控除対象親族', catOk(r, 'gensenShinzoku'), true);
+// 子：20歳・バイト136万（所得62万） → 特定扶養 63万
+r = jp({ relation: 'child', birth: { y: 2006, m: 8, d: 8 }, salary: 1360000 });
+eq('子20歳 136万 特定扶養 63万', dedAmt(r, '扶養控除（特定'), 630000);
+eq('子20歳 136万 特定親族ではない', catOk(r, 'tokuteiShinzoku'), false);
+// 子：20歳・バイト170万（所得96万） → 特定親族特別控除 41万、源泉控除対象親族（所得100万以下）
+r = jp({ relation: 'child', birth: { y: 2006, m: 8, d: 8 }, salary: 1700000 });
+eq('子20歳 170万 特定親族', catOk(r, 'tokuteiShinzoku'), true);
+eq('子20歳 170万 特定親族特別控除 41万', dedAmt(r, '特定親族特別控除'), 410000);
+eq('子20歳 170万 源泉控除対象親族', catOk(r, 'gensenShinzoku'), true);
+// 子：20歳・バイト180万（所得106万） → 特定親族特別控除 21万、源泉控除対象親族ではない
+r = jp({ relation: 'child', birth: { y: 2006, m: 8, d: 8 }, salary: 1800000 });
+eq('子20歳 180万 特定親族特別控除 21万', dedAmt(r, '特定親族特別控除'), 210000);
+eq('子20歳 180万 源泉控除対象親族ではない', catOk(r, 'gensenShinzoku'), false);
+// 子：20歳・バイト200万（所得126万）・身体3級 → すべて対象外、障害者控除もなし
+r = jp({ relation: 'child', birth: { y: 2006, m: 8, d: 8 }, salary: 2000000, handbook: 'shintai', grade: '3' });
+eq('子20歳 200万 扶養親族でない', catOk(r, 'fuyou'), false);
+eq('子20歳 200万 特定親族でない', catOk(r, 'tokuteiShinzoku'), false);
+eq('子20歳 200万 障害者控除なし', dedAmt(r, '障害者控除'), 0);
+eq('子20歳 200万 合計0', r.total, 0);
+// 母：75歳・年金所得50万・同居 → 同居老親等 58万 ; 別居 → 老人 48万 ; 兄（75歳）同居 → 老人 48万
+r = jp({ relation: 'parent', birth: { y: 1951, m: 2, d: 2 }, otherIncome: 500000, cohabiting: true });
+eq('母75歳 同居老親等 58万', dedAmt(r, '扶養控除（同居老親等'), 580000);
+r = jp({ relation: 'parent', birth: { y: 1951, m: 2, d: 2 }, otherIncome: 500000, cohabiting: false });
+eq('母75歳 別居 老人 48万', dedAmt(r, '扶養控除（老人'), 480000);
+r = jp({ relation: 'other', birth: { y: 1951, m: 2, d: 2 }, otherIncome: 500000, cohabiting: true });
+eq('兄75歳 同居でも老人 48万', dedAmt(r, '扶養控除（老人'), 480000);
+// 除外：事業専従者
+r = jp({ relation: 'child', birth: { y: 2009, m: 8, d: 8 }, salary: 0, businessEmployee: true });
+eq('事業専従者 → 扶養親族でない', catOk(r, 'fuyou'), false);
+eq('事業専従者 → 控除0', r.total, 0);
+// 年齢境界（令和8年分）：2011-01-01生まれは16歳、2011-01-02は15歳
+r = jp({ relation: 'child', birth: { y: 2011, m: 1, d: 1 }, salary: 0 });
+eq('2011-01-01生 → 控除対象扶養 38万', dedAmt(r, '扶養控除（一般'), 380000);
+r = jp({ relation: 'child', birth: { y: 2011, m: 1, d: 2 }, salary: 0 });
+eq('2011-01-02生 → 年少扶養 0', dedAmt(r, '扶養控除'), 0);
+// 令和7年分：所得要件58万 → 給与130万(所得65万)は扶養親族でない／特定親族(20歳)
+r = jp({ relation: 'child', birth: { y: 2005, m: 8, d: 8 }, salary: 1300000 }, { salary: 5000000 }, 2025);
+eq('R7 子20歳 130万 → 特定親族 63万', dedAmt(r, '特定親族特別控除'), 630000);
+
 console.log(`pass=${pass} fail=${fail}`); process.exit(fail ? 1 : 0);
