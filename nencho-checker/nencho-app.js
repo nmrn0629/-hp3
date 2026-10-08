@@ -9,7 +9,7 @@
     var app = document.getElementById('nencho-app');
     if (!R || !app) return;
 
-    var STEPS = ['ご本人', '配偶者', '扶養親族', '保険料・掛金', '結果'];
+    var STEPS = ['ご本人', '配偶者', '扶養親族', '保険料、<br>掛金', '結果'];
     var man = R.man;
     function rules() { return R.RULES[state.year] || R.RULES[R.years[0]]; }
     var CURRENT_YEAR = new Date().getFullYear();
@@ -495,8 +495,8 @@
     // ------------------------------------------------------------------
     function tabBar() {
         return '<div class="nencho-tabs" role="tablist">' +
-            '<button type="button" role="tab" class="nencho-tab' + (state.view === 'household' ? ' is-active' : '') + '" data-view="household" aria-selected="' + (state.view === 'household') + '">世帯の控除額チェッカー<small>本人・家族・保険料をまとめて計算</small></button>' +
-            '<button type="button" role="tab" class="nencho-tab' + (state.view === 'person' ? ' is-active' : '') + '" data-view="person" aria-selected="' + (state.view === 'person') + '">家族一人ひとりの判定<small>この人は何に該当し、控除はいくらか</small></button>' +
+            '<button type="button" role="tab" class="nencho-tab' + (state.view === 'household' ? ' is-active' : '') + '" data-view="household" aria-selected="' + (state.view === 'household') + '">世帯の控除額<small>本人・家族・保険料をまとめて計算</small></button>' +
+            '<button type="button" role="tab" class="nencho-tab' + (state.view === 'person' ? ' is-active' : '') + '" data-view="person" aria-selected="' + (state.view === 'person') + '">一人ひとりの判定<small>この人は何に該当し、控除はいくらか</small></button>' +
             '</div>';
     }
 
