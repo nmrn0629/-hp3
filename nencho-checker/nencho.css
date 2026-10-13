@@ -18,6 +18,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--color-bg);
@@ -469,8 +474,13 @@ button, input, select { font-family: inherit; }
 
 .nencho-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 14px 24px;
+}
+
+/* グリッドの中身が列幅を押し広げてカードからはみ出すのを防ぐ */
+.nencho-grid > * {
+    min-width: 0;
 }
 
 .nencho-grid .nencho-field {
@@ -946,6 +956,12 @@ button, input, select { font-family: inherit; }
     align-items: start;
 }
 
+/* 中の長いプルダウン等にパネル幅を押し広げられないようにする */
+.nencho-person-layout > *,
+.nencho-panel {
+    min-width: 0;
+}
+
 .nencho-person-layout .nencho-panel {
     padding: 26px 26px;
 }
@@ -1014,10 +1030,18 @@ button, input, select { font-family: inherit; }
 
 /* ---- レスポンシブ ---- */
 @media (max-width: 768px) {
-    .nencho-person-layout { grid-template-columns: 1fr; }
+    .nencho-person-layout { grid-template-columns: minmax(0, 1fr); }
     #person-result { position: static; max-height: none; }
-    .nencho-tabs { gap: 4px; padding: 5px; }
-    .nencho-tab { font-size: 0.78rem; padding: 10px 4px; white-space: nowrap; flex: 1 1 auto; letter-spacing: 0; }
+    .nencho-tabs { gap: 3px; padding: 4px; overflow: hidden; }
+    .nencho-tab {
+        /* 画面幅に比例（3タブ合計22文字が必ず収まる大きさ）。端末の文字サイズ設定の影響も受けにくい */
+        font-size: clamp(9px, 3.15vw, 14px);
+        padding: 10px 2px;
+        white-space: nowrap;
+        flex: 1 1 auto;
+        min-width: 0;
+        letter-spacing: 0;
+    }
     .nencho-tab small { display: none; }
     .nencho-guide-list { grid-template-columns: 1fr; }
 
@@ -1048,13 +1072,17 @@ button, input, select { font-family: inherit; }
     }
 
     .nencho-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .nencho-person {
+        padding: 16px 14px;
     }
 
     .nencho-date .nencho-select.year { min-width: 0; flex: 1 1 100%; }
     .nencho-date .nencho-select.month,
     .nencho-date .nencho-select.day { flex: 1; min-width: 0; }
-    .nencho-age-badge { flex: 1 1 100%; flex-direction: row; align-items: baseline; gap: 10px; }
+    .nencho-age-badge { flex: 1 1 100%; min-width: 0; flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; white-space: normal; }
 
     .nencho-nav {
         flex-direction: column-reverse;
@@ -1096,4 +1124,13 @@ button, input, select { font-family: inherit; }
 
 @media (max-width: 480px) {
     .app-header-note { display: none; }
+    .app-header-inner { padding: 12px 16px; }
+    .app-brand { min-width: 0; gap: 10px; }
+    .app-brand > div { min-width: 0; }
+    /* 狭い画面でもタイトルが途中で折れないよう、画面幅に比例した文字サイズにする */
+    .app-title { font-size: clamp(14px, 4.9vw, 19px); white-space: nowrap; }
+    .app-subtitle { font-size: clamp(10px, 3.2vw, 12.5px); white-space: nowrap; }
+    .app-brand-mark { width: 40px; height: 40px; font-size: 1.25rem; flex-shrink: 0; }
+    .app-main { padding: 24px 16px 40px; }
+    .nencho-clear-btn { font-size: 0.78rem; padding: 5px 13px; }
 }
