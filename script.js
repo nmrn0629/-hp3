@@ -185,6 +185,33 @@ document.addEventListener('DOMContentLoaded', () => {
             fabWrapper.appendChild(fabNew);
         }
 
+        // 「詳細はこちら」で別ページへ移り「戻る」で帰ってきたとき、吹き出しを開いた状態に戻す。
+        // 戻るとページは読み込み直されるため、履歴ごとに保持される history.state に状態を残しておく。
+        const saveBubbleState = () => {
+            const body = bubble.querySelector('.topics-bubble-body');
+            history.replaceState(Object.assign({}, history.state, {
+                topicsBubble: {
+                    scrollTop: body ? body.scrollTop : 0,
+                    fabLeft: fab.style.left,
+                    fabTop: fab.style.top
+                }
+            }), '');
+        };
+        // 自分で閉じたあとは、戻ってきても勝手に開かないよう状態を消す
+        const clearBubbleState = () => {
+            if (history.state && history.state.topicsBubble) {
+                const state = Object.assign({}, history.state);
+                delete state.topicsBubble;
+                history.replaceState(state, '');
+            }
+        };
+
+        bubble.addEventListener('click', (e) => {
+            if (e.target.closest('.topics-link, .topics-archive-link')) {
+                saveBubbleState();
+            }
+        });
+
         let isDragging = false;
         let startX, startY;
         let initialX, initialY;
@@ -218,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
                 hasMoved = true;
                 bubble.classList.remove('active'); // 実際に移動を開始した時だけ閉じる
+                clearBubbleState();
             }
 
             let newX = initialX + dx;
@@ -264,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 bubble.classList.add('active');
             } else {
                 bubble.classList.remove('active');
+                clearBubbleState();
             }
             updateBubblePosition();
         });
@@ -317,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 bubble.classList.remove('active');
+                clearBubbleState();
             });
         }
 
@@ -367,6 +397,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateBubblePosition();
             }
         });
+
+        // 「戻る」で帰ってきたときは、ボタンの位置・吹き出し・中のスクロール位置を元に戻す
+        const savedBubble = history.state && history.state.topicsBubble;
+        if (savedBubble) {
+            if (savedBubble.fabLeft && savedBubble.fabTop) {
+                const left = Math.max(10, Math.min(window.innerWidth - fab.offsetWidth - 10, parseFloat(savedBubble.fabLeft)));
+                const top = Math.max(10, Math.min(window.innerHeight - fab.offsetHeight - 10, parseFloat(savedBubble.fabTop)));
+                fab.style.left = `${left}px`;
+                fab.style.top = `${top}px`;
+                fab.style.bottom = 'auto';
+                fab.style.right = 'auto';
+            }
+            renderTopics();
+            bubble.classList.add('active');
+            updateBubblePosition();
+            const body = bubble.querySelector('.topics-bubble-body');
+            if (body) {
+                body.scrollTop = savedBubble.scrollTop || 0;
+            }
+        }
     }
 });
 
