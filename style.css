@@ -1643,6 +1643,46 @@ h4 {
     margin-left: 2px;
 }
 
+/* 追加から24時間以内のトピック（script.js の isNewTopic で付与） */
+.topics-list li.is-new {
+    background: #f8fbee;
+    border-bottom-color: transparent;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.topics-new-pill {
+    display: inline-block;
+    vertical-align: 1px;
+    margin-left: 6px;
+    background: #e8603c;
+    color: var(--color-white);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    padding: 4px 8px 3px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(232, 96, 60, 0.35);
+}
+
+.topics-fab-new {
+    position: absolute;
+    right: -10px;
+    bottom: 2px;
+    z-index: 2002;
+    background: #e8603c;
+    color: var(--color-white);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
 .topics-list li.topics-legend {
     list-style: none;
     margin-top: 10px;

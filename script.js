@@ -168,7 +168,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const bubble = document.getElementById('topics-bubble');
     const closeBtn = document.getElementById('close-topics');
 
+    // サイトに追加してから24時間以内のトピックに「NEW」を付ける。
+    // date は国税庁側の日付（掲載日・発出日）なので使わず、追加日時の addedAt で判定する。
+    const NEW_DURATION_MS = 24 * 60 * 60 * 1000;
+    const isNewTopic = (topic) => {
+        const added = Date.parse(topic && topic.addedAt);
+        return Number.isFinite(added) && Date.now() - added < NEW_DURATION_MS;
+    };
+
     if (fab && bubble) {
+        const fabWrapper = fab.querySelector('.topics-fab-img-wrapper');
+        if (fabWrapper && (window.topicsData || []).some(isNewTopic)) {
+            const fabNew = document.createElement('span');
+            fabNew.className = 'topics-fab-new';
+            fabNew.textContent = 'NEW';
+            fabWrapper.appendChild(fabNew);
+        }
+
         let isDragging = false;
         let startX, startY;
         let initialX, initialY;
@@ -280,8 +296,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const total = (window.topicsArchiveData || all).length;
                 const hasArchive = total > visible.length;
                 const itemsHtml = visible.map(topic => `
-                    <li>
-                        <span class="topics-date">${escapeHtml(topic.date)}${topic.dateType ? `<span class="topics-datetype">（${escapeHtml(topic.dateType)}）</span>` : ''}</span>
+                    <li${isNewTopic(topic) ? ' class="is-new"' : ''}>
+                        <span class="topics-date">${escapeHtml(topic.date)}${topic.dateType ? `<span class="topics-datetype">（${escapeHtml(topic.dateType)}）</span>` : ''}${isNewTopic(topic) ? '<span class="topics-new-pill">NEW</span>' : ''}</span>
                         ${escapeHtml(topic.content)}
                         ${topic.url ? `<br><a href="${escapeHtml(topic.url)}" class="topics-link">詳細はこちら</a>` : ''}
                     </li>

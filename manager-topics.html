@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>トピックス管理 | ハーモグロー会計事務所</title>
-    <link rel="stylesheet" href="style.css?v=15.3">
+    <link rel="stylesheet" href="style.css?v=15.4">
     <style>
         .admin-container {
             max-width: 800px;
@@ -142,7 +142,7 @@
         </div>
     </footer>
 
-    <script src="js/topics-data.js?v=1.38"></script>
+    <script src="js/topics-data.js?v=1.39"></script>
     <script>
         let generatedCode = "";
         let currentData = [...(window.topicsData || [])];
@@ -181,7 +181,9 @@
                 return;
             }
 
-            const newTopic = { date, dateType, content, url };
+            // addedAt はサイトに追加した日時（日本時間）。トップページではここから24時間「NEW」を表示する
+            const addedAt = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 19) + '+09:00';
+            const newTopic = { date, dateType, content, url, addedAt };
             currentData = [newTopic, ...currentData];
             
             renderAdminList();
