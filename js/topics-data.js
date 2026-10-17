@@ -1,6 +1,48 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/10/16",
+        "dateType": "掲載日",
+        "content": "e-Taxを装った不審なメール等にご注意ください（更新）",
+        "url": "https://www.e-tax.nta.go.jp/topics/2024/topics_hushinmail.htm"
+    },
+    {
+        "date": "2026/10/15",
+        "dateType": "掲載日",
+        "content": "インボイス登録申請書の処理状況及び登録日から実際に通知を受けられる期間までに取引を行われる場合の対応について",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice_shinsei.htm"
+    },
+    {
+        "date": "2026/10/14",
+        "dateType": "掲載日",
+        "content": "年末調整手続の電子化及び年調ソフト等に関するよくある質問（FAQ）令和８年10月改訂版",
+        "url": "https://www.nta.go.jp/users/gensen/nenmatsu/nencho_pamph.htm"
+    },
+    {
+        "date": "2026/10/13",
+        "dateType": "掲載日",
+        "content": "税務調査等における帳簿等データの提出依頼に関する取組等について",
+        "url": "https://www.nta.go.jp/about/introduction/torikumi/denshi_data/index.htm"
+    },
+    {
+        "date": "2026/10/13",
+        "dateType": "掲載日",
+        "content": "年末調整で住宅借入金等特別控除の適用を受ける方へ",
+        "url": "https://www.nta.go.jp/publication/pamph/shotoku/jukari/index.htm"
+    },
+    {
+        "date": "2026/10/09",
+        "dateType": "掲載日",
+        "content": "給与所得の確定申告がさらに簡単に！【利用者用ページ】",
+        "url": "https://www.nta.go.jp/taxes/tetsuzuki/mynumberinfo/kyuyogensenjoho-top/userpage.htm"
+    },
+    {
+        "date": "2026/10/09",
+        "dateType": "掲載日",
+        "content": "令和８年８月７日付課法２－17ほか２課共同「法人税基本通達等の一部改正について」（法令解釈通達）の趣旨説明",
+        "url": "https://www.nta.go.jp/law/joho-zeikaishaku/hojin/260807/index.htm"
+    },
+    {
         "date": "2026/10/08",
         "dateType": "掲載日",
         "content": "所得税徴収高計算書（源泉所得税の納付書）の送付に関するお知らせ",
@@ -77,7 +119,10 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "令和9年分　源泉徴収税額表",
         "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2027/01.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/08/31",
         "dateType": "掲載日",
@@ -119,10 +164,7 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "電子的控除証明書等作成ソフト等で作成した認定NPO法人等に対する寄附金に係る「寄附金受領証明書」に表示される文言の読み替えについて",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20260826.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/08/19",
         "dateType": "掲載日",
