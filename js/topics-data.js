@@ -1,6 +1,20 @@
 /* Topics Content Data */
 const topicsData = [
     {
+        "date": "2026/10/20",
+        "dateType": "掲載日",
+        "content": "令和9年1月からe-Taxが一層便利になります。",
+        "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20261020.htm",
+        "addedAt": "2026-10-30T13:35:37+09:00"
+    },
+    {
+        "date": "2026/10/20",
+        "dateType": "発出日",
+        "content": "「令和8年分の基準年利率について」の一部改正について（法令解釈通達）",
+        "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/hyoka/kaisei/2610xx/index.htm",
+        "addedAt": "2026-10-30T13:35:37+09:00"
+    },
+    {
         "date": "2026/10/16",
         "dateType": "掲載日",
         "content": "e-Taxを装った不審なメール等にご注意ください（更新）",
@@ -114,7 +128,10 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "消費税率引下げ特設サイト",
         "url": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/zeiritsuhikisage.htm"
-    },
+    }
+];
+
+const topicsArchiveData = topicsData.concat([
     {
         "date": "2026/08/31",
         "dateType": "掲載日",
@@ -126,10 +143,7 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "令和9年分　源泉徴収税額表",
         "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2027/01.htm"
-    }
-];
-
-const topicsArchiveData = topicsData.concat([
+    },
     {
         "date": "2026/08/31",
         "dateType": "掲載日",
