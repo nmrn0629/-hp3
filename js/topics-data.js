@@ -5,14 +5,14 @@ const topicsData = [
         "dateType": "掲載日",
         "content": "令和9年1月からe-Taxが一層便利になります。",
         "url": "https://www.e-tax.nta.go.jp/topics/2026/topics_20261020.htm",
-        "addedAt": "2026-10-30T13:35:37+09:00"
+        "addedAt": "2026-10-31T13:35:37+09:00"
     },
     {
         "date": "2026/10/20",
         "dateType": "発出日",
         "content": "「令和8年分の基準年利率について」の一部改正について（法令解釈通達）",
         "url": "https://www.nta.go.jp/law/tsutatsu/kobetsu/hyoka/kaisei/2610xx/index.htm",
-        "addedAt": "2026-10-30T13:35:37+09:00"
+        "addedAt": "2026-10-31T13:35:37+09:00"
     },
     {
         "date": "2026/10/16",
