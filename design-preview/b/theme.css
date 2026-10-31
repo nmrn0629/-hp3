@@ -1,0 +1,934 @@
+/* 案B「モダンラグジュアリー」: 左右分割と英字セリフの大見出しで、上質なホテルのような印象にする案 */
+:root {
+    --ink: #2f332f;
+    --ink-soft: #565c56;
+    --color-deep: #3d694b;
+    --bronze: #a08068;
+    --bronze-line: rgba(160, 128, 104, 0.42);
+    --hairline: rgba(61, 105, 75, 0.2);
+
+    --color-text: var(--ink);
+    --color-text-light: var(--ink-soft);
+    --font-main: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+    --font-latin: 'Cormorant Garamond', 'Times New Roman', serif;
+
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-pill: 0;
+
+    --shadow-card: none;
+    --shadow-hover: none;
+}
+
+body {
+    line-height: 2;
+    letter-spacing: 0.07em;
+    font-weight: 400;
+    font-feature-settings: 'palt' 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+[style*="color: #000"] {
+    color: var(--ink) !important;
+    font-weight: 400 !important;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 500;
+    color: var(--color-deep);
+}
+
+/* 見出し: 英字を主役、日本語を添える */
+.section-title,
+.page-header .section-title {
+    left: 0;
+    transform: none;
+    text-align: left;
+    font-size: 1.02rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    margin-bottom: 3.4rem;
+}
+
+.section-title::before {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-family: var(--font-latin);
+    font-size: 3.6rem;
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    color: var(--color-deep);
+}
+
+.features .section-title::before { content: 'Why us'; }
+.about-header .section-title::before { content: 'About'; }
+.services-header .section-title::before { content: 'Services'; }
+.pricing-header .section-title::before { content: 'Fees'; }
+.contact-header .section-title::before { content: 'Contact'; }
+.flow-section-title::before { content: 'Flow'; }
+
+.section-title::after {
+    display: none;
+}
+
+.contact-section .section-title {
+    left: 0;
+}
+
+/* ヘッダー */
+.header,
+.header.scrolled {
+    padding: 12px 0;
+    background-color: rgba(242, 250, 235, 0.9);
+    border-bottom: 1px solid var(--hairline);
+    box-shadow: none;
+}
+
+.btn-primary {
+    padding: 11px 26px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    box-shadow: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-deep);
+    transform: none;
+    box-shadow: none;
+}
+
+/* トップ: 左に紙とロゴ、右に絵画 */
+.hero-text-container::before {
+    content: 'Harmony & Growth';
+    display: block;
+    margin-bottom: 0.9rem;
+    font-family: var(--font-latin);
+    font-style: italic;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    color: var(--bronze);
+}
+
+.hero-title {
+    font-weight: 500;
+    line-height: 1.55;
+    letter-spacing: 0.14em;
+    text-shadow: none;
+}
+
+.hero-subtitle {
+    margin-bottom: 0;
+    font-size: 1.04rem;
+    line-height: 2.1;
+    text-shadow: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero-text-container {
+        animation: riseIn 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    @keyframes riseIn {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: none; }
+    }
+}
+
+/* 下層ページの見出し: 左を紙色に溶かし、右に画像を見せる */
+.page-header {
+    text-align: left !important;
+}
+
+.page-header .section-title,
+.page-header p {
+    text-shadow: none;
+}
+
+.page-header .section-title {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.about-header {
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.86) 34%, rgba(255, 255, 255, 0) 72%), url('../../images/観葉植物背景ウェブ版.png?v=2');
+}
+
+.services-header {
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.86) 34%, rgba(255, 255, 255, 0) 72%), url('../../images/電卓背景.png?v=3');
+}
+
+.pricing-header {
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.86) 34%, rgba(255, 255, 255, 0) 72%), url('../../images/パソコン背景ウェブ版2.png?v=1');
+}
+
+.contact-header {
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.86) 34%, rgba(255, 255, 255, 0) 72%), url('../../images/コーヒー背景ウェブ版.png?v=2');
+}
+
+/* 選ばれる理由: 番号付きの一覧 */
+.features {
+    position: relative;
+    overflow: hidden;
+    background-color: #f1f8e9;
+}
+
+.features::after {
+    content: '';
+    position: absolute;
+    right: -4%;
+    bottom: -10%;
+    width: 560px;
+    height: 760px;
+    background: url('../../images/木半顔.png') right bottom / contain no-repeat;
+    opacity: 0.07;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+.features .container {
+    position: relative;
+    z-index: 1;
+}
+
+.grid-4 {
+    counter-reset: reason;
+    display: block;
+    max-width: none;
+    margin: 0;
+    border-top: 1px solid var(--hairline);
+}
+
+.card {
+    padding: 34px 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--hairline);
+    box-shadow: none;
+}
+
+.feature-card {
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    column-gap: 8px;
+    align-items: baseline;
+}
+
+.feature-card::before {
+    display: none;
+}
+
+.feature-card:nth-child(2) { transition-delay: 0.08s; }
+.feature-card:nth-child(3) { transition-delay: 0.16s; }
+.feature-card:nth-child(4) { transition-delay: 0.24s; }
+
+.icon-wrapper {
+    grid-row: 1 / span 2;
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 0;
+    background: none;
+    border-radius: 0;
+    color: var(--bronze);
+}
+
+.icon-wrapper i {
+    display: none;
+}
+
+.icon-wrapper::before {
+    counter-increment: reason;
+    content: '0' counter(reason);
+    font-family: var(--font-latin);
+    font-size: 2.3rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.feature-card h4 {
+    margin-bottom: 6px;
+    font-size: 1.22rem;
+    letter-spacing: 0.1em;
+}
+
+.feature-card p {
+    font-size: 0.98rem;
+}
+
+/* 業務案内・料金案内: 見出しと説明を左右に並べた一覧 */
+.services-section .grid-2 {
+    display: block;
+    border-top: 1px solid var(--hairline);
+}
+
+.service-item {
+    padding: 38px 0;
+    background: none;
+    border-left: none;
+    border-bottom: 1px solid var(--hairline);
+    box-shadow: none;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, padding-left 0.35s ease;
+}
+
+.service-item.visible:hover {
+    transform: none;
+    box-shadow: none;
+    padding-left: 12px;
+}
+
+.service-text {
+    width: 100%;
+}
+
+.service-item h4 {
+    letter-spacing: 0.1em;
+}
+
+#pricing .service-item {
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+#pricing .grid-2 {
+    margin-top: 48px !important;
+}
+
+.price-intro {
+    max-width: none;
+    padding: 0;
+    background: none;
+    border-top: none;
+    text-align: left;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.price-intro::before,
+.price-intro-icon {
+    display: none;
+}
+
+.price-intro-title {
+    color: var(--color-deep);
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+}
+
+.price-intro-title br {
+    display: none;
+}
+
+.price-intro-text {
+    color: var(--ink);
+}
+
+.step-num {
+    font-family: var(--font-latin);
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--bronze);
+    margin-right: 0.3em;
+    font-variant-numeric: lining-nums;
+}
+
+.flow-step-heading {
+    display: flex;
+    align-items: baseline;
+}
+
+/* 締めの帯: フッターとひと続きのセージグリーン */
+.contact-cta-section {
+    background-color: var(--color-primary) !important;
+}
+
+.contact-cta-section p[style] {
+    color: var(--color-white) !important;
+}
+
+.contact-cta-section .btn-primary {
+    background-color: var(--color-white);
+    color: var(--color-deep);
+}
+
+.contact-cta-section .btn-primary::after {
+    content: '\2192';
+    margin-left: 1.1em;
+    transition: margin-left 0.3s ease;
+}
+
+.contact-cta-section .btn-primary:hover {
+    background-color: var(--color-white);
+    color: var(--color-deep);
+}
+
+.contact-cta-section .btn-primary:hover::after {
+    margin-left: 1.6em;
+}
+
+/* 事務所紹介 */
+.about-text-box {
+    padding: 0;
+    background: none;
+}
+
+.about-text {
+    font-size: 1.12rem;
+    font-weight: 400;
+    line-height: 2.3;
+}
+
+.company-info {
+    margin-top: 72px;
+    padding-top: 0;
+    border-top: 1px solid var(--hairline);
+    font-size: 1.02rem;
+}
+
+.info-row,
+.info-row.no-border-bottom,
+.info-row.sub-info-row {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.info-row dt,
+.info-row.sub-info-row dt {
+    padding-top: 0;
+    font-size: 0.96rem;
+    font-weight: 500;
+    color: var(--color-deep);
+    letter-spacing: 0.12em;
+}
+
+.info-row dd {
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: var(--ink);
+    line-height: 1.9;
+}
+
+.info-row dd::before,
+.access-bubble::before {
+    display: none;
+}
+
+.access-section {
+    margin-top: 80px;
+}
+
+.access-title {
+    color: var(--color-deep);
+    letter-spacing: 0.14em;
+}
+
+.access-info h4 {
+    color: var(--color-deep);
+    letter-spacing: 0.06em;
+}
+
+.access-bubble {
+    padding: 0 0 6px;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.access-map-image {
+    box-shadow: none;
+}
+
+/* お問い合わせ */
+.phone-contact-wrapper {
+    max-width: none;
+    min-height: 420px;
+    padding: 72px 64px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.82) 42%, rgba(255, 255, 255, 0) 80%), url('../../images/ミーティング室ウェブ版.png');
+    box-shadow: none !important;
+}
+
+.phone-desc {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-deep);
+    text-shadow: none;
+    letter-spacing: 0.14em;
+}
+
+.btn-phone {
+    padding: 0 0 8px;
+    background: none;
+    border-bottom: 1px solid var(--bronze);
+    color: var(--color-deep);
+    font-family: var(--font-latin);
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    font-variant-numeric: lining-nums;
+    box-shadow: none;
+}
+
+.btn-phone .fa-phone {
+    font-size: 0.42em;
+    color: var(--bronze);
+}
+
+.btn-phone:hover {
+    background: none;
+    color: var(--color-primary);
+    transform: none;
+    box-shadow: none;
+}
+
+.phone-note {
+    margin-top: 6px;
+    color: var(--ink);
+    text-shadow: none;
+}
+
+/* フッター */
+.footer {
+    padding: 30px 0 28px;
+    background-color: var(--color-primary);
+}
+
+.contact-cta-section + .footer,
+main:has(.contact-cta-section) + .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.footer-logo h2 {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+}
+
+.footer-links {
+    margin: 0;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.84rem;
+}
+
+.copyright {
+    font-family: var(--font-latin);
+    font-size: 0.92rem;
+    opacity: 0.9;
+    letter-spacing: 0.05em;
+}
+
+/* TOPICS */
+.topics-fab-img-wrapper {
+    border-width: 1px;
+    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.3);
+}
+
+.topics-label {
+    top: -9px;
+    padding: 3px 12px 2px;
+    border-radius: 0;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+}
+
+.topics-bubble {
+    border-width: 1px;
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.3);
+}
+
+.topics-bubble-header {
+    border-bottom-width: 1px;
+}
+
+.topics-bubble-header h3 {
+    font-weight: 500;
+    letter-spacing: 0.14em;
+}
+
+/* パソコン表示 */
+@media (min-width: 769px) {
+    .nav-list {
+        gap: 36px;
+    }
+
+    .nav-list a {
+        font-size: 0.88rem;
+        letter-spacing: 0.12em;
+    }
+
+    .nav-list a:not(.btn-primary) {
+        padding-bottom: 4px;
+        background: linear-gradient(var(--bronze), var(--bronze)) left bottom / 0 1px no-repeat;
+        transition: background-size 0.35s ease, color 0.2s ease;
+    }
+
+    .nav-list a:not(.btn-primary):hover {
+        color: var(--color-deep);
+        background-size: 100% 1px;
+    }
+
+    .nav-list a.btn-primary:hover {
+        color: var(--color-white);
+    }
+
+    .logo-desktop {
+        max-width: 150px;
+    }
+
+    .logo-container-hero {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 46%;
+        height: 100vh;
+        min-height: 660px;
+        padding: 112px 0 0 7vw;
+        text-align: left;
+    }
+
+    .logo-container-hero .container {
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+
+    .hero-logo {
+        width: min(27vw, 370px);
+        margin: 0;
+    }
+
+    .hero {
+        height: 100vh;
+        min-height: 660px;
+        margin-left: 46%;
+        overflow: visible;
+        background-image: url('../../images/トップ背景3.png');
+        background-position: 84% center;
+    }
+
+    .hero-content {
+        position: absolute;
+        right: 100%;
+        bottom: 10vh;
+        width: 85.2%;
+        max-width: none;
+        margin: 0;
+        padding: 0 3vw 0 7vw;
+        text-align: left;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem, 3.3vw, 3rem);
+        margin-bottom: 1.1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.04rem;
+    }
+
+    .section {
+        padding: 120px 0;
+    }
+
+    .features .container {
+        display: grid;
+        grid-template-columns: 290px 1fr;
+        column-gap: 72px;
+        align-items: start;
+    }
+
+    .feature-card h4 {
+        font-size: 1.22rem;
+    }
+
+    .feature-card p {
+        font-size: 0.98rem;
+    }
+
+    .page-header {
+        padding-top: 170px !important;
+        padding-bottom: 76px !important;
+    }
+
+    .section-title::before {
+        font-size: 4.6rem;
+    }
+
+    .page-header p {
+        font-size: 1rem;
+    }
+
+    .service-text {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        column-gap: 48px;
+        align-items: baseline;
+    }
+
+    .service-item h4 {
+        margin: 0;
+        font-size: 1.26rem;
+    }
+
+    .services-section:has(.flow-step-heading) .service-text {
+        grid-template-columns: 380px 1fr;
+    }
+
+    .service-item .flow-step-heading {
+        font-size: 1.14rem;
+    }
+
+    .service-item p {
+        font-size: 1rem;
+    }
+
+    #pricing .service-item p {
+        font-size: 1.22rem;
+    }
+
+    .price-intro-text {
+        font-size: 1rem;
+    }
+
+    .about-text {
+        font-size: 1.12rem;
+    }
+
+    .section > .container > p {
+        font-size: 1.1rem;
+    }
+
+    .contact-cta-section {
+        padding: 88px 0;
+    }
+
+    main .section:not(.services-section):not(.contact-section) .btn-primary {
+        font-size: 1rem;
+        padding: 17px 52px;
+    }
+
+    .info-row dt,
+    .info-row.sub-info-row dt {
+        width: 180px;
+        font-size: 0.96rem;
+    }
+
+    .info-row dd {
+        margin-left: 0;
+    }
+
+    .access-info h4 {
+        font-size: 1.05rem;
+    }
+
+    .access-info p {
+        font-size: 0.98rem;
+    }
+
+    .footer-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+    }
+
+    .footer-links {
+        order: 2;
+    }
+
+    .copyright {
+        order: 3;
+    }
+}
+
+/* スマホ表示 */
+@media (max-width: 768px) {
+    .about-header {
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.72) 55%, rgba(255, 255, 255, 0.1) 100%), url('../../images/観葉植物背景モバイル版.png?v=3');
+    }
+
+    .pricing-header {
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.72) 55%, rgba(255, 255, 255, 0.1) 100%), url('../../images/パソコン背景モバイル版2.png?v=3');
+    }
+
+    .contact-header {
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.72) 55%, rgba(255, 255, 255, 0.1) 100%), url('../../images/コーヒー背景.png?v=4');
+    }
+
+    .services-header {
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.72) 55%, rgba(255, 255, 255, 0.1) 100%), url('../../images/電卓背景.png?v=3');
+    }
+
+    .header,
+    .header.scrolled {
+        background-color: #f2faeb;
+    }
+
+    .nav-list a,
+    .nav-list .btn-primary {
+        padding: 0;
+        letter-spacing: 0.1em;
+    }
+
+    .mobile-menu-btn {
+        box-shadow: none;
+        border: 1px solid var(--hairline);
+    }
+
+    .mobile-menu-btn span {
+        height: 1px;
+        background-color: var(--color-deep);
+    }
+
+    .section-title,
+    .page-header .section-title {
+        font-size: 0.94rem;
+        margin-bottom: 2.4rem;
+    }
+
+    .page-header .section-title {
+        margin-bottom: 6px;
+    }
+
+    .section-title::before {
+        font-size: 3.1rem;
+    }
+
+    .section {
+        padding: 72px 0;
+    }
+
+    .logo-container-hero {
+        padding-top: 90px;
+        padding-bottom: 20px;
+    }
+
+    .hero-logo {
+        width: 74%;
+    }
+
+    /* 紙の上に文字、その下に絵画をそのまま見せる */
+    .hero {
+        display: block;
+        margin-top: 0;
+        padding: 0;
+        text-align: left;
+        background-image: url('../../images/金ロゴ背景白2.png');
+    }
+
+    .hero-content {
+        padding: 34px 28px 44px;
+        text-align: left;
+    }
+
+    .hero::after {
+        content: '';
+        display: block;
+        height: 66vw;
+        background: url('../../images/トップ背景3.png') 78% center / cover no-repeat;
+    }
+
+    .hero-text-container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero-title {
+        font-size: 1.95rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .page-header {
+        padding-top: 124px !important;
+        padding-bottom: 46px !important;
+    }
+
+    .card {
+        padding: 28px 0;
+    }
+
+    .feature-card {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .icon-wrapper::before {
+        font-size: 1.9rem;
+    }
+
+    .feature-card h4 {
+        font-size: 1.1rem;
+    }
+
+    .features::after {
+        width: 300px;
+        height: 420px;
+    }
+
+    .service-item {
+        padding: 30px 0;
+    }
+
+    .service-item h4 {
+        margin-bottom: 8px;
+    }
+
+    .about-text {
+        font-size: 1.02rem;
+    }
+
+    .company-info {
+        margin-top: 48px;
+    }
+
+    .info-row,
+    .info-row.no-border-bottom,
+    .info-row.sub-info-row {
+        padding: 16px 0;
+    }
+
+    .info-row dt,
+    .info-row.sub-info-row dt {
+        margin-bottom: 4px;
+        font-size: 0.92rem;
+    }
+
+    .phone-contact-wrapper {
+        min-height: 300px;
+        padding: 40px 24px;
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.76) 60%, rgba(255, 255, 255, 0.2) 100%), url('../../images/ミーティング室モバイル版.png');
+    }
+
+    .btn-phone {
+        width: auto;
+        padding: 0 0 6px;
+        font-size: 2.3rem;
+        justify-content: flex-start;
+    }
+
+    .contact-cta-section {
+        padding: 56px 0;
+    }
+
+    .footer-logo h2 {
+        margin-bottom: 8px;
+    }
+
+    .footer-links {
+        margin-bottom: 8px;
+    }
+}

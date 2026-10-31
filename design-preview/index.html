@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>デザイン候補の比較 | ハーモグロー会計事務所</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #2f332f;
+            --ink-soft: #565c56;
+            --deep: #3d694b;
+            --primary: #5c946e;
+            --pale: #f1f8e9;
+            --bronze: #a08068;
+            --hairline: rgba(61, 105, 75, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--pale);
+            color: var(--ink);
+            font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+            line-height: 1.9;
+            letter-spacing: 0.04em;
+            font-feature-settings: 'palt' 1;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap { max-width: 1160px; margin: 0 auto; padding: 56px 24px 72px; }
+
+        h1 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: var(--deep);
+        }
+
+        .lead { margin: 8px 0 40px; color: var(--ink-soft); }
+
+        .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+        .option { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--hairline); }
+
+        .option img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--hairline); }
+
+        .body { display: flex; flex-direction: column; flex: 1; padding: 22px 22px 24px; }
+
+        h2 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.22rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--deep);
+        }
+
+        .concept { margin: 4px 0 12px; font-size: 0.92rem; color: var(--bronze); font-weight: 500; }
+
+        ul { margin-bottom: 18px; padding-left: 1.1em; font-size: 0.9rem; color: var(--ink-soft); }
+
+        .pages { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+
+        .pages a {
+            padding: 6px 12px;
+            border: 1px solid var(--primary);
+            color: var(--deep);
+            font-size: 0.82rem;
+            text-decoration: none;
+        }
+
+        .pages a:hover { background: var(--primary); color: #fff; }
+
+        .pages a.main { background: var(--primary); color: #fff; }
+
+        .pages a.main:hover { background: var(--deep); border-color: var(--deep); }
+
+        .note { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 0.9rem; color: var(--ink-soft); }
+
+        @media (max-width: 860px) {
+            .options { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>デザイン候補の比較</h1>
+        <p class="lead">画像・文章・メインカラーはそのままで、見せ方だけを変えた試作です。各ページ左下の切り替えで、同じページを案ごとに見比べられます。</p>
+
+        <div class="options">
+            <section class="option">
+                <img src="shots/a.jpg" alt="案Aのトップページ" width="760" height="534">
+                <div class="body">
+                    <h2>案A　余白と明朝</h2>
+                    <p class="concept">和の品格・招待状のような格調</p>
+                    <ul>
+                        <li>キャッチコピーを明朝体の縦書きに</li>
+                        <li>カードは角を立てて細い二重枠に</li>
+                        <li>今の中央揃えの構成を活かす</li>
+                        <li>フッターはアップルグリーンのまま</li>
+                    </ul>
+                    <div class="pages">
+                        <a class="main" href="a/index.html">トップを見る</a>
+                        <a href="a/about.html">事務所紹介</a>
+                        <a href="a/services.html">業務案内</a>
+                        <a href="a/pricing.html">料金案内</a>
+                        <a href="a/contact.html">お問い合わせ</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="option">
+                <img src="shots/b.jpg" alt="案Bのトップページ" width="760" height="534">
+                <div class="body">
+                    <h2>案B　モダンラグジュアリー</h2>
+                    <p class="concept">上質なホテルのような洗練</p>
+                    <ul>
+                        <li>トップを左右分割にし、絵画を鮮明に</li>
+                        <li>英字セリフ体の大見出しを主役に</li>
+                        <li>カードをやめ、罫線の一覧に整理</li>
+                        <li>フッターをセージグリーンに統一</li>
+                    </ul>
+                    <div class="pages">
+                        <a class="main" href="b/index.html">トップを見る</a>
+                        <a href="b/about.html">事務所紹介</a>
+                        <a href="b/services.html">業務案内</a>
+                        <a href="b/pricing.html">料金案内</a>
+                        <a href="b/contact.html">お問い合わせ</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="option">
+                <img src="shots/current.jpg" alt="現在のトップページ" width="760" height="534">
+                <div class="body">
+                    <h2>現行デザイン</h2>
+                    <p class="concept">比較用（本番と同じ内容）</p>
+                    <ul>
+                        <li>丸みのあるゴシック体</li>
+                        <li>角丸のカードと影</li>
+                        <li>中央揃えのレイアウト</li>
+                    </ul>
+                    <div class="pages">
+                        <a class="main" href="current/index.html">トップを見る</a>
+                        <a href="current/about.html">事務所紹介</a>
+                        <a href="current/services.html">業務案内</a>
+                        <a href="current/pricing.html">料金案内</a>
+                        <a href="current/contact.html">お問い合わせ</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <p class="note">案A・案Bとも、見出しの文字色はセージグリーンを少し深くし（#3d694b）、細い線にはロゴのブロンズを使っています。英字の小見出しは装飾として加えたものです。</p>
+    </div>
+</body>
+
+</html>

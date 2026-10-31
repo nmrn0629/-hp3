@@ -1,0 +1,1882 @@
+/* CSS Variables for Theming - Updated: 2026-03-11 17:26 */
+:root {
+    --color-primary: #5c946e;
+    /* Sage Green - Trustworthy & Natural */
+    --color-accent: #dce775;
+    /* Lime Green - Fresh Growth */
+    --color-bg: #fafafa;
+    /* Neutral Background */
+    --color-text: #333333;
+    /* Dark Grey Text */
+    --color-text-light: #666666;
+    /* Light Grey Text */
+    --color-white: #ffffff;
+
+    --font-main: 'M PLUS Rounded 1c', sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 50px;
+
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 10px 25px rgba(92, 148, 110, 0.2);
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    /* Slightly wider for readability */
+    animation: none;
+    /* Disable animation by default (Desktop) */
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-primary);
+}
+
+.section-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--color-accent);
+    margin: 15px auto 0;
+    border-radius: var(--radius-pill);
+}
+
+.text-left.section-title {
+    left: 0;
+    transform: none;
+    text-align: left;
+}
+
+.text-left.section-title::after {
+    margin: 15px 0 0;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgba(242, 250, 235, 0.9);
+    /* 淡いグリーン（透過あり） */
+    backdrop-filter: blur(10px);
+}
+
+.page-header .section-title {
+    left: auto;
+    transform: none;
+    margin-bottom: 20px;
+}
+
+.page-header .section-title,
+.page-header p {
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.95),
+        0 0 35px rgba(255, 255, 255, 0.85),
+        0 0 12px rgba(255, 255, 255, 1);
+}
+
+/* Page Header Backgrounds */
+.about-header {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('../images/観葉植物背景ウェブ版.png?v=2');
+    background-size: cover;
+    background-position: center;
+}
+
+.services-header {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('../images/電卓背景.png?v=3');
+    background-size: cover;
+    background-position: center;
+}
+
+.pricing-header {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('../images/パソコン背景ウェブ版2.png?v=1');
+    background-size: cover;
+    background-position: center;
+}
+
+.contact-header {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('../images/コーヒー背景ウェブ版.png?v=2');
+    background-size: cover;
+    background-position: center;
+}
+
+.header.scrolled {
+    padding: 10px 0;
+    background-color: rgba(242, 250, 235, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Desktop Large Logo Section (Default hidden on mobile) */
+.desktop-large-logo-section {
+    display: none;
+}
+
+/* Hero Logo Section */
+.logo-mobile,
+.logo-mobile-container {
+    display: none;
+}
+
+.logo-container-hero {
+    text-align: center;
+    /* Center align */
+    padding-top: 100px;
+    /* Clear fixed header with extra clearance */
+    padding-bottom: 0;
+    /* Removed padding to eliminate gap */
+    margin-bottom: 0;
+    background-image: url('../images/金ロゴ背景白2.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.hero-logo {
+    width: 90%;
+    /* Slightly reduced to prevent hiding behind the fixed header */
+    max-width: 1200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    /* Center align */
+}
+
+.nav-list {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-list a {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.nav-list a:hover {
+    color: var(--color-accent);
+}
+
+.mobile-menu-btn {
+    display: none;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 30px;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(92, 148, 110, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #3d694b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(92, 148, 110, 0.4);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    padding: 10px 28px;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--color-primary);
+    font-weight: 700;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 90vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    /* Align content to center (vertical) */
+    overflow: hidden;
+    padding-top: 0;
+    /* Removed top padding to sit flush against the logo */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('../images/トップ背景3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+    /* Center align for desktop (and mobile inherits/overrides) */
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.95),
+        0 0 35px rgba(255, 255, 255, 0.85),
+        0 0 12px rgba(255, 255, 255, 1);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    margin-bottom: 2.5rem;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.95),
+        0 0 35px rgba(255, 255, 255, 0.85),
+        0 0 12px rgba(255, 255, 255, 1);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+/* Hero Logo Removed */
+
+/* Section Common */
+.section {
+    padding: 100px 0;
+}
+
+/* Features */
+.features {
+    background-color: var(--color-white);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--color-white);
+    padding: 40px 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    background-color: #f1f8e9;
+    /* Added pale green background */
+
+    /* Scroll Animation Init State */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+}
+
+.feature-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    /* Changed to white for contrast */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+}
+
+.feature-card {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/木半顔.png');
+    background-size: 70%;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    z-index: -1;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+.feature-card h4 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+}
+
+/* Services */
+.services-section {
+    background-color: #f1f8e9;
+}
+
+/* Pricing intro banner (全体説明) */
+.price-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%);
+    border-radius: var(--radius-md);
+    border-top: 4px solid var(--color-primary);
+    padding: 40px 48px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.price-intro::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.price-intro-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin: 0 auto 16px;
+}
+
+.price-intro-title {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-bottom: 14px;
+}
+
+.price-intro-text {
+    font-size: 1.05rem;
+    color: #000;
+    line-height: 1.9;
+    text-align: left;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+}
+
+.service-item {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 40px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: var(--shadow-card);
+    border-left: 5px solid var(--color-accent);
+
+    /* Scroll Animation Init State */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+}
+
+.service-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-item.visible:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.service-item h4 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.service-item p {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+}
+
+/* About */
+.about-section {
+    background-color: var(--color-white);
+}
+
+.about-wrapper {
+    display: flex;
+    gap: 50px;
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-text-box {
+    background-color: #f1f8e9;
+    padding: 30px;
+    border-radius: var(--radius-md);
+    margin-bottom: 30px;
+}
+
+.about-text {
+    margin-bottom: 0;
+}
+
+.company-info {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px dashed #ddd;
+    /* Soften the border */
+}
+
+.info-row.no-border-bottom {
+    border-bottom: none;
+    padding-bottom: 20px;
+}
+
+.info-row.sub-info-row {
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
+.info-row.sub-info-row dt {
+    padding-left: 0;
+}
+
+.info-row dt {
+    width: 130px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    padding-top: 15px;
+    /* Align text vertically with bubble padding */
+    flex-shrink: 0;
+}
+
+.info-row dd {
+    flex: 1;
+    position: relative;
+    background: #f1f8e9;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-left: 20px;
+    color: #333;
+    line-height: 1.6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* 吹き出しのしっぽ（左向き） */
+.info-row dd::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    /* Position aligned with dt text */
+    left: -14px;
+    border-width: 10px 14px 10px 0;
+    border-style: solid;
+    border-color: transparent #f1f8e9 transparent transparent;
+}
+
+/* 吹き出し枠線がなくなったため内側のしっぽ調整は不要 */
+.info-row dd::after {
+    display: none;
+}
+
+/* Access Section */
+.access-section {
+    margin-top: 30px;
+    padding-top: 0;
+    border-top: none;
+}
+
+.access-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.access-content {
+    display: flex;
+    flex-direction: row-reverse;
+    /* Map (source first) goes Right, Info (source second) goes Left */
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.access-map-wrapper {
+    width: 50%;
+    /* Half width on desktop */
+    text-align: center;
+}
+
+.access-info {
+    flex: 1;
+    text-align: left;
+}
+
+.access-info h4 {
+    font-size: 1rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+
+.access-info h4:first-child {
+    margin-top: 0;
+}
+
+.access-info p {
+    font-size: 0.9rem;
+    margin-bottom: 0px;
+    line-height: 1.6;
+}
+
+/* アクセス項目の吹き出し */
+.access-bubble {
+    position: relative;
+    background: #f1f8e9;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.access-bubble::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 30px;
+    border-width: 0 10px 14px 10px;
+    border-style: solid;
+    border-color: transparent transparent #f1f8e9 transparent;
+}
+
+.access-bubble::after {
+    display: none;
+}
+
+.access-map-image {
+    width: 100%;
+    /* Fill the flex item */
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    display: block;
+}
+
+
+
+/* Contact */
+.contact-section {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    border-radius: 40px 40px 0 0;
+    /* Top rounded corners for section */
+}
+
+
+
+
+
+.contact-section .section-title {
+    color: var(--color-white);
+    left: auto;
+    transform: none;
+}
+
+.contact-section .section-title::after {
+    background-color: var(--color-accent);
+}
+
+.contact-desc {
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Consultation Flow Section */
+.flow-title {
+    text-align: center;
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.flow-steps {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease;
+}
+
+.flow-step:hover {
+    transform: translateY(-2px);
+}
+
+.flow-step-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.flow-step-content h4 {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.flow-step-content p {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    opacity: 0.85;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.phone-contact-wrapper {
+    background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('../images/ミーティング室ウェブ版.png');
+    background-size: cover;
+    background-position: center;
+    padding: 60px 20px;
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-phone {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 20px 60px;
+    border-radius: var(--radius-pill);
+    font-size: 2rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s;
+}
+
+.btn-phone:hover {
+    background-color: #7a9c00;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+}
+
+.phone-desc {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.95), 0 0 35px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 1);
+}
+
+.phone-note {
+    font-size: 0.9rem;
+    color: #000000;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.95), 0 0 35px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 1);
+}
+
+/* Footer */
+.footer {
+    background-color: #8DB600;
+    /* Apple Green */
+    color: var(--color-white);
+    padding: 27px 0 13px;
+    text-align: center;
+}
+
+.footer-logo h2 {
+    color: var(--color-white);
+    font-size: 1.5rem;
+    margin-bottom: 13px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: var(--color-white);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* Global utility for mobile break */
+.mobile-break {
+    display: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .mobile-break {
+        display: block;
+        /* Changing to block to force a break */
+    }
+
+    .desktop-space {
+        display: none;
+    }
+
+    .career-list li {
+        margin-bottom: 20px;
+    }
+
+    .career-list li:last-child {
+        margin-bottom: 0;
+    }
+
+    body {
+        animation: pageFadeIn 0.8s ease-out forwards;
+    }
+
+    .hero {
+        height: auto;
+        min-height: auto;
+        margin-top: -45px;
+        /* Further shifted down to resolve overlap while keeping backgrounds connected */
+        padding: 100px 0 5px;
+        /* Adjusted padding to move text lower within the background */
+        background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url('../images/トップ背景3.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: scroll !important;
+        /* Standard background behavior for mobile devices */
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-text-container {
+        width: auto;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-top: 0 !important;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-image: none !important;
+        /* Remove mobile-specific background to use parent's 'トップ背景3' */
+        aspect-ratio: auto;
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Adjust page header backgrounds for mobile */
+    .about-header {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('../images/観葉植物背景モバイル版.png?v=3');
+        background-position: top center;
+    }
+
+    .pricing-header {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('../images/パソコン背景モバイル版2.png?v=3');
+        background-position: top center;
+    }
+
+    .contact-header {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.41), rgba(255, 255, 255, 0.41)), url('../images/コーヒー背景.png?v=4');
+        background-position: top center;
+    }
+
+    .hero-content {
+        margin-top: 0 !important;
+    }
+
+    .header {
+        background-color: #f2faeb; /* 業務案内項目に近い淡いグリーン */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1005;
+    }
+
+    .header.scrolled {
+        background-color: #f2faeb;
+        /* Keep the same green when scrolled */
+    }
+
+    .header-container {
+        position: relative;
+        padding: 0 15px;
+    }
+
+    /* Mobile Menu Style - Circular Reveal */
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #8DB600;
+        /* Apple Green */
+        padding-top: 70px;
+        /* Reduced top padding to move items up */
+        padding-right: 20px;
+        /* Reduced right padding */
+        align-items: flex-end;
+        /* Align items to the right */
+        justify-content: flex-start;
+        /* Align items to the top */
+        gap: 12px;
+        /* Reduced gap to fit items */
+        z-index: 1000;
+
+        /* Initial State: Circle at top-right with 0 size */
+        clip-path: circle(0% at 100% 0%);
+        transition: clip-path 0.5s ease-in-out, background-color 1.2s ease-in-out;
+        /* Added bg transition with different timing */
+
+        /* Reset previous styles if any */
+        transform: none;
+        opacity: 1;
+        pointer-events: none;
+        /* Prevent clicks when closed */
+    }
+
+    .nav-list.active {
+        /* Active State: Circle expands to cover top-right corner */
+        clip-path: circle(48% at 100% 0%);
+        pointer-events: auto;
+    }
+
+    .nav-home {
+        display: none;
+    }
+
+    /* Mobile Header Center Logo */
+    .mobile-center-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        z-index: 1002;
+    }
+
+    .mobile-center-logo img {
+        height: 53px;
+        width: auto;
+    }
+
+    /* Page Transition Effect */
+    .nav-list.transitioning {
+        clip-path: circle(150% at 100% 0%) !important;
+        /* Expand to full screen */
+        background-color: white !important;
+        /* Whiteout */
+        pointer-events: none;
+    }
+
+    .nav-list a {
+        font-size: 0.9rem;
+        /* Slightly smaller font */
+        color: var(--color-white);
+        opacity: 0;
+        transform: translateX(20px);
+        /* Slide in from right */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-list.active a {
+        opacity: 1;
+        transform: translateX(0);
+        transition-delay: 0.2s;
+        /* Delay to show after background expands */
+    }
+
+    .nav-list.transitioning a {
+        opacity: 0 !important;
+        /* Hide links during transition */
+        transition: opacity 0.2s ease;
+    }
+
+    /* Hide close button during transition */
+    .mobile-menu-btn.transitioning {
+        opacity: 0 !important;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 40px;
+        height: 40px;
+        background: #ffffff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 11px 7px;
+        z-index: 1001;
+        /* Above the overlay */
+        position: relative;
+        /* Ensure z-index works */
+        margin-right: 15px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .mobile-menu-btn span {
+        width: 100%;
+        height: 3px;
+        background-color: #e5e5e5;
+        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Hide spans when active (replaced by CLOSE text) */
+    .mobile-menu-btn.active span {
+        opacity: 0;
+    }
+
+    /* Show CLOSE text */
+    .mobile-menu-btn.active::after {
+        content: "CLOSE";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--color-primary);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+
+    /* Reset button style in mobile menu to match other links */
+    .nav-list .btn-primary {
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        color: var(--color-white);
+        font-weight: 500;
+        /* Match other links */
+        display: inline;
+        border-radius: 0;
+    }
+
+    .nav-list .btn-primary:hover {
+        background-color: transparent;
+        box-shadow: none;
+        transform: none;
+        color: var(--color-white);
+    }
+
+    /* Access Section Mobile */
+    .access-content {
+        flex-direction: column;
+        /* Map Top, Text Bottom */
+    }
+
+    .access-info h4 {
+        margin-top: 30px;
+    }
+
+    .access-map-wrapper {
+        width: 100%;
+    }
+
+    /* Mobile Logo Adjustments */
+    .logo-container-hero {
+        display: block;
+        padding-top: 110px;
+        /* More clearance for mobile header */
+        padding-bottom: 60px;
+        /* Expanded display range for logo background */
+    }
+
+    .logo a {
+        display: none;
+    }
+
+    .logo-mobile-container {
+        display: none;
+    }
+
+    .logo-mobile {
+        display: none;
+    }
+
+
+
+    .hero-buttons {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section .flow-section-title {
+        font-size: 1.2rem;
+    }
+
+    .flow-step-heading {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .flow-step-heading .step-num {
+        white-space: nowrap;
+    }
+
+    .about-wrapper {
+        flex-direction: column;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 25px 0;
+    }
+
+    .info-row dt {
+        width: 100%;
+        padding-top: 0;
+        margin-bottom: 12px;
+        text-align: left;
+        padding-left: 0;
+        font-size: 1.3rem;
+    }
+
+    .info-row.sub-info-row dt {
+        padding-left: 0;
+        text-align: left;
+        font-size: 1.3rem;
+    }
+
+    .info-row dd {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    /* 吹き出しのしっぽ（上向き）に変更 */
+    .info-row dd::before {
+        top: -14px;
+        left: 30px;
+        transform: none;
+        border-width: 0 10px 14px 10px;
+        border-color: transparent transparent #f1f8e9 transparent;
+    }
+
+    .info-row dd::after {
+        display: none;
+    }
+
+    .access-title {
+        font-size: 1.3rem;
+        text-align: left;
+    }
+
+    .contact-section {
+        border-radius: 20px 20px 0 0;
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .btn-phone {
+        font-size: 1.3rem;
+        padding: 15px 10px;
+        width: 100%;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .phone-desc {
+        font-size: 0.95rem;
+        white-space: nowrap;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Duplicate .access-title removed to clean up CSS */
+
+    .access-content {
+        display: block;
+    }
+
+    .access-map-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .price-intro {
+        padding: 30px 1.5em;
+    }
+
+    .price-intro-text {
+        text-align: justify;
+        text-justify: inter-character;
+    }
+
+    .access-map-image {
+        max-width: 100%;
+    }
+
+    /* Explicit spacing fix for mobile */
+    .access-section {
+        margin-top: 30px;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    /* Mobile background adjustment */
+    .phone-contact-wrapper {
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('../images/ミーティング室モバイル版.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 20px;
+        overflow: hidden;
+    }
+
+    /* Footer mobile height reduction (half of original) */
+    .footer {
+        padding: 20px 0 10px;
+    }
+
+    .footer-logo h2 {
+        margin-bottom: 10px;
+    }
+
+    .footer-links {
+        margin-bottom: 15px;
+    }
+
+    /* 業務案内・料金案内下部のお問い合わせセクションの余白縮小 */
+    .contact-cta-section {
+        padding: 30px 0;
+    }
+}
+
+/* Privacy Policy Hanging Indent */
+.privacy-sub-title {
+    padding-left: 1.8em;
+    text-indent: -1.8em;
+}
+
+.privacy-sub-title.title-4 {
+    padding-left: 1.4em;
+    text-indent: -1.4em;
+}
+
+.privacy-sub-title.title-10 {
+    padding-left: 2.1em;
+    text-indent: -2.1em;
+}
+
+/* Desktop only styles */
+@media (min-width: 769px) {
+    .mobile-center-logo {
+        display: none;
+    }
+
+    .hero-subtitle {
+        font-size: 1.8rem;
+    }
+
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 100px;
+        max-width: 1100px;
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .grid-3>*:first-child {
+        grid-column: 1 / -1;
+        max-width: 55%;
+        margin: 0 auto;
+    }
+
+    .feature-card h4 {
+        font-size: 1.5rem;
+    }
+
+    .feature-card p {
+        font-size: 1.19rem;
+    }
+
+    .service-item h4 {
+        font-size: 1.625rem;
+    }
+
+    .service-item p {
+        font-size: 1.19rem;
+    }
+
+    .price-intro-text {
+        font-size: 1.19rem;
+    }
+
+    .page-header p {
+        font-size: 1.25rem;
+    }
+
+    .about-text {
+        font-size: 1.19rem;
+    }
+
+    .section>.container>p {
+        font-size: 1.25rem;
+    }
+
+    main .section:not(.services-section):not(.contact-section) .btn-primary {
+        font-size: 1.5rem;
+        padding: 18px 45px;
+    }
+
+    .company-info {
+        font-size: 1.25rem;
+    }
+
+    .info-row dt {
+        width: 150px;
+    }
+
+    .info-row.sub-info-row dt {
+        font-size: 1.5rem;
+    }
+
+    .access-info h4 {
+        font-size: 1.25rem;
+    }
+
+    .access-map-wrapper {
+        margin-top: 110px;
+    }
+
+    .access-info p {
+        font-size: 1.125rem;
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    .logo-desktop {
+        display: block;
+        max-width: 225px;
+        height: auto;
+    }
+
+    .page-header {
+        padding-top: 240px !important;
+        padding-bottom: 90px !important;
+    }
+
+    .privacy-sub-title {
+        padding-left: 0 !important;
+        text-indent: 0 !important;
+    }
+}
+
+/* Topics Floating Button & Bubble */
+#topics-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 90px;
+    height: 90px;
+    z-index: 2000;
+    cursor: move;
+    user-select: none;
+    touch-action: none;
+}
+
+.topics-fab-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--color-white);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    border: 3px solid #8db600; /* Apple Green */
+    overflow: visible; /* ラベルがはみ出せるように変更 */
+}
+
+.topics-fab-img-wrapper img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-top: 8px;
+    /* Pushes the image down to clear the TOPICS label */
+}
+
+.topics-label {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8db600; /* Apple Green */
+    color: var(--color-white);
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 900;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 2001;
+    letter-spacing: 0.1em;
+}
+
+#topics-fab:hover .topics-fab-img-wrapper {
+    transform: scale(1.05);
+}
+
+#topics-fab:active .topics-fab-img-wrapper {
+    transform: scale(0.95);
+}
+
+.topics-bubble {
+    position: fixed;
+    bottom: 130px;
+    right: 30px;
+    width: 350px;
+    max-width: 90vw;
+    background: var(--color-white);
+    border: 3px solid #8db600; /* Apple Green */
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    z-index: 1999;
+    padding: 25px;
+    display: none;
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.topics-bubble.active {
+    display: block;
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.topics-bubble-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #8db600;
+    padding-bottom: 10px;
+}
+
+.topics-bubble-header h3 {
+    font-size: 1.25rem;
+    color: #8db600;
+    margin: 0;
+    font-weight: 800;
+}
+
+.close-topics-btn {
+    background: #f0f0f0;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.close-topics-btn:hover {
+    background: #e0e0e0;
+}
+
+.topics-bubble-body {
+    max-height: 250px; /* 最新2件が収まる程度の高さに制限 */
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* スクロールバーのデザインもアップルグリーンに合わせる */
+.topics-bubble-body::-webkit-scrollbar {
+    width: 6px;
+}
+.topics-bubble-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.topics-bubble-body::-webkit-scrollbar-thumb {
+    background: #8db600;
+    border-radius: 10px;
+}
+
+
+.topics-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.topics-list li {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    line-height: 1.6;
+}
+
+.topics-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.topics-date {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.topics-datetype {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #8a8a8a;
+    margin-left: 2px;
+}
+
+/* 追加から24時間以内のトピック（script.js の isNewTopic で付与） */
+.topics-list li.is-new {
+    background: #f8fbee;
+    border-bottom-color: transparent;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.topics-new-pill {
+    display: inline-block;
+    vertical-align: 1px;
+    margin-left: 6px;
+    background: #e8603c;
+    color: var(--color-white);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    padding: 4px 8px 3px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(232, 96, 60, 0.35);
+}
+
+.topics-fab-new {
+    position: absolute;
+    right: -10px;
+    bottom: 2px;
+    z-index: 2002;
+    background: #e8603c;
+    color: var(--color-white);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.topics-list li.topics-legend {
+    list-style: none;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: #8a8a8a;
+}
+
+.archive-datetype {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #8a8a8a;
+    margin-left: 2px;
+}
+
+.archive-legend {
+    margin-top: 24px;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: #8a8a8a;
+}
+
+.topics-link {
+    display: inline-block;
+    color: #8db600;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.topics-archive-link-item {
+    text-align: right;
+    padding-top: 10px;
+    border-bottom: none !important;
+}
+
+.topics-archive-link {
+    color: #8db600;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.topics-archive-link:hover {
+    text-decoration: underline;
+}
+
+/* Archive page */
+.archive-monthly {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.archive-empty {
+    text-align: center;
+    color: #666;
+    padding: 40px 0;
+}
+
+.archive-month {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.archive-month-summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    color: #333;
+    background: #fafafa;
+    list-style: none;
+    transition: background 0.15s;
+}
+
+.archive-month-summary::-webkit-details-marker {
+    display: none;
+}
+
+.archive-month-summary:hover {
+    background: #f0f0f0;
+}
+
+.archive-month-summary::before {
+    content: '▶';
+    font-size: 0.7rem;
+    color: #8db600;
+    margin-right: 10px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.archive-month[open] > .archive-month-summary::before {
+    transform: rotate(90deg);
+}
+
+.archive-month-label {
+    flex: 1;
+    font-size: 1.05rem;
+}
+
+.archive-month-count {
+    font-size: 0.85rem;
+    color: #8db600;
+    font-weight: 600;
+    background: #fff;
+    border: 1px solid #d9e8b2;
+    padding: 2px 10px;
+    border-radius: 12px;
+}
+
+.archive-list {
+    margin: 0;
+    padding: 4px 18px 10px;
+    list-style: none;
+}
+
+.archive-list li {
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.archive-list li:last-child {
+    border-bottom: none;
+}
+
+.archive-day {
+    flex-shrink: 0;
+    color: #8db600;
+    font-weight: 700;
+    font-size: 0.9rem;
+    min-width: 3em;
+}
+
+.archive-content {
+    flex: 1;
+}
+
+.archive-list .topics-link {
+    flex-shrink: 0;
+    margin-top: 0;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .archive-month-summary {
+        padding: 12px 14px;
+    }
+    .archive-list {
+        padding: 4px 14px 8px;
+    }
+    .archive-list li {
+        flex-wrap: wrap;
+        gap: 6px 10px;
+    }
+    .archive-day {
+        flex-basis: 100%;
+        min-width: 0;
+    }
+    .archive-month-label {
+        font-size: 0.98rem;
+    }
+}
+
+/* 吹き出しのしっぽを削除（シンプルな四角枠にするため） */
+.topics-bubble-tail {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #topics-fab {
+        width: 80px;
+        height: 80px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .topics-bubble {
+        bottom: 110px;
+        right: 15px;
+        width: calc(100vw - 30px);
+        padding: 20px;
+    }
+}
