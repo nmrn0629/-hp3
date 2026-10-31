@@ -17,6 +17,7 @@
 | `archive.html` | 過去のTOPICS一覧 |
 | `manager-topics.html` | TOPICS更新用の管理ツール（検索エンジンからは除外） |
 | `style.css` | 全ページ共通のスタイル |
+| `theme.css` | デザイン案Aの上書きスタイル（`style.css` の次に読み込む。`manager-topics.html` は対象外） |
 | `script.js` | 共通スクリプト（メニュー・スクロール・TOPICSバブル等） |
 | `js/topics-data.js` | TOPICS（お知らせ）データ |
 | `images/` | 画像素材 |
