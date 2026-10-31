@@ -112,7 +112,7 @@ h1, h2, h3, h4 {
     min-height: 640px;
     background-image:
         radial-gradient(ellipse 38% 64% at 46% 48%, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.4) 62%, rgba(255, 255, 255, 0.1) 100%),
-        url('images/トップ背景3.png');
+        url('images/トップ背景3-淡彩.jpg');
 }
 
 .hero-text-container {
@@ -166,19 +166,19 @@ h1, h2, h3, h4 {
 
 /* 下層ページの見出し: 画像を活かしつつ銘板を重ねる */
 .about-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/観葉植物背景ウェブ版.png?v=2');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/観葉植物背景ウェブ版-淡彩.jpg');
 }
 
 .services-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/電卓背景.png?v=3');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/電卓背景-淡彩.jpg');
 }
 
 .pricing-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/パソコン背景ウェブ版2.png?v=1');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/パソコン背景ウェブ版2-淡彩.jpg');
 }
 
 .contact-header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/コーヒー背景ウェブ版.png?v=2');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/コーヒー背景ウェブ版-淡彩.jpg');
 }
 
 .page-header .section-title,
@@ -399,7 +399,7 @@ h1, h2, h3, h4 {
 .phone-contact-wrapper {
     max-width: 720px;
     padding: 72px 28px;
-    background: linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url('images/ミーティング室ウェブ版.png') center / cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url('images/ミーティング室ウェブ版-淡彩.jpg') center / cover;
     box-shadow: none !important;
 }
 
@@ -598,15 +598,15 @@ h1, h2, h3, h4 {
 /* スマホ表示 */
 @media (max-width: 768px) {
     .about-header {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/観葉植物背景モバイル版.png?v=3');
+        background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/観葉植物背景モバイル版-淡彩.jpg');
     }
 
     .pricing-header {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/パソコン背景モバイル版2.png?v=3');
+        background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/パソコン背景モバイル版2-淡彩.jpg');
     }
 
     .contact-header {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/コーヒー背景.png?v=4');
+        background-image: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), url('images/コーヒー背景-淡彩.jpg');
     }
 
     .header,
@@ -656,7 +656,7 @@ h1, h2, h3, h4 {
         padding: 52px 0;
         background-image:
             radial-gradient(ellipse 70% 62% at 50% 50%, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.66) 72%, rgba(255, 255, 255, 0.24) 100%),
-            url('images/トップ背景3.png');
+            url('images/トップ背景3-淡彩.jpg');
     }
 
     .hero-text-container {
@@ -720,7 +720,7 @@ h1, h2, h3, h4 {
 
     .phone-contact-wrapper {
         padding: 46px 24px;
-        background: linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url('images/ミーティング室モバイル版.png') center / cover;
+        background: linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url('images/ミーティング室モバイル版-淡彩.jpg') center / cover;
     }
 
     .btn-phone {
