@@ -475,10 +475,34 @@ h1, h2, h3, h4 {
     vertical-align: -0.2em;
 }
 
-/* TOPICSボタンと著作権表記が重ならないよう下に逃がす */
+/* スマホは左寄せにしてTOPICSボタンの横に文字を収める */
 @media (max-width: 480px) {
     .footer {
-        padding-bottom: 116px;
+        padding: 20px 0;
+        text-align: left;
+    }
+
+    .footer-logo h2 {
+        margin-bottom: 8px;
+    }
+
+    .footer-links {
+        justify-content: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .copyright {
+        letter-spacing: 0.03em;
+    }
+
+    .built-by {
+        margin-top: 2px;
+    }
+}
+
+@media (max-width: 350px) {
+    .copyright {
+        font-size: 0.68rem;
     }
 }
 
