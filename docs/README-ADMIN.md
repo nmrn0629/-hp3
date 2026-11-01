@@ -22,7 +22,7 @@
 2.  **GitHubにログインする**:
     - ブラウザでGitHubにログインし、プロジェクトの「Settings」→「Collaborators」から、他の管理者のアカウントを招待してください。
 3.  **データをPCに持ってくる**:
-    - `git clone https://github.com/nmrn0629/-hp3.git` コマンド等で、自分のPCに作業フォルダを作ります。
+    - `git clone https://github.com/koinuLab/-hp3.git` コマンド等で、自分のPCに作業フォルダを作ります。
 4.  **自動送信スクリプトを起動する**:
     - そのPCのフォルダ内にある `auto-push-topics.ps1` を右クリックして「PowerShellで実行」します。これで、あなたのPCと同様に「ファイルを置くだけ」で更新できるようになります。
 

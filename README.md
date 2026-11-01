@@ -2,7 +2,7 @@
 
 税理士事務所「ハーモグロー会計事務所」の公式サイトです。ビルド工程のない静的サイト（HTML / CSS / JavaScript）で、GitHub Pages で公開しています。
 
-- **公開URL**: https://nmrn0629.github.io/-hp3/
+- **公開URL**: https://koinulab.github.io/-hp3/
 
 ## ファイル構成
 

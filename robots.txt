@@ -7,4 +7,4 @@ User-agent: *
 Disallow: /manager-topics.html
 Disallow: /-hp3/manager-topics.html
 
-Sitemap: https://nmrn0629.github.io/-hp3/sitemap.xml
+Sitemap: https://koinulab.github.io/-hp3/sitemap.xml

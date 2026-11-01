@@ -22,7 +22,7 @@
 
 GitHub Pages 上の次のURLをスマホで開き、「ホーム画面に追加」するとブラウザの枠なしで全画面のアプリとして起動します（オフラインでも開けます）。
 
-- URL：https://nmrn0629.github.io/-hp3/nencho-checker/
+- URL：https://koinulab.github.io/-hp3/nencho-checker/
 - Android（Chrome）：右上「︙」→「ホーム画面に追加」または「アプリをインストール」
 - iPhone（Safari）：「共有」→「ホーム画面に追加」
 
