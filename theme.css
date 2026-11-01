@@ -455,6 +455,33 @@ h1, h2, h3, h4 {
     letter-spacing: 0.08em;
 }
 
+.built-by {
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    color: var(--color-white);
+}
+
+.built-by-sub {
+    opacity: 0.8;
+}
+
+.built-by-paw {
+    display: inline-block;
+    width: 1.15em;
+    height: 1.15em;
+    margin: 0 0.1em;
+    vertical-align: -0.2em;
+}
+
+/* TOPICSボタンと著作権表記が重ならないよう下に逃がす */
+@media (max-width: 480px) {
+    .footer {
+        padding-bottom: 116px;
+    }
+}
+
 /* TOPICS */
 .topics-fab-img-wrapper {
     border-width: 1px;
